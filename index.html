@@ -75,8 +75,8 @@ h1{cursor:pointer}
 .ci{font-size:26px;font-weight:700}
 .st{display:flex;align-items:center;gap:12px}
 .st b{min-width:96px;text-align:center;font-size:18px;border:2px solid var(--line);border-radius:.3em;padding:9px 12px}
-textarea{user-select:text;-webkit-user-select:text;font:inherit;width:100%;min-height:170px;background:#2a2a2a;border:0;border-radius:18px;color:#fff;padding:14px;font-size:16px}
-input{user-select:text;-webkit-user-select:text;font:inherit;width:100%;min-height:48px;background:#2a2a2a;border:0;border-radius:99px;color:#fff;padding:0 20px;font-size:17px}
+textarea{user-select:text;-webkit-user-select:text;-webkit-touch-callout:default;font:inherit;width:100%;min-height:170px;background:#2a2a2a;border:0;border-radius:18px;color:#fff;padding:14px;font-size:16px}
+input{user-select:text;-webkit-user-select:text;-webkit-touch-callout:default;font:inherit;width:100%;min-height:48px;background:#2a2a2a;border:0;border-radius:99px;color:#fff;padding:0 20px;font-size:17px}
 .sw{display:flex;border-radius:99px;overflow:hidden;background:#2a2a2a}
 .sw button{flex:1;min-height:48px;font-weight:700}
 .sw .sel{background:#fff;color:#000}
@@ -102,7 +102,7 @@ const DEMO=()=>({title:'Матрос (Дети Picasso)',bpm:130,rows:[R('Ин',
 let S={song:DEMO(),mode:'edit',cur:0},sel=null,lp=false,lpT,metro=null,wl=null;
 try{const x=JSON.parse(localStorage.getItem('chords1'));if(x&&x.rows)S.song=x}catch(e){}
 let SEED=null;try{SEED=JSON.parse(document.getElementById('seed').textContent)}catch(e){}
-const SV=SEED?SEED.v:0;
+let SV=SEED?SEED.v:0;
 if(SEED&&SEED.songs&&SEED.songs.length){S.lib=SEED.songs;S.song=S.lib[Math.min(SEED.cur||0,S.lib.length-1)]}else S.lib=[S.song];
 try{const L=JSON.parse(localStorage.getItem('chords2'));if(L&&L.songs&&L.songs.length&&L.base>=SV){S.lib=L.songs;S.song=L.songs[Math.min(L.cur||0,L.songs.length-1)]}}catch(e){}
 const $=s=>document.querySelector(s),song=()=>S.song;
@@ -256,8 +256,8 @@ function menuSheet(){
   <div class="h">Режим</div><div class="sw"><button data-a="mode" data-v="edit" class="${S.mode==='edit'?'sel':''}">Редактирование</button><button data-a="mode" data-v="play" class="${S.mode==='play'?'sel':''}">Репетиция</button></div>
   <div class="h">Вид</div><div class="sw">${[['full','Полный'],['compact','Компакт'],['map','Схема'],['text','Текст']].map(x=>`<button data-a="view" data-v="${x[0]}" class="${(S.view||'full')===x[0]?'sel':''}">${x[1]}</button>`).join('')}</div>
   <div class="h">GitHub Синхронизация (Только для автора)</div>
-  <input id="gh_token" type="text" placeholder="GitHub Token (ghp_...)" style="margin-bottom:8px" autocomplete="off">
-  <input id="gh_repo" placeholder="Репозиторий (например: abstractlogicus/-hordsmap)" style="margin-bottom:14px" autocomplete="off" autocorrect="off" autocapitalize="off">
+  <div style="display:flex;gap:8px;margin-bottom:8px"><input id="gh_token" type="text" placeholder="GitHub Token (ghp_...)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="flex:1;min-width:0"><button class="k" data-a="gh_paste" style="flex:none;white-space:nowrap">Вставить</button></div>
+  <input id="gh_repo" type="text" placeholder="Репозиторий (например: abstractlogicus/-hordsmap)" style="margin-bottom:14px" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
   <div class="g" style="margin-bottom:8px"><button class="k" data-a="gh_push" id="btn_gh_push">Отправить изменения на GitHub</button></div>
   <div id="gh_log" class="h" style="margin-top:0; color:#ffdd1a;"></div>
   
@@ -265,55 +265,90 @@ function menuSheet(){
   <div class="h">Песня</div><div class="g"><button class="k dng" data-a="delsong">${S.delAsk?'Точно удалить «'+esc(song().title)+'»?':'Удалить песню'}</button><button class="k sel" data-a="close">Готово</button></div>`);
   $('#ti').oninput=e=>{song().title=e.target.value;$('#title').textContent=e.target.value;save()};
   const ght = $('#gh_token'), ghr = $('#gh_repo');
-  ght.value = localStorage.getItem('gh_token')||'';
-  ghr.value = localStorage.getItem('gh_repo')||'abstractlogicus/-hordsmap';
-  ght.onchange=e=>localStorage.setItem('gh_token', e.target.value.trim());
-  ghr.onchange=e=>localStorage.setItem('gh_repo', e.target.value.trim());
+  const savedRepo = localStorage.getItem('gh_repo') || 'abstractlogicus/-hordsmap';
+  localStorage.setItem('gh_repo', savedRepo);
+  ght.value = localStorage.getItem('gh_token') || '';
+  ghr.value = savedRepo;
+  const saveGh = () => {
+    localStorage.setItem('gh_token', ght.value.trim());
+    localStorage.setItem('gh_repo', ghr.value.trim());
+  };
+  ght.oninput = ght.onchange = saveGh;
+  ghr.oninput = ghr.onchange = saveGh;
 }
 
 async function pushToGitHub() {
-  const token = localStorage.getItem('gh_token'), repo = localStorage.getItem('gh_repo');
+  const ght = $('#gh_token'), ghr = $('#gh_repo');
+  const token = (ght ? ght.value : localStorage.getItem('gh_token') || '').trim();
+  const repo = (ghr ? ghr.value : localStorage.getItem('gh_repo') || 'abstractlogicus/-hordsmap').trim();
+  if (token) localStorage.setItem('gh_token', token);
+  if (repo) localStorage.setItem('gh_repo', repo);
+
   const log = $('#gh_log'), btn = $('#btn_gh_push');
-  if(!token || !repo) { log.textContent = 'Укажите токен и репозиторий!'; return; }
-  log.textContent = '⏳ Получение текущей версии...'; btn.style.opacity = '0.5';
-  
+  if(!token || !repo) {
+    log.textContent = !token ? 'Введите GitHub Token!' : 'Укажите репозиторий!';
+    log.style.color = '#ff6b6b';
+    return;
+  }
+  log.textContent = '⏳ Получение текущей версии...';
+  log.style.color = '#ffdd1a';
+  btn.style.opacity = '0.5';
+  btn.disabled = true;
+
   try {
-    // 1. Получаем текущий файл
     let r = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+      cache: 'no-store',
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
     });
-    if (!r.ok) throw new Error('Не удалось найти index.html в репозитории');
+    if (!r.ok) {
+      if (r.status === 401) throw new Error('Неверный токен (401)');
+      if (r.status === 404) throw new Error('Репозиторий или index.html не найден (404)');
+      throw new Error(`Ошибка загрузки (${r.status})`);
+    }
     const fileData = await r.json();
-    
-    // 2. Декодируем и обновляем
-    const content = decodeURIComponent(escape(atob(fileData.content)));
-    const newData = JSON.stringify({ v: SV + 1, songs: S.lib });
-    const newContent = content.replace(/<script type="application\/json" id="seed">.*?<\/script>/s, `<script type="application/json" id="seed">${newData}<\/script>`);
-    
-    // 3. Кодируем и отправляем
+
+    const rawBin = atob(fileData.content.replace(/\s/g, ''));
+    const rawBytes = Uint8Array.from(rawBin, c => c.charCodeAt(0));
+    const content = new TextDecoder('utf-8').decode(rawBytes);
+
+    const newV = Math.max(SV + 1, Date.now());
+    const newData = JSON.stringify({ v: newV, songs: S.lib, cur: Math.max(0, S.lib.indexOf(S.song)) }).replace(/<\/script/gi, '<\\/script');
+    const re = /<script type="application\/json" id="seed">[\s\S]*?<\/script>/;
+    if (!re.test(content)) throw new Error('В index.html не найден блок seed');
+    const newContent = content.replace(re, () => `<script type="application/json" id="seed">${newData}<\/script>`);
+
     log.textContent = '⏳ Отправка изменений...';
-    const b64 = btoa(unescape(encodeURIComponent(newContent)));
-    
+    const outBytes = new TextEncoder().encode(newContent);
+    let binStr = '';
+    for (let i = 0; i < outBytes.length; i++) binStr += String.fromCharCode(outBytes[i]);
+    const b64 = btoa(binStr);
+
     r = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
       method: 'PUT',
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        message: `Авто-обновление сет-листа из приложения (v${SV+1})`,
+        message: `Авто-обновление сет-листа (v${newV})`,
         content: b64,
         sha: fileData.sha
       })
     });
-    
-    if (!r.ok) throw new Error('Ошибка при сохранении файла (проверьте права токена)');
-    
-    log.textContent = '✅ Успешно обновлено на GitHub!';
+
+    if (!r.ok) {
+      if (r.status === 401 || r.status === 403) throw new Error(`Нет прав на запись (${r.status}) — проверьте галочку repo у токена`);
+      if (r.status === 409) throw new Error('Конфликт версий (409) — нажмите ещё раз');
+      throw new Error(`Ошибка сохранения (${r.status})`);
+    }
+
+    SV = newV;
+    save();
+    log.textContent = '✅ Сохранено на GitHub! Сайт обновится через 1–2 мин.';
     log.style.color = '#0a9a3a';
-    setTimeout(() => { if($('#gh_log')) $('#gh_log').textContent = ''; }, 5000);
   } catch (err) {
-    log.textContent = '❌ Ошибка: ' + err.message;
+    log.textContent = '❌ ' + err.message;
     log.style.color = '#ff6b6b';
   } finally {
     btn.style.opacity = '1';
+    btn.disabled = false;
   }
 }
 function setChord(v){song().rows[sel.i].c[sel.j]=v}
@@ -341,6 +376,20 @@ document.addEventListener('click',e=>{
       song().text=$('#txa').value;
       close();
       break;
+    case 'gh_paste':
+      (async()=>{
+        const log=$('#gh_log'), ght=$('#gh_token');
+        try{
+          if(!navigator.clipboard||!navigator.clipboard.readText) throw new Error('no-api');
+          const txt=(await navigator.clipboard.readText()).trim();
+          if(!txt){if(log){log.textContent='Буфер обмена пуст';log.style.color='#ffdd1a'}return}
+          if(ght){ght.value=txt;localStorage.setItem('gh_token',txt)}
+          if(log){log.textContent='✅ Токен вставлен и сохранён';log.style.color='#0a9a3a'}
+        }catch(err){
+          if(log){log.textContent='Зажмите поле токена пальцем → Вставить';log.style.color='#ffdd1a'}
+        }
+      })();
+      return;
     case 'gh_push':
       pushToGitHub();
       return;
@@ -439,7 +488,7 @@ document.addEventListener('touchmove',e=>{const t=e.touches[0];if(DP&&DP.on)e.pr
 document.addEventListener('mousedown',e=>{if(Date.now()-lastTouch<800||e.button)return;dpStart(e,e.clientX,e.clientY)});
 document.addEventListener('mousemove',e=>{if(Date.now()-lastTouch<800)return;dpMove(e.clientX,e.clientY)});
 document.addEventListener('mouseup',()=>{if(Date.now()-lastTouch<800)return;dpEnd()});
-document.addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest('.text-view'))return;e.preventDefault()});
+document.addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest('input,textarea,.text-view'))return;e.preventDefault()});
 function setView(v){S.view=v;try{localStorage.setItem('chords_view',v)}catch(e){}render()}
 function fit(){
   const l=$('#list'),v=S.view||'full';
