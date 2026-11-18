@@ -255,8 +255,66 @@ function menuSheet(){
   sheet(`<div class="h">Песни</div><div class="g">${S.lib.map((s,k)=>`<button class="k${s===song()?' sel':''}" data-a="pick" data-v="${k}">${esc(s.title)||'Без названия'}</button>`).join('')}<button class="k" data-a="newsong">+ Новая</button></div><div class="h">Название</div><input id="ti" value="${song().title.replace(/"/g,'&quot;')}">
   <div class="h">Режим</div><div class="sw"><button data-a="mode" data-v="edit" class="${S.mode==='edit'?'sel':''}">Редактирование</button><button data-a="mode" data-v="play" class="${S.mode==='play'?'sel':''}">Репетиция</button></div>
   <div class="h">Вид</div><div class="sw">${[['full','Полный'],['compact','Компакт'],['map','Схема'],['text','Текст']].map(x=>`<button data-a="view" data-v="${x[0]}" class="${(S.view||'full')===x[0]?'sel':''}">${x[1]}</button>`).join('')}</div>
+  <div class="h">GitHub Синхронизация (Только для автора)</div>
+  <input id="gh_token" type="password" placeholder="GitHub Token (ghp_...)" style="margin-bottom:8px" autocomplete="off">
+  <input id="gh_repo" placeholder="Репозиторий (например: abstractlogicus/-hordsmap)" style="margin-bottom:14px" autocomplete="off" autocorrect="off" autocapitalize="off">
+  <div class="g" style="margin-bottom:8px"><button class="k" data-a="gh_push" id="btn_gh_push">Отправить изменения на GitHub</button></div>
+  <div id="gh_log" class="h" style="margin-top:0; color:#ffdd1a;"></div>
+  
+  <div class="h">Локальные данные</div><div class="g"><button class="k" data-a="export">Скачать резервный JSON</button></div>
   <div class="h">Песня</div><div class="g"><button class="k dng" data-a="delsong">${S.delAsk?'Точно удалить «'+esc(song().title)+'»?':'Удалить песню'}</button><button class="k sel" data-a="close">Готово</button></div>`);
   $('#ti').oninput=e=>{song().title=e.target.value;$('#title').textContent=e.target.value;save()};
+  const ght = $('#gh_token'), ghr = $('#gh_repo');
+  ght.value = localStorage.getItem('gh_token')||'';
+  ghr.value = localStorage.getItem('gh_repo')||'abstractlogicus/-hordsmap';
+  ght.onchange=e=>localStorage.setItem('gh_token', e.target.value.trim());
+  ghr.onchange=e=>localStorage.setItem('gh_repo', e.target.value.trim());
+}
+
+async function pushToGitHub() {
+  const token = localStorage.getItem('gh_token'), repo = localStorage.getItem('gh_repo');
+  const log = $('#gh_log'), btn = $('#btn_gh_push');
+  if(!token || !repo) { log.textContent = 'Укажите токен и репозиторий!'; return; }
+  log.textContent = '⏳ Получение текущей версии...'; btn.style.opacity = '0.5';
+  
+  try {
+    // 1. Получаем текущий файл
+    let r = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('Не удалось найти index.html в репозитории');
+    const fileData = await r.json();
+    
+    // 2. Декодируем и обновляем
+    const content = decodeURIComponent(escape(atob(fileData.content)));
+    const newData = JSON.stringify({ v: SV + 1, songs: S.lib });
+    const newContent = content.replace(/<script type="application\/json" id="seed">.*?<\/script>/s, `<script type="application/json" id="seed">${newData}<\/script>`);
+    
+    // 3. Кодируем и отправляем
+    log.textContent = '⏳ Отправка изменений...';
+    const b64 = btoa(unescape(encodeURIComponent(newContent)));
+    
+    r = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `Авто-обновление сет-листа из приложения (v${SV+1})`,
+        content: b64,
+        sha: fileData.sha
+      })
+    });
+    
+    if (!r.ok) throw new Error('Ошибка при сохранении файла (проверьте права токена)');
+    
+    log.textContent = '✅ Успешно обновлено на GitHub!';
+    log.style.color = '#0a9a3a';
+    setTimeout(() => { if($('#gh_log')) $('#gh_log').textContent = ''; }, 5000);
+  } catch (err) {
+    log.textContent = '❌ Ошибка: ' + err.message;
+    log.style.color = '#ff6b6b';
+  } finally {
+    btn.style.opacity = '1';
+  }
 }
 function setChord(v){song().rows[sel.i].c[sel.j]=v}
 function click(){
@@ -282,6 +340,22 @@ document.addEventListener('click',e=>{
     case 'savetext':
       song().text=$('#txa').value;
       close();
+      break;
+    case 'gh_push':
+      pushToGitHub();
+      return;
+    case 'export':
+      {
+        const data = { v: SV + 1, songs: S.lib };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'seed.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        close();
+      }
       break;
     case 'exp1':shareText(songText(song())).then(r=>pmsg(r==='copy'?'Скопировано. Вставьте в Telegram.':r==='ok'?'Готово.':'Не удалось скопировать.'));return;
     case 'expall':shareText(S.lib.map(songText).join('\n\n')).then(r=>pmsg(r==='copy'?'Скопировано. Вставьте в Telegram.':r==='ok'?'Готово.':'Не удалось скопировать.'));return;
@@ -388,4 +462,5 @@ function fit(){
 addEventListener('resize',fit);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 render();
+menuSheet();
 </script></body></html>
