@@ -256,7 +256,7 @@ function menuSheet(){
   <div class="h">Режим</div><div class="sw"><button data-a="mode" data-v="edit" class="${S.mode==='edit'?'sel':''}">Редактирование</button><button data-a="mode" data-v="play" class="${S.mode==='play'?'sel':''}">Репетиция</button></div>
   <div class="h">Вид</div><div class="sw">${[['full','Полный'],['compact','Компакт'],['map','Схема'],['text','Текст']].map(x=>`<button data-a="view" data-v="${x[0]}" class="${(S.view||'full')===x[0]?'sel':''}">${x[1]}</button>`).join('')}</div>
   <div class="h">GitHub Синхронизация (Только для автора)</div>
-  <input id="gh_token" type="password" placeholder="GitHub Token (ghp_...)" style="margin-bottom:8px" autocomplete="off">
+  <input id="gh_token" type="text" placeholder="GitHub Token (ghp_...)" style="margin-bottom:8px" autocomplete="off">
   <input id="gh_repo" placeholder="Репозиторий (например: abstractlogicus/-hordsmap)" style="margin-bottom:14px" autocomplete="off" autocorrect="off" autocapitalize="off">
   <div class="g" style="margin-bottom:8px"><button class="k" data-a="gh_push" id="btn_gh_push">Отправить изменения на GitHub</button></div>
   <div id="gh_log" class="h" style="margin-top:0; color:#ffdd1a;"></div>
