@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#000000"><title>Аккорды</title>
+<meta name="mobile-web-app-capable" content="yes"><style id="appcss">
+:root{--bg:#000;--fg:#fff;--pill:#2e2e2e;--mute:#8a8a8a;--line:#3a3a3a;--sheet:#161616;--acc:#ffdd1a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Roboto,system-ui,sans-serif;scroll-padding-top:env(safe-area-inset-top,0px);user-select:none;-webkit-user-select:none}
+body{min-height:100%;max-width:560px;margin:0 auto;padding:0 16px 120px}
+header{display:flex;align-items:center;justify-content:space-between;padding-top:20px}
+h1{font-size:24px;font-weight:400;margin:0;line-height:1.2}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
+.menu{width:48px;height:48px;display:grid;place-items:center;margin-right:-10px}
+.menu i{display:block;width:22px;height:2px;background:#fff;margin:3px 0}
+.bpm{margin:8px 0 18px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;min-height:34px}
+.bpm.on{border-color:var(--acc);color:var(--acc)}
+#list{font-size:clamp(17px,5.3vw,22px)}
+.row{display:flex;flex-wrap:nowrap;align-items:center;gap:.2em;min-height:2.2em;padding:.14em 0;font-weight:700;transition:opacity .15s}
+.row>*{flex:none}
+.wrap .row{flex-wrap:wrap}
+.play .row{opacity:.3}.play .row.cur{opacity:1}
+.row.cur{background:linear-gradient(90deg,#1b1b1b,transparent);border-radius:99px 0 0 99px;margin-left:-8px;padding-left:8px}
+.b{height:1.9em;min-width:1.9em;padding:0 .6em;border-radius:99px;display:grid;place-items:center;background:#555;white-space:nowrap}
+.b.note{font-size:1.5em;height:1.267em;width:1.933em;padding:0;border-radius:0;clip-path:polygon(18% 0,82% 0,100% 50%,82% 100%,18% 0,0 50%,18% 100%,82% 100%);background:#0a9a3a;line-height:1}
+.b.note{clip-path:polygon(22% 0,78% 0,100% 50%,78% 100%,22% 100%,0 50%)}
+.c{height:1.9em;min-width:1.9em;padding:0 .62em;border-radius:99px;background:var(--pill);display:grid;place-items:center}
+.c:active{background:#555}
+.play .c{background:#3a3a3a}
+.r{height:1.9em;padding:0 .4em;border:2px solid var(--line);border-radius:.3em;display:grid;place-items:center;margin-left:.1em;min-width:2em}
+.p{display:inline-flex;align-items:center;gap:.2em;margin-left:.3em;font-size:1em}
+.p svg{width:1.5em;height:1.5em}
+.p{background:none}
+.b.nb{background:transparent!important;color:#5a5a5a;font-weight:400;min-width:2.2em;padding:0}
+.adds{display:flex;gap:8px}.adds .add{flex:1;padding:0 6px;font-size:15px}
+.row,.row *{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+#ins{position:fixed;height:3px;background:#fff;border-radius:2px;z-index:9;display:none;pointer-events:none}
+.row.ph{opacity:.25}
+.row.ghost{background:#262626;box-shadow:0 8px 24px #000c;border-radius:14px;transform:scale(1.03);z-index:9}
+#dz.top{top:calc(32px + env(safe-area-inset-top,0px));bottom:auto}
+.row.flash{background:#1f3a22;border-radius:14px}
+.row.lift{background:#222;box-shadow:0 6px 18px #000a;border-radius:14px;transform:scale(1.02);position:relative;z-index:3}
+#dz{position:fixed;left:16px;right:16px;bottom:calc(32px + env(safe-area-inset-bottom,0px));height:68px;border-radius:99px;border:2px dashed #888;background:#2a2a2a;display:none;place-items:center;font-weight:700;font-size:17px;z-index:8}
+#dz.on{background:#fff;color:#000;border-style:solid}
+body.dragging #dz{display:grid}
+.hb{display:flex;align-items:center}.hb .menu:first-child{margin-right:0}
+.map-l{display:flex;flex-wrap:wrap;align-items:center;gap:.35em .6em}
+.row{break-inside:avoid}
+.row.mrow{display:inline-flex;min-height:0;padding:0;gap:.15em}
+body.v-c,body.v-m{padding-bottom:20px}body.v-c .adds,body.v-m .adds{display:none}
+.pv{font-size:19px;display:flex;flex-wrap:wrap;align-items:center;gap:5px;font-weight:700;margin-bottom:14px}
+.pv .gh{font-size:15px;display:grid}
+.c.cs{background:#fff;color:#000}
+.gh{height:1.9em;min-width:1.9em;padding:0 .5em;border:2px dashed #3d3d3d;color:#7a7a7a;border-radius:99px;display:grid;place-items:center;font-size:.8em;font-weight:700}
+.gh.gx{border-radius:.3em}
+.gp svg{width:1.4em;height:1.4em;opacity:.5}
+.ng .gh{display:none}.play .list .gh{display:none}
+h1{cursor:pointer}
+.add{margin:14px 0;height:52px;width:100%;border:2px dashed var(--line);border-radius:99px;color:var(--mute)}
+.play .add{display:none}
+#pl{position:fixed;left:0;right:0;bottom:0;z-index:4;max-width:560px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#121212;border-top:1px solid var(--line)}
+#pl input{flex:1;width:auto;min-height:32px;padding:0;background:none;border-radius:0;accent-color:#fff}
+#pl span{font-size:14px;color:var(--mute);min-width:38px}
+#bd{position:fixed;inset:0;background:#0009;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+#bd.on{opacity:1;pointer-events:auto}
+#sh{position:fixed;left:0;right:0;bottom:0;max-width:560px;margin:0 auto;background:var(--sheet);border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .2s;z-index:6;max-height:86%;overflow:auto}
+#sh.on{transform:none}
+.h{font-size:13px;color:var(--mute);margin:14px 0 8px}.h:first-child{margin-top:0}
+.g{display:flex;flex-wrap:wrap;gap:8px}
+.k{min-height:46px;min-width:46px;padding:0 16px;border-radius:99px;background:#2a2a2a;font-weight:700;font-size:17px;display:grid;place-items:center}
+.k.sel{background:#fff;color:#000}
+.k.dng{color:#ff6b6b}
+.k.tp{min-width:76px;min-height:52px;font-size:18px}
+.k.tp.note{border-radius:0;clip-path:polygon(22% 0,78% 0,100% 50%,78% 100%,22% 100%,0 50%);min-width:92px;font-size:30px}
+.tpw{display:inline-flex}
+.tpw.on{filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)}
+.big{font-size:34px;font-weight:700;margin-bottom:6px}
+.ci{font-size:26px;font-weight:700}
+.st{display:flex;align-items:center;gap:12px}
+.st b{min-width:96px;text-align:center;font-size:18px;border:2px solid var(--line);border-radius:.3em;padding:9px 12px}
+textarea{user-select:text;-webkit-user-select:text;font:inherit;width:100%;min-height:170px;background:#2a2a2a;border:0;border-radius:18px;color:#fff;padding:14px;font-size:16px}
+input{user-select:text;-webkit-user-select:text;font:inherit;width:100%;min-height:48px;background:#2a2a2a;border:0;border-radius:99px;color:#fff;padding:0 20px;font-size:17px}
+.sw{display:flex;border-radius:99px;overflow:hidden;background:#2a2a2a}
+.sw button{flex:1;min-height:48px;font-weight:700}
+.sw .sel{background:#fff;color:#000}
+
+/* Стили для текстового режима */
+.text-view { font-size: clamp(17px,5.3vw,22px); padding-top: 10px; max-width: 100%; overflow-x: hidden; user-select: text; -webkit-user-select: text; }
+.text-view .lyric-line { font-family: Roboto, system-ui, sans-serif; font-size: 16px; line-height: 1.5; color: #e0e0e0; margin-top: 2px; word-wrap: break-word; }
+body.play .text-view { opacity: 1; }
+</style></head><body><header><h1 id="title" data-a="menu"></h1><span class="hb"><button class="menu" data-a="viewcycle" aria-label="Вид"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button><button class="menu" data-a="menu" aria-label="Меню"><span><i></i><i></i></span></button></span></header>
+<button class="bpm" id="bpm" data-a="bpm"></button>
+<main id="list"></main>
+<div class="adds"><button class="add" data-a="addrow">+ Секция</button><button class="add" data-a="addrow2">+ Строка без плашки</button></div>
+<div id="bd" data-a="close"></div>
+<div id="sh"></div>
+<script type="application/json" id="seed">{"v": 1794959664151, "songs": [{"title": "Матрос (Дети Picasso)", "bpm": 126, "rows": [{"t": "Ин", "c": ["Em", "G", "Em"], "r": 8, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "П", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "К", "c": ["Em", "C", "Gm", "C"], "r": 2, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 1, "p": 0}, {"t": "П", "c": ["Em", "D", "C#m", "C"], "r": 2, "p": 0}, {"t": "Соло", "c": ["Em", "D", "C#m", "C"], "r": 4, "p": 0}, {"t": "П", "c": ["Em", "D", "C#m", "C"], "r": 4, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "Ин", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "К", "c": ["Em", "C", "Em", "C"], "r": 1, "p": 0}, {"t": "К", "c": ["Hm", "C", "Em", "C"], "r": 1, "p": 0}]}, {"title": "Панк морей", "bpm": 120, "rows": [{"t": "К", "c": ["Csus4", "C", "C", "C"], "r": 1, "p": 0}]}, {"title": "1. Люболь", "bpm": 144, "rows": []}, {"title": "Блюз о крыльях, ногах и хвостах", "bpm": 101, "text": "[Ин x8]\n\n[К]\nПустыня. Солнце жжёт, как в аду на сковородке.\nЖажда. Сухая кожа. Зуд и вечно пустошь в глОтке.\nСижу на жёстком камне. Я уродец. Обветшалый блюз\nПою про край наш жалкий, бедный, захудалый.\n---\nВон щуплый страус с хитрым грифом заболтались\nИ оба в миг прям как-то слишком уж разволновались.\nА мне до них нет дела. Я сам по себе бывалый блюз\nПою про край наш жаркий, знойный, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[К]\nТем, кому летать не суждено, прокачивали ноги,\nБежали по горячему песку — на пятках мозоли и ожоги,\nНо от себя не убежать — подохнешь лишь усталым.\nЯ блюз пою про край наш жаркий, знойный, захудалый\n---\nКто не умел летать — пусть учится, а то заставят силой.\nУчись всегда, чтоб образованным прилечь потом в могилу,\nА кто невежда и лентяй — тот дуба даст отсталым.\nЯ блюз пою про край наш истощённый, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Бридж]\nЕсть крылья у одних и ноги у других,\nНо нету смысла о них мусолить тех и тех и этих\nСкоро кондратий пустит на погост.\nВедь главное не крылья и не ноги, а только хвост.\n\n[Соло x2]\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Конец]", "rows": [{"t": "Ин", "c": ["Em", "G", "Em", "G"], "r": 8, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "Бридж", "c": ["C", "Am", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["C", "Am", "Em"], "r": 1, "p": 1}, {"t": "Соло", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 3, "p": 0}]}], "cur": 3}</script><script>
+const SRC_JS=document.currentScript.textContent,SRC_CSS=document.getElementById('appcss').textContent;
+const TYPES=[['Ин','#c4237a'],['К','#1a3cff'],['П','#ff2020'],['Соло','#ffdd1a','#000'],['Бридж','#8a2be2'],['Конец','#ff7a00'],['♪','#0a9a3a'],['','#2a2a2a']];
+const ROOTS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B','H'];
+const QUAL=[['','maj'],['m','m'],['7','7'],['m7','m7'],['maj7','maj7'],['sus4','sus4']];
+const A=['Em','C','Em','C'],B=['Em','D','C#m','C'];
+const R=(t,c,r,p)=>({t,c:[...c],r:r||1,p:p||0});
+const DEMO=()=>({title:'Матрос (Дети Picasso)',bpm:130,rows:[R('Ин',A,4,2),R('К',A,2),R('♪',A),R('П1',A,2),R('♪',A,2),R('К2',A,2),R('♪',A),R('П2',B,2),R('Соло',B,4),R('П3',B,4),R('♪',A,2),R('Ин',A,2)]});
+let S={song:DEMO(),mode:'edit',cur:0},sel=null,lp=false,lpT,metro=null,wl=null;
+try{const x=JSON.parse(localStorage.getItem('chords1'));if(x&&x.rows)S.song=x}catch(e){}
+let SEED=null;try{SEED=JSON.parse(document.getElementById('seed').textContent)}catch(e){}
+const SV=SEED?SEED.v:0;
+if(SEED&&SEED.songs&&SEED.songs.length){S.lib=SEED.songs;S.song=S.lib[Math.min(SEED.cur||0,S.lib.length-1)]}else S.lib=[S.song];
+try{const L=JSON.parse(localStorage.getItem('chords2'));if(L&&L.songs&&L.songs.length&&L.base>=SV){S.lib=L.songs;S.song=L.songs[Math.min(L.cur||0,L.songs.length-1)]}}catch(e){}
+const $=s=>document.querySelector(s),song=()=>S.song;
+S.lib.forEach(s=>s.rows.forEach(r=>r.t=norm(r.t)));
+try{S.view=localStorage.getItem('chords_view')||'full'}catch(e){S.view='full'}
+function save(){try{localStorage.setItem('chords2',JSON.stringify({songs:S.lib,cur:S.lib.indexOf(S.song),base:SV}))}catch(e){}}
+function norm(t){const m=/^([КП])\d+$/.exec(t);return m?m[1]:t}
+function labelsOf(rows){const c={};return rows.map(r=>{const b=norm(r.t);if(b==='К'||b==='П'){c[b]=(c[b]||0)+1;return b+c[b]}return r.t})}
+const tinfo=t=>TYPES.find(x=>x[0]===norm(t))||[t,'#555'];
+const pauseSvg='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8v8M14 8v8"/></svg>';
+
+function render(){
+  $('#title').textContent=song().title;
+  const b=$('#bpm');b.textContent=(metro?'● ':'')+song().bpm+' bpm';b.classList.toggle('on',!!metro);
+  document.body.classList.toggle('play',S.mode==='play');
+  const v=S.view||'full';
+  
+  if(v==='text'){
+    $('#list').className='text-view';
+    document.querySelector('.adds').style.display='none';
+    let html='';
+    const txt=song().text||'';
+    if(txt){
+      let tCounters = {};
+      txt.split('\n').forEach(l=>{
+        const trim=l.trim();
+        if(!trim){html+='<div style="height:12px"></div>';return}
+        if(trim==='---'){html+='<div style="height:1px; background:var(--line); margin: 16px 0; opacity: 0.5;"></div>';return}
+        const m=/^\[(.*?)\]$/.exec(trim);
+        if(m){
+          let inner = m[1].trim();
+          if (inner.toLowerCase() === 'пауза') {
+             html += `<div class="row" style="margin: 12px 0 8px;"><button class="p" style="margin:0; pointer-events:none;">${pauseSvg}</button></div>`;
+          } else {
+             let rep = '';
+             const repMatch = /(.*?)\s+(x\d+|\d+x)$/i.exec(inner);
+             if(repMatch){
+                inner = repMatch[1].trim();
+                rep = repMatch[2].toLowerCase();
+                if(rep.startsWith('x')) rep = rep.substring(1) + 'x';
+             }
+             const tName = norm(inner) || inner;
+             const ti = tinfo(tName);
+             const note = tName === '♪';
+             let dispName = tName;
+             if (tName === 'К' || tName === 'П') {
+                 tCounters[tName] = (tCounters[tName] || 0) + 1;
+                 dispName = tName + tCounters[tName];
+             }
+             html+=`<div class="row" style="margin: 20px 0 8px;"><button class="b${note?' note':''}${tName===''?' nb':''}" style="background:${ti[1]};color:${ti[2]||'#fff'}; pointer-events:none;">${note?'♪':dispName}</button>${rep?`<button class="r" style="pointer-events:none;">${rep}</button>`:''}</div>`;
+          }
+        }else{
+           html += `<div class="lyric-line">${esc(l)}</div>`;
+        }
+      });
+    }else{
+      html+='<div class="h">Текста пока нет. Добавьте его через редактор.</div>';
+    }
+    if(S.mode==='edit') html+=`<div style="margin-top:24px"><button class="add" data-a="edittext" style="display:flex;align-items:center;justify-content:center">Редактировать текст</button></div>`;
+    $('#list').innerHTML=html;
+    return;
+  }
+  
+  document.querySelector('.adds').style.display='';
+  const lab=labelsOf(song().rows);
+  const mp=v==='map';$('#list').className='';
+  $('#list').innerHTML=song().rows.map((r,i)=>{
+    const ti=tinfo(r.t),note=r.t==='♪';
+    if(mp&&r.t==='')return '';
+    return `<div class="row${S.mode==='play'&&i===S.cur?' cur':''}${S.drag===i?' lift':''}" data-i="${i}">`+
+      `<button class="b${note?' note':''}${r.t===''?' nb':''}" data-a="tpick" style="background:${ti[1]};color:${ti[2]||'#fff'}">${note?'♪':lab[i]||'↳'}</button>`+
+      (mp?'':r.c.map((c,j)=>`<button class="c" data-a="chord" data-j="${j}">${c}</button>`).join(''))+
+      (r.r>1?`<button class="r" data-a="row">${r.r}x</button>`:'')+
+      (r.p?`<button class="p" data-a="row">${pauseSvg}</button>`:'')+`</div>`}).join('');
+}
+function sheet(h){$('#sh').innerHTML=h;$('#sh').classList.add('on');$('#bd').classList.add('on')}
+function close(){$('#sh').classList.remove('on');$('#bd').classList.remove('on');sel=null}
+const vib=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
+
+S.tab='chord';
+function chordSheet(){edSheet()}function rowSheet(){edSheet()}function typeSheet(){edSheet()}
+const typeBtns=(act,cur)=>TYPES.map(t=>`<span class="tpw${t[0]===cur?' on':''}"><button class="k tp${t[0]==='♪'?' note':''}" data-a="${act}" data-v="${t[0]}" style="background:${t[1]};color:${t[2]||'#fff'}">${t[0]||'без плашки'}</button></span>`).join('');
+function prevRow(){const r=song().rows[sel.i],lab=labelsOf(song().rows)[sel.i],ti=tinfo(r.t),note=r.t==='♪';
+  return `<div class="pv"><button class="b${note?' note':''}${r.t===''?' nb':''}" data-a="gtab" data-v="type" style="background:${ti[1]};color:${ti[2]||'#fff'}">${note?'♪':lab||'↳'}</button>`+
+  r.c.map((c,j)=>`<button class="c${j===sel.j?' cs':''}" data-a="gch" data-v="${j}">${esc(c)}</button>`).join('')+
+  `<button class="gh gc" data-a="addc">+</button>`+
+  (r.r>1?`<button class="r" data-a="gtab" data-v="row">${r.r}x</button>`:`<button class="gh gx" data-a="gx">x</button>`)+
+  (r.p?`<button class="p" data-a="gtab" data-v="row">${pauseSvg}</button>`:`<button class="gh gp" data-a="gp">${pauseSvg}</button>`)+`</div>`}
+function edSheet(){
+  const rows=song().rows,r=rows[sel&&sel.i];if(!r){close();return}
+  const tab=S.tab||'chord';if(sel.j===undefined||sel.j>=r.c.length)sel.j=0;
+  const old=$('#sh'),sc=S.lastTab===tab&&old?old.scrollTop:0;S.lastTab=tab;
+  let body='';
+  if(tab==='chord'){const ch=r.c[sel.j],m=/^([A-H][#b]?)(.*)$/.exec(ch)||['',ch,''],used=[...new Set(rows.flatMap(x=>x.c))];
+    body=`<div class="h">Свой аккорд: введите любой</div><input id="ci" class="ci" value="${esc(ch)}" placeholder="Hm, F#7, Dsus2…" autocapitalize="off" autocomplete="off" spellcheck="false">
+    <div class="h">В песне</div><div class="g">${used.map(c=>`<button class="k${c===ch?' sel':''}" data-a="setc" data-v="${esc(c)}" data-x="1">${esc(c)}</button>`).join('')}</div>
+    <div class="h">Нота</div><div class="g">${ROOTS.map(x=>`<button class="k${x===m[1]?' sel':''}" data-a="root" data-v="${x}">${x}</button>`).join('')}</div>
+    <div class="h">Тип</div><div class="g">${QUAL.map(q=>`<button class="k${q[0]===m[2]?' sel':''}" data-a="qual" data-v="${q[0]}">${q[1]}</button>`).join('')}</div>
+    <div class="h">Аккорд в строке</div><div class="g"><button class="k" data-a="insr">Копия справа</button><button class="k dng" data-a="delc">Удалить аккорд</button></div>`}
+  else if(tab==='type')body=`<div class="g">${typeBtns('typeset',r.t)}</div>`;
+  else body=`<div class="h">Повтор</div><div class="st"><button class="k" data-a="rep" data-v="-1">−</button><b>${r.r>1?r.r+'x':'нет'}</b><button class="k" data-a="rep" data-v="1">+</button>${r.r>1?'<button class="k dng" data-a="rep" data-v="-99">Убрать</button>':''}</div>
+    <div class="h">Пауза после строки</div><div class="g">${r.p?'<button class="k dng" data-a="pau" data-v="-99">Убрать паузу</button>':'<button class="k" data-a="pau" data-v="1">+ Добавить паузу</button>'}</div>
+    <div class="h">Порядок</div><div class="g"><button class="k" data-a="up">↑ Выше</button><button class="k" data-a="down">↓ Ниже</button><button class="k" data-a="rowbelow">+ Строка ниже</button></div>
+    <div class="g" style="margin-top:14px"><button class="k dng" data-a="delr">Удалить строку</button></div>`;
+  sheet(prevRow()+`<div class="sw" style="margin-bottom:4px">${[['chord','Аккорд'],['type','Секция'],['row','Строка']].map(t=>`<button data-a="gtab" data-v="${t[0]}" class="${t[0]===tab?'sel':''}">${t[1]}</button>`).join('')}</div>`+body+`<div class="g" style="margin-top:16px"><button class="k sel" data-a="close">Готово</button></div>`);
+  const sh=$('#sh');if(sh)sh.scrollTop=sc;
+  if(tab==='chord'){const ci=$('#ci');if(ci)ci.oninput=()=>{const v=ci.value.trim();if(v){setChord(v);save();render();const e=document.querySelector('.pv .cs');if(e)e.textContent=v}}}
+}
+function bpmSheet(){
+  sheet(`<div class="big">${song().bpm} bpm</div>
+  <div class="st"><button class="k" data-a="bp" data-v="-5">−5</button><button class="k" data-a="bp" data-v="-1">−1</button><button class="k" data-a="bp" data-v="1">+1</button><button class="k" data-a="bp" data-v="5">+5</button></div>
+  <div class="h">Метроном</div><div class="g"><button class="k${metro?' sel':''}" data-a="metro">${metro?'Выключить':'Включить'}</button><button class="k" data-a="tap">Tap tempo</button></div>`);
+}
+
+function pmsg(t){const e=$('#pm');if(e)e.textContent=t}
+const NAMES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],TM=[],TN=[];
+for(let r=0;r<12;r++)for(const [q,iv] of [['',[0,4,7]],['m',[0,3,7]]]){const t=new Float32Array(12);iv.forEach(k=>t[(r+k)%12]=1/Math.sqrt(3));TM.push(t);TN.push(NAMES[r]+q)}
+let AN=null;const TP={src:null,pos:0,t0:0,playing:false};
+function tpTime(){return TP.playing?Math.min(S.ab.duration,S.ac.currentTime-TP.t0):TP.pos}
+function tpPlay(){if(TP.playing||!S.ab)return;const ac=S.ac;ac.resume();const s=ac.createBufferSource();s.buffer=S.ab;s.connect(ac.destination);s.start(0,TP.pos);TP.src=s;TP.t0=ac.currentTime-TP.pos;TP.playing=true;s.onended=()=>{if(TP.src===s&&TP.playing){TP.playing=false;TP.pos=0;updPl()}}}
+function tpPause(){if(!TP.playing)return;TP.pos=tpTime();TP.playing=false;try{TP.src.onended=null;TP.src.stop()}catch(e){}}
+function tpSeek(t){const was=TP.playing;tpPause();TP.pos=Math.max(0,Math.min(S.ab.duration-.05,t));if(was)tpPlay()}
+function updPl(){
+  let p=document.getElementById('pl');const show=S.ab&&song()===S.asong;
+  if(!show){if(p)p.style.display='none';tpPause();return}
+  if(!p){p=document.createElement('div');p.id='pl';p.innerHTML='<button class="k sel" id="pp">▶</button><input type="range" id="ps" min="0" max="1000" value="0"><span id="pt">0:00</span><button class="k" id="px">✕</button>';document.body.appendChild(p);
+    $('#pp').onclick=()=>{if(TP.playing)tpPause();else{S.mode='play';wake(true);tpPlay()}render()};
+    $('#ps').oninput=e=>tpSeek(e.target.value/1000*S.ab.duration);
+    $('#px').onclick=()=>{tpPause();try{S.ac.close()}catch(x){}S.ab=null;S.asong=null;render()};
+    setInterval(tick,250)}
+  p.style.display='flex';$('#pp').textContent=TP.playing?'❚❚':'▶';
+}
+function tick(){if(!S.ab||!document.getElementById('pl'))return;const t=tpTime();$('#ps').value=t/S.ab.duration*1000;$('#pt').textContent=Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+  if(TP.playing&&song()===S.asong){const i=song().rows.findIndex(r=>r.rt&&t>=r.rt[0]&&t<r.rt[1]);if(i>=0&&i!==S.cur){S.cur=i;render()}}}
+function songText(s){return '# '+s.title+' | '+s.bpm+'\n'+s.rows.map((r,i)=>(labelsOf(s.rows)[i]||'-')+': '+r.c.join(' ')+(r.r>1?' x'+r.r:'')+(r.p?' п1':'')).join('\n')}
+function parseSongs(t){const out=[];let cur=null;
+  t.split(/\r?\n/).forEach(l=>{l=l.trim();if(!l)return;
+    if(l[0]==='#'){const m=l.slice(1).split('|');cur={title:m[0].trim()||'Без названия',bpm:Math.max(40,Math.min(240,parseInt(m[1])||120)),rows:[]};out.push(cur);return}
+    const m=/^(.+?):\s*(.+)$/.exec(l);if(!m)return;if(!cur){cur={title:'Импорт',bpm:120,rows:[]};out.push(cur)}
+    const row={t:m[1].trim()==='-'?'':m[1].trim(),c:[],r:1,p:0};m[2].split(/\s+/).forEach(k=>{let q;if(q=/^[xх×](\d+)$/i.exec(k))row.r=+q[1];else if(q=/^[пp](\d+)$/i.exec(k))row.p=+q[1];else row.c.push(k)});
+    if(row.c.length)cur.rows.push(row)});
+  return out.filter(s=>s.rows.length)}
+async function shareText(t){try{if(navigator.share){await navigator.share({text:t});return 'ok'}}catch(e){if(e&&e.name==='AbortError')return 'ok'}
+  try{await navigator.clipboard.writeText(t);return 'copy'}catch(e){}
+  const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok?'copy':'fail'}
+function impSheet(){sheet(`<div class="h">Вставьте текст песни из Telegram</div><textarea id="it" placeholder="# Название | 120&#10;Ин: Em C Em C x2"></textarea><div class="h" id="im"></div><div class="g"><button class="k sel" data-a="impgo">Добавить</button><button class="k" data-a="close">Отмена</button></div>`)}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function menuSheet(){
+  if(S._m!==song())S.delAsk=false;S._m=song();
+  sheet(`<div class="h">Песни</div><div class="g">${S.lib.map((s,k)=>`<button class="k${s===song()?' sel':''}" data-a="pick" data-v="${k}">${esc(s.title)||'Без названия'}</button>`).join('')}<button class="k" data-a="newsong">+ Новая</button></div><div class="h">Название</div><input id="ti" value="${song().title.replace(/"/g,'&quot;')}">
+  <div class="h">Режим</div><div class="sw"><button data-a="mode" data-v="edit" class="${S.mode==='edit'?'sel':''}">Редактирование</button><button data-a="mode" data-v="play" class="${S.mode==='play'?'sel':''}">Репетиция</button></div>
+  <div class="h">Вид</div><div class="sw">${[['full','Полный'],['compact','Компакт'],['map','Схема'],['text','Текст']].map(x=>`<button data-a="view" data-v="${x[0]}" class="${(S.view||'full')===x[0]?'sel':''}">${x[1]}</button>`).join('')}</div>
+  <div class="h">Песня</div><div class="g"><button class="k dng" data-a="delsong">${S.delAsk?'Точно удалить «'+esc(song().title)+'»?':'Удалить песню'}</button><button class="k sel" data-a="close">Готово</button></div>`);
+  $('#ti').oninput=e=>{song().title=e.target.value;$('#title').textContent=e.target.value;save()};
+}
+function setChord(v){song().rows[sel.i].c[sel.j]=v}
+function click(){
+  try{const c=metro.ctx,o=c.createOscillator(),g=c.createGain();o.frequency.value=1000;g.gain.setValueAtTime(.4,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.06);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.07)}catch(e){}
+}
+function metroOn(){
+  metroOff();const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  metro={ctx,t:setInterval(click,60000/song().bpm)};click();
+}
+function metroOff(){if(metro){clearInterval(metro.t);try{metro.ctx.close()}catch(e){}metro=null}}
+async function wake(on){try{if(on&&navigator.wakeLock)wl=await navigator.wakeLock.request('screen');else if(wl){wl.release();wl=null}}catch(e){}}
+let taps=[];
+
+document.addEventListener('click',e=>{
+  if(lp){lp=false;return}
+  const el=e.target.closest('[data-a]');if(!el)return;
+  const a=el.dataset.a,v=el.dataset.v,rowEl=el.closest('.row'),i=rowEl?+rowEl.dataset.i:null,rows=song().rows;
+  if(rowEl&&(a==='chord'||a==='row'||a==='tpick')&&S.mode==='play'){S.cur=i;vib(15);{const rt=rows[i].rt;if(S.ab&&rt&&song()===S.asong)tpSeek(rt[0])}render();return}
+  switch(a){
+    case 'edittext':
+      sheet(`<div class="h">Текст песни (названия секций пишите в скобках, например [К] или [П])</div><textarea id="txa" style="min-height:350px; font-family:monospace; white-space:pre">${esc(song().text||'')}</textarea><div class="g" style="margin-top:16px"><button class="k sel" data-a="savetext">Сохранить</button></div>`);
+      return;
+    case 'savetext':
+      song().text=$('#txa').value;
+      close();
+      break;
+    case 'exp1':shareText(songText(song())).then(r=>pmsg(r==='copy'?'Скопировано. Вставьте в Telegram.':r==='ok'?'Готово.':'Не удалось скопировать.'));return;
+    case 'expall':shareText(S.lib.map(songText).join('\n\n')).then(r=>pmsg(r==='copy'?'Скопировано. Вставьте в Telegram.':r==='ok'?'Готово.':'Не удалось скопировать.'));return;
+    case 'imp':impSheet();return;
+    case 'impgo':{const L=parseSongs($('#it').value);if(!L.length){$('#im').textContent='Не нашёл песен в тексте.';return}L.forEach(s=>s.rows.forEach(r=>r.t=norm(r.t)));S.lib.push(...L);S.song=L[0];S.cur=0;close();break}
+    case 'chord':sel={i,j:+el.dataset.j};S.tab='chord';edSheet();return;
+    case 'gtab':S.tab=v;edSheet();return;
+    case 'gch':sel.j=+v;S.tab='chord';edSheet();return;
+    case 'gx':rows[sel.i].r=2;S.tab='row';edSheet();break;
+    case 'gp':rows[sel.i].p=1;S.tab='row';edSheet();break;
+    case 'row':sel={i};S.tab='row';edSheet();return;
+    case 'tpick':sel={i};S.tab='type';edSheet();return;
+    case 'typeset':rows[sel.i].t=v;close();break;
+    case 'menu':menuSheet();return;
+    case 'bpm':bpmSheet();return;
+    case 'close':close();return;
+    case 'addrow':rows.push(R('К',A));break;
+    case 'setc':setChord(v);if(el.dataset.x){chordSheet()}break;
+    case 'root':{const m=/^([A-H][#b]?)(.*)$/.exec(rows[sel.i].c[sel.j]);setChord(v+(m?m[2]:''));chordSheet();break}
+    case 'qual':{const m=/^([A-H][#b]?)(.*)$/.exec(rows[sel.i].c[sel.j]);setChord((m?m[1]:'C')+v);chordSheet();break}
+    case 'insl':rows[sel.i].c.splice(sel.j,0,rows[sel.i].c[sel.j]);sel.j++;chordSheet();break;
+    case 'insr':rows[sel.i].c.splice(sel.j+1,0,rows[sel.i].c[sel.j]);chordSheet();break;
+    case 'delc':{const c=rows[sel.i].c;if(c.length>1){c.splice(sel.j,1);sel.j=Math.min(sel.j,c.length-1)}edSheet();break}
+    case 'type':rows[sel.i].t=v;rowSheet();break;
+    case 'rep':rows[sel.i].r=Math.max(1,Math.min(16,rows[sel.i].r+ +v));rowSheet();break;
+    case 'addx':rows[i].r=2;sel={i};rowSheet();break;
+    case 'addp':rows[i].p=2;sel={i};rowSheet();break;
+    case 'addc2':rows[i].c.push(rows[i].c[rows[i].c.length-1]||'Em');sel={i,j:rows[i].c.length-1};save();render();chordSheet();return;
+    case 'crep':rows[sel.i].r=Math.max(1,Math.min(16,rows[sel.i].r+ +v));chordSheet();break;
+    case 'cpau':rows[sel.i].p=Math.max(0,Math.min(16,rows[sel.i].p+ +v));chordSheet();break;
+    case 'view':setView(v);menuSheet();return;
+    case 'viewcycle':setView({full:'compact',compact:'map',map:'text',text:'full'}[S.view||'full']);return;
+    case 'addrow2':rows.push(R('',rows.length?rows[rows.length-1].c:A));break;
+    case 'rowbelow':{const b=rows[sel.i];rows.splice(sel.i+1,0,{t:'',c:[...b.c],r:1,p:0});sel={i:sel.i+1,j:0};S.tab='chord';save();render();edSheet();return}
+    case 'rep0':rows[sel.i].r=1;rowSheet();break;
+    case 'pau':rows[sel.i].p=Math.max(0,Math.min(16,rows[sel.i].p+ +v));rowSheet();break;
+    case 'addc':{const c=rows[sel.i].c;c.push(c[c.length-1]||'Em');sel.j=c.length-1;S.tab='chord';edSheet();break}
+    case 'up':if(sel.i>0){[rows[sel.i-1],rows[sel.i]]=[rows[sel.i],rows[sel.i-1]];sel.i--}rowSheet();break;
+    case 'down':if(sel.i<rows.length-1){[rows[sel.i+1],rows[sel.i]]=[rows[sel.i],rows[sel.i+1]];sel.i++}rowSheet();break;
+    case 'dup':rows.splice(sel.i+1,0,JSON.parse(JSON.stringify(rows[sel.i])));sel.i++;edSheet();break;
+    case 'delr':rows.splice(sel.i,1);close();break;
+    case 'bp':song().bpm=Math.max(40,Math.min(240,song().bpm+ +v));if(metro)metroOn();bpmSheet();break;
+    case 'metro':metro?metroOff():metroOn();bpmSheet();break;
+    case 'tap':{const n=Date.now();taps=taps.filter(t=>n-t<2500);taps.push(n);if(taps.length>1){const d=(taps[taps.length-1]-taps[0])/(taps.length-1);song().bpm=Math.round(Math.max(40,Math.min(240,60000/d)))}bpmSheet();break}
+    case 'mode':S.mode=v;wake(v==='play');menuSheet();break;
+    case 'pick':S.song=S.lib[+v];S.cur=0;metroOff();menuSheet();break;
+    case 'newsong':{const n={title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]};S.lib.push(n);S.song=n;S.cur=0;metroOff();menuSheet();const t=$('#ti');t.focus();t.select();break}
+    case 'delsong':if(!S.delAsk){S.delAsk=true;menuSheet();setTimeout(()=>{if(S.delAsk){S.delAsk=false;if($('#ti'))menuSheet()}},4000);return}
+      S.delAsk=false;{const k=S.lib.indexOf(song());S.lib.splice(k,1);if(!S.lib.length)S.lib.push({title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]});S.song=S.lib[Math.max(0,k-1)];S.cur=0;menuSheet()}break;
+  }
+  save();render();
+});
+let DP=null,lastTouch=0;
+const blk=i=>{if(S.view!=='map')return 1;const r=song().rows;let n=1;while(r[i+n]&&r[i+n].t==='')n++;return n};
+function dpStart(e,x,y){if(S.mode==='play'||DP||!e.target.closest||S.view==='text')return;const row=e.target.closest('.row');if(!row||e.target.closest('#sh')||row.classList.contains('ghost'))return;DP={i:+row.dataset.i,el:row,x,y,cx:x,cy:y,on:false,t:setTimeout(dpBegin,380)}}
+function dpBegin(){if(!DP)return;const el=DP.el,q=el.getBoundingClientRect(),l=$('#list');
+  DP.on=true;lp=true;vib(40);DP.dx=DP.x-q.left;DP.dy=DP.y-q.top;
+  const g=el.cloneNode(true);g.className='row ghost';g.style.cssText='position:fixed;left:'+q.left+'px;top:'+q.top+'px;width:'+q.width+'px;font-size:'+getComputedStyle(l).fontSize+';margin:0;pointer-events:none';document.body.appendChild(g);DP.g=g;
+  el.classList.add('ph');const ins=document.createElement('div');ins.id='ins';document.body.appendChild(ins);DP.ins=ins;
+  DP.top=DP.y>innerHeight/2;let z=document.getElementById('dz');if(!z){z=document.createElement('div');z.id='dz';z.textContent='⧉ Копия сюда';document.body.appendChild(z)}
+  z.className=DP.top?'top':'';document.body.classList.add('dragging');DP.sy=0;
+  DP.tm=setInterval(()=>{if(DP&&DP.on){if(DP.sy)window.scrollBy(0,DP.sy);dpPlace()}},30);dpPlace()}
+function dpPlace(){const d=DP,x=d.cx,y=d.cy;d.g.style.left=(x-d.dx)+'px';d.g.style.top=(y-d.dy)+'px';
+  const z=document.getElementById('dz'),zr=z.getBoundingClientRect();d.over=d.top?y<=zr.bottom+8:y>=zr.top-8;z.classList.toggle('on',d.over);const tx=d.over?'Отпустите: копия':'⧉ Копия сюда';if(z.textContent!==tx)z.textContent=tx;
+  d.sy=d.over?0:y<(d.top?175:90)?-10:y>innerHeight-(d.top?90:170)?10:0;
+  let best=null,bd=1e12;for(const r of $('#list').children){if(r.dataset.i===undefined)continue;const q=r.getBoundingClientRect(),dy=y<q.top?q.top-y:y>q.bottom?y-q.bottom:0,dx=x<q.left?q.left-x:x>q.right?x-q.right:0,dd=dy*dy+dx*dx*.3;if(dd<bd){bd=dd;best=r}}
+  if(!best||d.over){d.k=null;d.ins.style.display='none';return}
+  const q=best.getBoundingClientRect(),i=+best.dataset.i,after=y>q.top+q.height/2;d.k=after?i+blk(i):i;
+  Object.assign(d.ins.style,{display:'block',left:q.left+'px',width:q.width+'px',top:((after?q.bottom:q.top)-1)+'px'})}
+function dpMove(x,y){if(!DP)return;if(!DP.on){if(Math.abs(y-DP.y)>10||Math.abs(x-DP.x)>10){clearTimeout(DP.t);DP=null}return}DP.cx=x;DP.cy=y;dpPlace()}
+function dpEnd(){if(!DP)return;clearTimeout(DP.t);const d=DP;DP=null;if(!d.on)return;clearInterval(d.tm);
+  d.g.remove();d.ins.remove();d.el.classList.remove('ph');const z=document.getElementById('dz');if(z)z.className='';document.body.classList.remove('dragging');
+  const rows=song().rows,n=blk(d.i);let fl=null;
+  if(d.over){rows.splice(d.i+n,0,...JSON.parse(JSON.stringify(rows.slice(d.i,d.i+n))));fl=d.i+n;vib([20,30,20])}
+  else if(d.k!=null&&(d.k<d.i||d.k>d.i+n)){const moved=rows.splice(d.i,n);const at=d.k>d.i?d.k-n:d.k;rows.splice(at,0,...moved);fl=at;vib(15)}
+  save();render();setTimeout(()=>{lp=false},350);
+  if(fl!==null){const el=[...$('#list').children].find(r=>+r.dataset.i===fl);if(el){el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),800)}}}
+document.addEventListener('touchstart',e=>{lastTouch=Date.now();if(e.touches.length>1){if(DP)clearTimeout(DP.t);if(!DP||!DP.on)DP=null;return}const t=e.touches[0];dpStart(e,t.clientX,t.clientY)},{passive:true});
+document.addEventListener('touchmove',e=>{const t=e.touches[0];if(DP&&DP.on)e.preventDefault();dpMove(t.clientX,t.clientY)},{passive:false});
+['touchend','touchcancel'].forEach(n=>document.addEventListener(n,dpEnd));
+document.addEventListener('mousedown',e=>{if(Date.now()-lastTouch<800||e.button)return;dpStart(e,e.clientX,e.clientY)});
+document.addEventListener('mousemove',e=>{if(Date.now()-lastTouch<800)return;dpMove(e.clientX,e.clientY)});
+document.addEventListener('mouseup',()=>{if(Date.now()-lastTouch<800)return;dpEnd()});
+document.addEventListener('contextmenu',e=>{if(e.target.closest&&e.target.closest('.text-view'))return;e.preventDefault()});
+function setView(v){S.view=v;try{localStorage.setItem('chords_view',v)}catch(e){}render()}
+function fit(){
+  const l=$('#list'),v=S.view||'full';
+  document.body.classList.toggle('v-c',v==='compact');document.body.classList.toggle('v-m',v==='map');
+  if(v==='text') return; // для текста адаптив не нужен
+  
+  const wfit=(start,min)=>{l.classList.remove('wrap');let fs=start;l.style.fontSize=fs+'px';
+    const over=()=>Math.max(0,...[...l.querySelectorAll('.row')].map(r=>r.scrollWidth-r.clientWidth));
+    for(let k=0;k<10;k++){const o=over();if(o<=0||fs<=min)break;const w=l.children[0]?l.children[0].clientWidth:l.clientWidth;fs=Math.max(min,fs*w/(w+o)-.2);l.style.fontSize=fs+'px'}return fs};
+  const hfit=(fs,min)=>{const p=document.getElementById('pl'),top=l.getBoundingClientRect().top+scrollY,avail=innerHeight-top-24-(p&&p.style.display!=='none'?64:0);
+    for(let k=0;k<8;k++){if(l.scrollHeight<=avail||fs<=min)break;fs=Math.max(min,fs*avail/l.scrollHeight*.97);l.style.fontSize=fs+'px'}return fs};
+  l.classList.add('ng');
+  if(v==='full'){l.style.columnCount='';wfit(Math.min(22,innerWidth*.057),12);if([...l.children].some(r=>r.scrollWidth>r.clientWidth))l.classList.add('wrap')}
+  else{let best=null;const n=song().rows.filter(r=>v!=='map'||r.t!=='').length;
+    for(const c of (n>7?(v==='map'?[1,2,3,4]:[1,2,3]):[1])){l.style.columnCount=c;const fs=hfit(wfit(Math.min(22,innerWidth*.057),5),5);if(!best||fs>best.fs+.3)best={c,fs}}
+    l.style.columnCount=best.c;l.style.fontSize=best.fs+'px'}
+  l.classList.remove('ng');
+}
+{const _r=render;render=()=>{_r();fit();updPl()}}
+addEventListener('resize',fit);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+render();
+</script></body></html>
