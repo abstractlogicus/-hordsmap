@@ -181,7 +181,7 @@ function render(){
       (r.p?`<button class="p" data-a="row">${pauseSvg}</button>`:'')+`</div>`}).join('');
 }
 function sheet(h){$('#sh').innerHTML=h;$('#sh').classList.add('on');$('#bd').classList.add('on')}
-function close(){$('#sh').classList.remove('on');$('#bd').classList.remove('on');sel=null}
+function close(){$('#sh').classList.remove('on');$('#bd').classList.remove('on');sel=null;S.ghOpen=false}
 const vib=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
 
 S.tab='chord';
@@ -257,13 +257,14 @@ function menuSheet(){
   sheet(`<div class="h">Песни</div><div class="g">${S.lib.map((s,k)=>`<button class="k${s===song()?' sel':''}" data-a="pick" data-v="${k}">${esc(s.title)||'Без названия'}</button>`).join('')}<button class="k" data-a="newsong">+ Новая</button></div><div class="h">Название</div><input id="ti" value="${song().title.replace(/"/g,'&quot;')}">
   <div class="h">Режим</div><div class="sw"><button data-a="mode" data-v="edit" class="${S.mode==='edit'?'sel':''}">Редактирование</button><button data-a="mode" data-v="play" class="${S.mode==='play'?'sel':''}">Репетиция</button></div>
   <div class="h">Вид</div><div class="sw">${[['full','Полный'],['compact','Компакт'],['map','Схема'],['text','Текст']].map(x=>`<button data-a="view" data-v="${x[0]}" class="${(S.view||'full')===x[0]?'sel':''}">${x[1]}</button>`).join('')}</div>
-  <div class="h">GitHub Синхронизация (Только для автора)</div>
-  <div style="display:flex;gap:8px;margin-bottom:8px"><input id="gh_token" type="text" placeholder="GitHub Token (ghp_...)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="flex:1;min-width:0"><button class="k" data-a="gh_paste" style="flex:none;white-space:nowrap">Вставить</button></div>
-  <input id="gh_repo" type="text" placeholder="Репозиторий (например: abstractlogicus/-hordsmap)" style="margin-bottom:14px" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-  <div class="g" style="margin-bottom:8px"><button class="k" data-a="gh_push" id="btn_gh_push">Отправить изменения на GitHub</button></div>
-  <div id="gh_log" class="h" style="margin-top:0; color:#ffdd1a;"></div>
-  
-  <div class="h">Приложение и данные</div><div class="g">${isApp()?'':'<button class="k" data-a="install_app">На экран «Домой»</button>'}<button class="k" data-a="export">Скачать резервный JSON</button></div>
+  <div class="h">Приложение и данные</div><div class="g">${isApp()?'':'<button class="k" data-a="install_app">На экран «Домой»</button>'}<button class="k" data-a="export">Скачать резервный JSON</button><button class="k${S.ghOpen?' sel':''}" data-a="gh_toggle" id="btn_gh_toggle">Админ</button></div>
+  <div id="gh_box" style="display:${S.ghOpen?'block':'none'};margin-top:12px;padding-top:10px;border-top:1px solid var(--line)">
+    <div class="h" style="margin-top:0">GitHub Синхронизация</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px"><input id="gh_token" type="text" placeholder="GitHub Token (ghp_...)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="flex:1;min-width:0"><button class="k" data-a="gh_paste" style="flex:none;white-space:nowrap">Вставить</button></div>
+    <input id="gh_repo" type="text" placeholder="Репозиторий (например: abstractlogicus/-hordsmap)" style="margin-bottom:14px" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <div class="g" style="margin-bottom:8px"><button class="k" data-a="gh_push" id="btn_gh_push">Отправить изменения на GitHub</button></div>
+    <div id="gh_log" class="h" style="margin-top:0; color:#ffdd1a;"></div>
+  </div>
   <div class="h">Песня</div><div class="g"><button class="k dng" data-a="delsong">${S.delAsk?'Точно удалить «'+esc(song().title)+'»?':'Удалить песню'}</button><button class="k sel" data-a="close">Готово</button></div>`);
   $('#ti').oninput=e=>{song().title=e.target.value;$('#title').textContent=e.target.value;save()};
   const ght = $('#gh_token'), ghr = $('#gh_repo');
@@ -385,6 +386,10 @@ document.addEventListener('click',e=>{
         return;
       }
       sheet(`<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDg3IDEwODYiPjxwYXRoIGQ9Ik02NTEuODY5IDBDODAwLjkxMyAwIDg3NS40MzYgLTAuMDAwNTU1MjEzIDkzMi43NiAyOC4wOTAxQzk4Ny42NDYgNTQuOTg1NiAxMDMyLjAzIDk5LjM4IDEwNTguOTIgMTU0LjI4MUMxMDg3IDIxMS42MjEgMTA4NyAyODYuMTY0IDEwODcgNDM1LjI0N1Y2NDkuODQxQzEwODcgNzk4LjkyNCAxMDg3IDg3My40NjUgMTA1OC45MiA5MzAuODA1QzEwMzIuMDMgOTg1LjcwNiA5ODcuNjQ2IDEwMzAuMSA5MzIuNzYgMTA1N0M4NzUuNDM2IDEwODUuMDkgODAwLjkxNCAxMDg1LjA5IDY1MS44NzEgMTA4NS4wOUg0MzUuMTMxQzI4Ni4wODcgMTA4NS4wOSAyMTEuNTY0IDEwODUuMDkgMTU0LjI0IDEwNTdDOTkuMzUzNiAxMDMwLjEgNTQuOTcxMyA5ODUuNzA2IDI4LjA4MjkgOTMwLjgwNUMtMC4wMDAxNDQ0NiA4NzMuNDY1IDAgNzk4LjkyNCAwIDY0OS44NDFWNDM1LjI0N0MwIDI4Ni4xNjQgLTAuMDAwMTkxNDUzIDIxMS42MjEgMjguMDgyOSAxNTQuMjgxQzU0Ljk3MTQgOTkuMzgwMSA5OS4zNTM3IDU0Ljk4NTYgMTU0LjI0IDI4LjA5MDFDMjExLjU2NCAtMC4wMDA1NTUyMTMgMjg2LjA4NyAwIDQzNS4xMzEgMEg2NTEuODY5Wk0zNTMuNTY1IDcwLjE4MzJDMzE3LjczMiA1OC44MTg0IDI3OS40NzEgNzguNjU0MiAyNjguMTA2IDExNC40ODZMNzIuMDk3NCA3MzIuNDc4QzYwLjczMjUgNzY4LjMxIDgwLjU2ODMgODA2LjU3MiAxMTYuNDAxIDgxNy45MzdMNzM0LjM5MiAxMDEzLjk1Qzc3MC4yMjUgMTAyNS4zMSA4MDguNDg2IDEwMDUuNDggODE5Ljg1MSA5NjkuNjQ0TDEwMTUuODYgMzUxLjY1MUMxMDI3LjIyIDMxNS44MTggMTAwNy4zOSAyNzcuNTU4IDk3MS41NTYgMjY2LjE5M0wzNTMuNTY1IDcwLjE4MzJaIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==" width="56" height="56" style="flex:none" alt=""><div><div style="font-size:19px;font-weight:700">Добавить на экран</div><div style="font-size:13px;color:var(--mute);margin-top:2px">Откроется как приложение без строки браузера</div></div></div><div class="h">Android (Chrome / Яндекс / Edge)</div><div style="font-size:15px;line-height:1.45;color:#e0e0e0">Нажмите меню <b>⋮</b> справа вверху → <b>«Добавить на главный экран»</b> (или <b>«Установить приложение»</b>).</div><div class="h">iPhone (Safari)</div><div style="font-size:15px;line-height:1.45;color:#e0e0e0">Нажмите <b>«Поделиться»</b> внизу экрана → <b>«На экран „Домой“»</b>.</div><div class="g" style="margin-top:18px"><button class="k sel" data-a="close">Понятно</button></div>`);
+      return;
+    case 'gh_toggle':
+      S.ghOpen=!S.ghOpen;
+      {const b=$('#gh_box'),t=$('#btn_gh_toggle');if(b)b.style.display=S.ghOpen?'block':'none';if(t)t.classList.toggle('sel',S.ghOpen);if(S.ghOpen&&b)b.scrollIntoView({behavior:'smooth',block:'nearest'})}
       return;
     case 'gh_paste':
       (async()=>{
