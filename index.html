@@ -10,8 +10,17 @@ h1{font-size:24px;font-weight:400;margin:0;line-height:1.2}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
 .menu{width:48px;height:48px;display:grid;place-items:center;margin-right:-10px}
 .menu i{display:block;width:22px;height:2px;background:#fff;margin:3px 0}
-.bpm{margin:8px 0 18px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;min-height:34px}
+.subbar{margin:8px 0 18px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+body.home .subbar{display:none!important}
+.bpm{margin:0;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;min-height:34px;max-width:100%}
 .bpm.on{border-color:var(--acc);color:var(--acc)}
+.aud-btn{color:#cfcfcf}
+.aud-btn.has{border-color:#555;color:#fff;background:#161616}
+.aud-btn svg{width:14px;height:14px;flex:none;opacity:.85}
+.aud-btn .aud-lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:165px}
+.aud-btn .aud-tag{font-size:12px;color:var(--acc);font-weight:700;flex:none}
+body.has-pl{padding-bottom:156px}
+body.has-pl #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 #list{font-size:clamp(17px,5.3vw,22px)}
 .row{display:flex;flex-wrap:nowrap;align-items:center;gap:.2em;min-height:2.2em;padding:.14em 0;font-weight:700;transition:opacity .15s}
 .row>*{flex:none}
@@ -174,12 +183,12 @@ body.home #bpm,body.home .adds{display:none!important}
 .imp-pills{display:flex;flex-wrap:wrap;gap:5px}
 .imp-pill{height:26px;min-width:26px;padding:0 9px;border-radius:99px;font-size:13px;font-weight:700;display:inline-grid;place-items:center}
 </style></head><body class="home"><div id="splash" aria-hidden="true"><div class="sp-lock"><svg class="sp-mark" viewBox="0 0 36.38 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33.7278 0C35.1913 2.98773e-07 36.3776 1.17403 36.3776 2.62227V33.3777C36.3776 34.826 35.1913 36 33.7278 36H2.64978C1.18635 36 0 34.826 0 33.3777V2.62227C3.78778e-07 1.17403 1.18635 0 2.64978 0H33.7278Z" fill="#fff"/><g transform="translate(18.21 18.04)"><g class="sp-spin"><path transform="translate(-18.21 -18.04)" d="M12.3293 2.77677C10.9344 2.33893 9.4449 3.10309 9.00247 4.48355L2.82275 23.7653C2.38032 25.1457 3.15249 26.6198 4.54744 27.0576L24.4283 33.2978C25.604 33.6668 26.8595 33.0227 27.2324 31.8592L33.538 12.1847C33.9804 10.8042 33.2083 9.33018 31.8133 8.89234L12.3293 2.77677Z" fill="#000"/></g></g></svg><div class="sp-word-clip"><svg class="sp-word" viewBox="53.8 0 217.2 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M61.5055 20.3116H64.6541C65.5312 20.3116 66.3713 19.9612 66.984 19.34L76.4484 9.74201C77.0148 9.11504 77.8877 8.7481 78.8126 8.74814L93.1951 8.74854C94.0881 8.74858 94.8692 9.2642 95.0978 10.0045L102.456 32.5847C102.562 32.9096 102.868 33.1299 103.213 33.1299H104.715C105.062 33.1299 105.369 32.9069 105.474 32.5792L112.645 10.0049C112.874 9.26441 113.655 8.74876 114.549 8.74893L137.902 8.75249C141.971 8.77474 146.316 9.76111 148.647 11.692C151.047 13.6099 152.246 16.1848 152.246 19.4168V34.6189C152.246 35.354 151.551 35.9498 150.694 35.9498H135.362C132.084 35.9498 128.126 36.1129 125.557 34.2139C123.612 32.6867 122.64 30.4291 122.64 27.943C122.64 21.9463 127.336 20.2373 133.281 20.2373L144.595 20.2373V19.166C144.595 14.413 143.165 11.2162 137.902 11.2162H121.258C120.696 11.2162 120.202 11.5388 120.054 12.0041L112.523 34.6533C112.284 35.4007 111.491 35.9188 110.588 35.9188H97.1555C96.2518 35.9188 95.4597 35.4007 95.2207 34.6533L87.6938 11.9519C87.5585 11.5289 87.1101 11.2356 86.5986 11.2356H85.1472C84.5205 11.2356 83.9285 11.4821 83.5409 11.9045L75.1852 20.5291C74.7573 20.9707 74.7342 21.6604 75.1316 22.1292L86.8911 36H77.6578L67.4611 24.5041C66.843 23.8073 65.9515 23.4078 65.0146 23.4078H61.5055V36H53.8295V0H61.5055V20.3116ZM136.944 22.7856C133.221 22.7856 131.242 24.963 131.242 27.943C131.242 30.8329 133.626 33.3885 136.445 33.3885H144.585V23.1857C144.591 23.0541 144.595 22.9208 144.595 22.7856H136.944Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M209.401 8.77759H221.315C225.384 8.79985 229.729 9.76112 232.06 11.692C234.459 13.6099 235.659 16.1849 235.659 19.4168V34.5925C235.659 35.3258 234.968 35.9209 234.112 35.9235L217.651 35.9665C214.495 35.9665 210.586 36.0822 208.099 34.2139C206.155 32.6867 205.183 30.4291 205.183 27.943C205.183 21.1258 210.407 19.6855 216.352 19.6855H228.008V19.166C228.008 14.2994 226.256 11.2649 221.315 11.2649H209.401V11.274H199.365C198.696 11.274 198.154 11.8107 198.154 12.4727V35.9188H190.502V10.9997C190.502 9.76269 191.671 8.75983 193.114 8.75982H209.401V8.77759ZM219.487 22.2013C215.763 22.2013 213.712 24.7683 213.712 27.5263C213.712 30.2843 215.525 33.3236 218.987 33.3236H227.998V22.6014C228.004 22.4699 228.008 22.3365 228.008 22.2013H219.487Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M185.504 8.73475H185.506V13.8517H185.504V30.8329H185.514V34.6189C185.514 35.3539 184.819 35.9498 183.962 35.9498H170.213C165.999 35.9285 162.476 34.632 159.645 32.0608C156.865 29.4634 155.465 26.4672 155.432 22.3548C155.465 18.2425 156.856 15.2212 159.636 12.6238C162.467 10.0526 165.99 8.75643 170.204 8.73511L177.852 8.73475V0.00585732H185.504V8.73475ZM172.961 11.2547C166.351 11.2547 163.774 16.4905 163.774 22.3548C163.774 28.6312 167.26 33.3 172.97 33.3H177.852V22.5845C177.852 22.3038 177.845 22.0293 177.829 21.7612V11.2549C176.587 11.2548 178.291 11.2547 172.961 11.2547Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M247.142 8.74864H257.789V11.5374H247.142V26.862C247.142 29.2379 248.212 33.2498 253.069 33.2498H258.924V35.9188H250.555C247.411 35.9188 243.835 35.1374 242.097 33.5747C240.36 32.0119 239.491 29.7744 239.491 26.862V0.00371841H247.142V8.74864Z" fill="white"/><path d="M267.319 2.14408C267.511 2.14411 267.695 2.18981 267.873 2.28116C268.055 2.36923 268.204 2.5014 268.32 2.67752C268.44 2.85024 268.5 3.06387 268.5 3.31784C268.5 3.57176 268.438 3.79172 268.315 3.97795C268.195 4.16083 268.041 4.30132 267.853 4.39954C267.85 4.40072 267.848 4.40133 267.846 4.4025L268.654 5.89339H267.915L267.205 4.54699H266.164V5.89339H265.501V2.14408H267.319ZM266.164 4.03382H267.103C267.278 4.03382 267.434 3.97318 267.571 3.85126C267.711 3.72598 267.781 3.54804 267.781 3.31784C267.781 3.08084 267.711 2.91126 267.571 2.80964C267.434 2.70803 267.283 2.65722 267.119 2.65722H266.164V4.03382Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M266.893 0C267.461 0 267.993 0.104688 268.49 0.314683C268.986 0.524666 269.422 0.816053 269.799 1.18858C270.175 1.56115 270.47 1.99341 270.682 2.48453C270.894 2.97559 271 3.50235 271 4.06452C271 4.62672 270.894 5.1534 270.682 5.64449C270.47 6.13556 270.175 6.56742 269.799 6.93997C269.422 7.31249 268.986 7.60384 268.49 7.81383C267.993 8.02383 267.461 8.12904 266.893 8.12904C266.324 8.12902 265.792 8.0238 265.296 7.81383C264.8 7.60384 264.363 7.31251 263.987 6.93997C263.61 6.56741 263.316 6.13558 263.104 5.64449C262.892 5.1534 262.786 4.62673 262.786 4.06452C262.786 3.50233 262.892 2.9756 263.104 2.48453C263.316 1.99341 263.61 1.56115 263.987 1.18858C264.363 0.816053 264.8 0.524661 265.296 0.314683C265.792 0.104718 266.324 2.70596e-05 266.893 0ZM266.893 0.757075C266.277 0.757111 265.715 0.905955 265.209 1.20391C264.706 1.50194 264.303 1.90168 264.002 2.40288C263.701 2.90078 263.55 3.45486 263.55 4.06452C263.55 4.67415 263.701 5.22984 264.002 5.73109C264.303 6.22889 264.706 6.62662 265.209 6.92464C265.715 7.22265 266.277 7.3719 266.893 7.37193C267.509 7.37193 268.069 7.2227 268.572 6.92464C269.078 6.62662 269.482 6.22886 269.783 5.73109C270.085 5.22984 270.235 4.67415 270.235 4.06452C270.235 3.45485 270.085 2.90078 269.783 2.40288C269.482 1.90167 269.078 1.50194 268.572 1.20391C268.069 0.905851 267.509 0.757075 266.893 0.757075Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/></svg></div></div></div><header><div class="brand home-only"><svg class="brand-svg" viewBox="0 0 271 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kvadrat"><path d="M33.7278 0C35.1913 2.98773e-07 36.3776 1.17403 36.3776 2.62227V33.3777C36.3776 34.826 35.1913 36 33.7278 36H2.64978C1.18635 36 0 34.826 0 33.3777V2.62227C3.78778e-07 1.17403 1.18635 0 2.64978 0H33.7278ZM12.3293 2.77677C10.9344 2.33893 9.4449 3.10309 9.00247 4.48355L2.82275 23.7653C2.38032 25.1457 3.15249 26.6198 4.54744 27.0576L24.4283 33.2978C25.604 33.6668 26.8595 33.0227 27.2324 31.8592L33.538 12.1847C33.9804 10.8042 33.2083 9.33018 31.8133 8.89234L12.3293 2.77677Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M61.5055 20.3116H64.6541C65.5312 20.3116 66.3713 19.9612 66.984 19.34L76.4484 9.74201C77.0148 9.11504 77.8877 8.7481 78.8126 8.74814L93.1951 8.74854C94.0881 8.74858 94.8692 9.2642 95.0978 10.0045L102.456 32.5847C102.562 32.9096 102.868 33.1299 103.213 33.1299H104.715C105.062 33.1299 105.369 32.9069 105.474 32.5792L112.645 10.0049C112.874 9.26441 113.655 8.74876 114.549 8.74893L137.902 8.75249C141.971 8.77474 146.316 9.76111 148.647 11.692C151.047 13.6099 152.246 16.1848 152.246 19.4168V34.6189C152.246 35.354 151.551 35.9498 150.694 35.9498H135.362C132.084 35.9498 128.126 36.1129 125.557 34.2139C123.612 32.6867 122.64 30.4291 122.64 27.943C122.64 21.9463 127.336 20.2373 133.281 20.2373L144.595 20.2373V19.166C144.595 14.413 143.165 11.2162 137.902 11.2162H121.258C120.696 11.2162 120.202 11.5388 120.054 12.0041L112.523 34.6533C112.284 35.4007 111.491 35.9188 110.588 35.9188H97.1555C96.2518 35.9188 95.4597 35.4007 95.2207 34.6533L87.6938 11.9519C87.5585 11.5289 87.1101 11.2356 86.5986 11.2356H85.1472C84.5205 11.2356 83.9285 11.4821 83.5409 11.9045L75.1852 20.5291C74.7573 20.9707 74.7342 21.6604 75.1316 22.1292L86.8911 36H77.6578L67.4611 24.5041C66.843 23.8073 65.9515 23.4078 65.0146 23.4078H61.5055V36H53.8295V0H61.5055V20.3116ZM136.944 22.7856C133.221 22.7856 131.242 24.963 131.242 27.943C131.242 30.8329 133.626 33.3885 136.445 33.3885H144.585V23.1857C144.591 23.0541 144.595 22.9208 144.595 22.7856H136.944Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M209.401 8.77759H221.315C225.384 8.79985 229.729 9.76112 232.06 11.692C234.459 13.6099 235.659 16.1849 235.659 19.4168V34.5925C235.659 35.3258 234.968 35.9209 234.112 35.9235L217.651 35.9665C214.495 35.9665 210.586 36.0822 208.099 34.2139C206.155 32.6867 205.183 30.4291 205.183 27.943C205.183 21.1258 210.407 19.6855 216.352 19.6855H228.008V19.166C228.008 14.2994 226.256 11.2649 221.315 11.2649H209.401V11.274H199.365C198.696 11.274 198.154 11.8107 198.154 12.4727V35.9188H190.502V10.9997C190.502 9.76269 191.671 8.75983 193.114 8.75982H209.401V8.77759ZM219.487 22.2013C215.763 22.2013 213.712 24.7683 213.712 27.5263C213.712 30.2843 215.525 33.3236 218.987 33.3236H227.998V22.6014C228.004 22.4699 228.008 22.3365 228.008 22.2013H219.487Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M185.504 8.73475H185.506V13.8517H185.504V30.8329H185.514V34.6189C185.514 35.3539 184.819 35.9498 183.962 35.9498H170.213C165.999 35.9285 162.476 34.632 159.645 32.0608C156.865 29.4634 155.465 26.4672 155.432 22.3548C155.465 18.2425 156.856 15.2212 159.636 12.6238C162.467 10.0526 165.99 8.75643 170.204 8.73511L177.852 8.73475V0.00585732H185.504V8.73475ZM172.961 11.2547C166.351 11.2547 163.774 16.4905 163.774 22.3548C163.774 28.6312 167.26 33.3 172.97 33.3H177.852V22.5845C177.852 22.3038 177.845 22.0293 177.829 21.7612V11.2549C176.587 11.2548 178.291 11.2547 172.961 11.2547Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M247.142 8.74864H257.789V11.5374H247.142V26.862C247.142 29.2379 248.212 33.2498 253.069 33.2498H258.924V35.9188H250.555C247.411 35.9188 243.835 35.1374 242.097 33.5747C240.36 32.0119 239.491 29.7744 239.491 26.862V0.00371841H247.142V8.74864Z" fill="white"/><path d="M267.319 2.14408C267.511 2.14411 267.695 2.18981 267.873 2.28116C268.055 2.36923 268.204 2.5014 268.32 2.67752C268.44 2.85024 268.5 3.06387 268.5 3.31784C268.5 3.57176 268.438 3.79172 268.315 3.97795C268.195 4.16083 268.041 4.30132 267.853 4.39954C267.85 4.40072 267.848 4.40133 267.846 4.4025L268.654 5.89339H267.915L267.205 4.54699H266.164V5.89339H265.501V2.14408H267.319ZM266.164 4.03382H267.103C267.278 4.03382 267.434 3.97318 267.571 3.85126C267.711 3.72598 267.781 3.54804 267.781 3.31784C267.781 3.08084 267.711 2.91126 267.571 2.80964C267.434 2.70803 267.283 2.65722 267.119 2.65722H266.164V4.03382Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M266.893 0C267.461 0 267.993 0.104688 268.49 0.314683C268.986 0.524666 269.422 0.816053 269.799 1.18858C270.175 1.56115 270.47 1.99341 270.682 2.48453C270.894 2.97559 271 3.50235 271 4.06452C271 4.62672 270.894 5.1534 270.682 5.64449C270.47 6.13556 270.175 6.56742 269.799 6.93997C269.422 7.31249 268.986 7.60384 268.49 7.81383C267.993 8.02383 267.461 8.12904 266.893 8.12904C266.324 8.12902 265.792 8.0238 265.296 7.81383C264.8 7.60384 264.363 7.31251 263.987 6.93997C263.61 6.56741 263.316 6.13558 263.104 5.64449C262.892 5.1534 262.786 4.62673 262.786 4.06452C262.786 3.50233 262.892 2.9756 263.104 2.48453C263.316 1.99341 263.61 1.56115 263.987 1.18858C264.363 0.816053 264.8 0.524661 265.296 0.314683C265.792 0.104718 266.324 2.70596e-05 266.893 0ZM266.893 0.757075C266.277 0.757111 265.715 0.905955 265.209 1.20391C264.706 1.50194 264.303 1.90168 264.002 2.40288C263.701 2.90078 263.55 3.45486 263.55 4.06452C263.55 4.67415 263.701 5.22984 264.002 5.73109C264.303 6.22889 264.706 6.62662 265.209 6.92464C265.715 7.22265 266.277 7.3719 266.893 7.37193C267.509 7.37193 268.069 7.2227 268.572 6.92464C269.078 6.62662 269.482 6.22886 269.783 5.73109C270.085 5.22984 270.235 4.67415 270.235 4.06452C270.235 3.45485 270.085 2.90078 269.783 2.40288C269.482 1.90167 269.078 1.50194 268.572 1.20391C268.069 0.905851 267.509 0.757075 266.893 0.757075Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/></svg></div><span class="hl song-only"><button class="back" data-a="home" aria-label="Список программы"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><h1 id="title" data-a="menu"></h1></span><span class="hb"><button class="plus-btn home-only" data-a="newsong_sheet" aria-label="Новая песня"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><button class="menu song-only" data-a="viewcycle" aria-label="Вид"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button><button class="menu" data-a="menu" aria-label="Меню"><span><i></i><i></i></span></button></span></header>
-<button class="bpm" id="bpm" data-a="bpm"></button>
+<div class="subbar"><button class="bpm" id="bpm" data-a="bpm"></button><button class="bpm aud-btn" id="audbtn" data-a="audbtn"></button></div><input type="file" id="audfile" accept="audio/*" hidden>
 <main id="list"></main>
 <div class="adds"><button class="add" data-a="addrow">+ Секция</button><button class="add" data-a="addrow2">+ Строка без плашки</button></div>
 <div id="bd" data-a="close"></div>
 <div id="sh"></div><div id="mv-edge"></div><div id="mvis" aria-hidden="true"><div class="mv-top"><div class="mv-song" id="mv-title"></div><button class="mv-x" data-a="mclose" aria-label="Закрыть">✕</button></div><div class="mv-mid"><div class="mv-stage" data-a="metro"><div class="mv-halo" id="mv-halo"></div><div class="mv-wave" id="mv-wave"></div><div class="mv-orb" id="mv-orb"><div class="mv-num" id="mv-num">120</div><div class="mv-sub" id="mv-sub">BPM</div></div></div><div class="mv-dots" id="mv-dots" data-a="mmeter"></div></div><div class="mv-bot"><div class="mv-row"><button class="k" data-a="bp" data-v="-5">−5</button><button class="k" data-a="bp" data-v="-1">−1</button><button class="k" data-a="bp" data-v="1">+1</button><button class="k" data-a="bp" data-v="5">+5</button></div><div class="mv-row"><button class="k" data-a="tap">Tap</button><button class="k" data-a="mmeter" id="mv-meter">4/4</button><button class="k" data-a="msound" id="mv-sound">Звук: Выкл</button></div><div class="mv-row"><button class="k" data-a="metro" id="mv-toggle">Пауза</button><button class="k sel" data-a="mclose">Готово</button></div></div></div>
-<script type="application/json" id="seed">{"v":1795373256874,"songs":[{"title":"Матрос (Дети Picasso)","bpm":126,"rows":[{"t":"Ин","c":["Em","G","Em"],"r":8,"p":0},{"t":"К","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"П","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"♪","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"К","c":["Em","C","Gm","C"],"r":2,"p":0},{"t":"♪","c":["Em","C","Em","C"],"r":1,"p":0},{"t":"П","c":["Em","D","C#m","C"],"r":2,"p":0},{"t":"Соло","c":["Em","D","C#m","C"],"r":4,"p":0},{"t":"П","c":["Em","D","C#m","C"],"r":4,"p":0},{"t":"♪","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"Ин","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"К","c":["Em","C","Em","C"],"r":1,"p":0},{"t":"К","c":["Hm","C","Em","C"],"r":1,"p":0}]},{"title":"Блюз о крыльях, ногах и хвостах","bpm":171,"text":"[Ин x8]\n\n[К]\nПустыня. Солнце жжёт, как в аду на сковородке.\nЖажда. Сухая кожа. Зуд и вечно пустошь в глОтке.\nСижу на жёстком камне. Я уродец. Обветшалый блюз\nПою про край наш жалкий, бедный, захудалый.\n---\nВон щуплый страус с хитрым грифом заболтались\nИ оба в миг прям как-то слишком уж разволновались.\nА мне до них нет дела. Я сам по себе бывалый блюз\nПою про край наш жаркий, знойный, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[К]\nТем, кому летать не суждено, прокачивали ноги,\nБежали по горячему песку — на пятках мозоли и ожоги,\nНо от себя не убежать — подохнешь лишь усталым.\nЯ блюз пою про край наш жаркий, знойный, захудалый\n---\nКто не умел летать — пусть учится, а то заставят силой.\nУчись всегда, чтоб образованным прилечь потом в могилу,\nА кто невежда и лентяй — тот дуба даст отсталым.\nЯ блюз пою про край наш истощённый, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Бридж]\nЕсть крылья у одних и ноги у других,\nНо нету смысла о них мусолить тех и тех и этих\nСкоро кондратий пустит на погост.\nВедь главное не крылья и не ноги, а только хвост.\n\n[Соло x2]\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Конец]","rows":[{"t":"Ин","c":["Em","G","Em","G"],"r":8,"p":0},{"t":"К","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"П","c":["Em","G","Em","G","Em","G"],"r":1,"p":0},{"t":"","c":["D","B","Am","B","Em"],"r":1,"p":1},{"t":"♪","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":1,"p":0},{"t":"К","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"П","c":["Em","G","Em","G","Em","G"],"r":1,"p":0},{"t":"","c":["D","B","Am","B","Em"],"r":1,"p":1},{"t":"♪","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":1,"p":0},{"t":"Бридж","c":["C","Am","Em","G"],"r":1,"p":0},{"t":"","c":["C","Am","Em"],"r":1,"p":1},{"t":"Соло","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":1,"p":0},{"t":"П","c":["Em","G","Em","G","Em","G"],"r":1,"p":0},{"t":"","c":["D","B","Am","B","Em"],"r":1,"p":1},{"t":"♪","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":3,"p":0}]},{"title":"Старый панк","bpm":120,"rows":[{"t":"К","c":["Csus4","C","C","C"],"r":1,"p":0}]},{"title":"Арарат","bpm":115,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Летели облака","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Журавли","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Коты","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Ласточка","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Knocking","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"А снег идёт","bpm":120,"rows":[{"t":"П","c":["Am","Dm"],"r":1,"p":0},{"t":"","c":["Am","Gm","A7"],"r":1,"p":0},{"t":"","c":["Dm","G7","C","F"],"r":1,"p":0},{"t":"","c":["B7","E"],"r":1,"p":0},{"t":"К","c":["Am","Dm"],"r":1,"p":0},{"t":"","c":["Am","Gm","A7"],"r":1,"p":0},{"t":"","c":["Dm","G7","C","F"],"r":1,"p":0},{"t":"","c":["B7","E"],"r":1,"p":0},{"t":"К","c":["Am","Dm"],"r":1,"p":0},{"t":"","c":["Am","Gm","A7"],"r":1,"p":0},{"t":"","c":["Dm","G7","C","F"],"r":1,"p":0},{"t":"","c":["B7","E"],"r":1,"p":0},{"t":"П","c":["Am","Dm"],"r":1,"p":0},{"t":"","c":["Am","Gm","A7"],"r":1,"p":0},{"t":"","c":["Dm","G7","C","F"],"r":1,"p":0},{"t":"","c":["B7","E"],"r":1,"p":0},{"t":"","c":["Am","Dm"],"r":1,"p":0},{"t":"","c":["Am","Gm","A7"],"r":1,"p":0},{"t":"","c":["Dm","G7","C","F"],"r":1,"p":0},{"t":"","c":["B7","E","Am"],"r":1,"p":0}],"text":"[П]\nА снег идет, а снег идет ...\nИ все вокруг чего-то ждет.\nПод этот снег, под тихий снег,\nХочу сказать при всех.\n\n[К]\nМой самый главный человек,\nВзгляни со мной на этот снег.\nОн чист, как то, о чем молчу,\nО чем сказать хочу.\n\n[К]\nКто мне любовь мою принес\nНаверно, добрый Дед Мороз.\nКогда в окно с тобой смотрю,\nЯ снег благодарю.\n\n[П]\nА снег идет, а снег идет ...\nИ все мерцает и плывет.\nЗа то, что ты в моей судьбе,\nСпасибо, снег, тебе.\n\nА снег идет, а снег идет ...\nИ все мерцает и плывет.\nЗа то, что ты в моей судьбе,\nСпасибо, снег, тебе!"}],"cur":9}</script><script>
+<script type="application/json" id="seed">{"v": 1794959664151, "songs": [{"title": "Матрос (Дети Picasso)", "bpm": 126, "rows": [{"t": "Ин", "c": ["Em", "G", "Em"], "r": 8, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "П", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "К", "c": ["Em", "C", "Gm", "C"], "r": 2, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 1, "p": 0}, {"t": "П", "c": ["Em", "D", "C#m", "C"], "r": 2, "p": 0}, {"t": "Соло", "c": ["Em", "D", "C#m", "C"], "r": 4, "p": 0}, {"t": "П", "c": ["Em", "D", "C#m", "C"], "r": 4, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "Ин", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "К", "c": ["Em", "C", "Em", "C"], "r": 1, "p": 0}, {"t": "К", "c": ["Hm", "C", "Em", "C"], "r": 1, "p": 0}]}, {"title": "Панк морей", "bpm": 120, "rows": [{"t": "К", "c": ["Csus4", "C", "C", "C"], "r": 1, "p": 0}]}, {"title": "1. Люболь", "bpm": 144, "rows": []}, {"title": "Блюз о крыльях, ногах и хвостах", "bpm": 101, "text": "[Ин x8]\n\n[К]\nПустыня. Солнце жжёт, как в аду на сковородке.\nЖажда. Сухая кожа. Зуд и вечно пустошь в глОтке.\nСижу на жёстком камне. Я уродец. Обветшалый блюз\nПою про край наш жалкий, бедный, захудалый.\n---\nВон щуплый страус с хитрым грифом заболтались\nИ оба в миг прям как-то слишком уж разволновались.\nА мне до них нет дела. Я сам по себе бывалый блюз\nПою про край наш жаркий, знойный, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[К]\nТем, кому летать не суждено, прокачивали ноги,\nБежали по горячему песку — на пятках мозоли и ожоги,\nНо от себя не убежать — подохнешь лишь усталым.\nЯ блюз пою про край наш жаркий, знойный, захудалый\n---\nКто не умел летать — пусть учится, а то заставят силой.\nУчись всегда, чтоб образованным прилечь потом в могилу,\nА кто невежда и лентяй — тот дуба даст отсталым.\nЯ блюз пою про край наш истощённый, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Бридж]\nЕсть крылья у одних и ноги у других,\nНо нету смысла о них мусолить тех и тех и этих\nСкоро кондратий пустит на погост.\nВедь главное не крылья и не ноги, а только хвост.\n\n[Соло x2]\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Конец]", "rows": [{"t": "Ин", "c": ["Em", "G", "Em", "G"], "r": 8, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "Бридж", "c": ["C", "Am", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["C", "Am", "Em"], "r": 1, "p": 1}, {"t": "Соло", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 3, "p": 0}]}], "cur": 3}</script><script>
 const SRC_JS=document.currentScript.textContent,SRC_CSS=document.getElementById('appcss').textContent;
 const TYPES=[['Ин','#c4237a'],['К','#1a3cff'],['П','#ff2020'],['Соло','#ffdd1a','#000'],['Бридж','#8a2be2'],['Конец','#ff7a00'],['♪','#0a9a3a'],['','#2a2a2a']];
 const ROOTS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B','H'];
@@ -204,6 +213,7 @@ function labelsOf(rows){const c={};return rows.map(r=>{const b=norm(r.t);if(b===
 const tinfo=t=>TYPES.find(x=>x[0]===norm(t))||[t,'#555'];
 const pauseSvg='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8v8M14 8v8"/></svg>';
 const trashSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>';
+const noteSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
 
 function render(){
   const isHome=S.screen==='home';
@@ -218,6 +228,19 @@ function render(){
   }
   $('#title').textContent=song().title;
   const b=$('#bpm');b.textContent=(metro?'● ':'')+song().bpm+' bpm';b.classList.toggle('on',!!metro);
+  const ab=$('#audbtn');
+  if(ab){
+    const hasA=S.ab&&song()===S.asong;
+    ab.classList.toggle('has',!!hasA);
+    if(S.audLoading){
+      ab.innerHTML='<span>⏳ Загрузка…</span>';
+    }else if(hasA){
+      const tag=(S.audBpm&&S.audBpm!==song().bpm)?`<span class="aud-tag">~${S.audBpm}</span>`:'';
+      ab.innerHTML=`${noteSvg}<span class="aud-lbl">${esc(S.audName||'Аудио')}</span>${tag}`;
+    }else{
+      ab.innerHTML=`${noteSvg}<span>Аудио</span>`;
+    }
+  }
   const v=S.view||'full';
   
   if(v==='text'){
@@ -348,38 +371,173 @@ function closeMetro(){
   save();render();
 }
 
-function pmsg(t){const e=$('#pm');if(e)e.textContent=t}
-const NAMES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],TM=[],TN=[];
-for(let r=0;r<12;r++)for(const [q,iv] of [['',[0,4,7]],['m',[0,3,7]]]){const t=new Float32Array(12);iv.forEach(k=>t[(r+k)%12]=1/Math.sqrt(3));TM.push(t);TN.push(NAMES[r]+q)}
-let AN=null;const TP={src:null,pos:0,t0:0,playing:false};
+const TP={src:null,pos:0,t0:0,playing:false};
+function songKey(s){if(!s)return'';if(!s.id){s.id='s_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,6);save()}return s.id}
+function audDbOpen(){
+  return new Promise((res,rej)=>{
+    if(!window.indexedDB)return rej();
+    const rq=indexedDB.open('kvadrat_audio',1);
+    rq.onupgradeneeded=()=>{const db=rq.result;if(!db.objectStoreNames.contains('tracks'))db.createObjectStore('tracks')};
+    rq.onsuccess=()=>res(rq.result);
+    rq.onerror=()=>rej();
+  });
+}
+async function audDbSave(key,rec){
+  try{const db=await audDbOpen();const tx=db.transaction('tracks','readwrite');tx.objectStore('tracks').put(rec,key)}catch(e){}
+}
+async function audDbLoad(key){
+  try{
+    const db=await audDbOpen();
+    return await new Promise(res=>{
+      const tx=db.transaction('tracks','readonly');
+      const rq=tx.objectStore('tracks').get(key);
+      rq.onsuccess=()=>res(rq.result||null);
+      rq.onerror=()=>res(null);
+    });
+  }catch(e){return null}
+}
+async function audDbDel(key){
+  try{const db=await audDbOpen();const tx=db.transaction('tracks','readwrite');tx.objectStore('tracks').delete(key)}catch(e){}
+}
+function detectBpmFromBuffer(ab){
+  try{
+    const origSr=ab.sampleRate,nCh=ab.numberOfChannels,totalOrig=ab.length;
+    const step=Math.max(1,Math.round(origSr/11025)),sr=origSr/step;
+    const total=Math.floor(totalOrig/step);
+    if(total<sr*3)return null;
+    const maxSamp=Math.floor(sr*60);
+    const start=total>sr*75?Math.floor(total*0.15):0;
+    const len=Math.min(total-start,maxSamp);
+    const hop=128,nFrames=Math.floor(len/hop);
+    if(nFrames<200)return null;
+    const chs=[];for(let c=0;c<nCh;c++)chs.push(ab.getChannelData(c));
+    const alpha=1-Math.exp(-2*Math.PI*200/sr);
+    const env=new Float32Array(nFrames);
+    let lp=0,prevLL=0,prevLA=0;
+    for(let f=0;f<nFrames;f++){
+      const base=(start+f*hop)*step;
+      let eLow=0,eAll=0;
+      for(let j=0;j<hop;j++){
+        const idx=base+j*step;
+        let x=0;for(let c=0;c<nCh;c++)x+=chs[c][idx];
+        if(nCh>1)x/=nCh;
+        lp+=alpha*(x-lp);
+        eLow+=lp*lp;eAll+=x*x;
+      }
+      const ll=Math.log1p(1000*(eLow/hop)),la=Math.log1p(1000*(eAll/hop));
+      env[f]=Math.max(0,ll-prevLL)*1.6+Math.max(0,la-prevLA);
+      prevLL=ll;prevLA=la;
+    }
+    const win=Math.max(4,Math.round(0.35*sr/hop));
+    const onset=new Float32Array(nFrames);
+    const pref=new Float32Array(nFrames+1);
+    for(let i=0;i<nFrames;i++)pref[i+1]=pref[i]+env[i];
+    for(let i=0;i<nFrames;i++){
+      const a=Math.max(0,i-win),b=Math.min(nFrames,i+win+1);
+      onset[i]=Math.max(0,env[i]-(pref[b]-pref[a])/(b-a));
+    }
+    const fps=sr/hop;
+    const minLag=Math.max(2,Math.floor(fps*60/220));
+    const maxLag=Math.min(Math.floor(nFrames/2),Math.floor(fps*60/32));
+    const acf=new Float32Array(maxLag+2);
+    for(let lag=minLag;lag<=maxLag;lag++){
+      let s=0;const cnt=nFrames-lag;
+      for(let i=0;i<cnt;i++)s+=onset[i]*onset[i+lag];
+      acf[lag]=s/cnt;
+    }
+    const acfAt=lf=>{
+      const i0=Math.floor(lf);
+      if(i0<minLag||i0+1>maxLag)return 0;
+      const fr=lf-i0;
+      return acf[i0]*(1-fr)+acf[i0+1]*fr;
+    };
+    let bestBpm=120,bestScore=-1;
+    for(let bpm=65;bpm<=185;bpm++){
+      const lag=fps*60/bpm;
+      let sc=acfAt(lag)+0.55*acfAt(lag*2)+0.25*acfAt(lag*0.5)+0.20*acfAt(lag*4);
+      const p=Math.log2(bpm/118)/0.65;
+      sc*=Math.exp(-0.5*p*p);
+      if(sc>bestScore){bestScore=sc;bestBpm=bpm}
+    }
+    return bestBpm;
+  }catch(e){return null}
+}
+function clearAudioMem(){
+  tpPause();
+  if(S.ac){try{S.ac.close()}catch(e){}}
+  S.ac=null;S.ab=null;S.asong=null;S.audName='';S.audBpm=null;TP.pos=0;
+}
+async function loadAudioBytes(targetSong,arrayBuf,fileName,saveToDb,showBpmPrompt){
+  S.audLoading=true;render();
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext;
+    const ac=new AC();
+    const copyBuf=arrayBuf.slice(0);
+    const ab=await ac.decodeAudioData(copyBuf);
+    if(song()!==targetSong){try{ac.close()}catch(e){}S.audLoading=false;render();return}
+    clearAudioMem();
+    S.ac=ac;S.ab=ab;S.asong=targetSong;
+    S.audName=fileName.replace(/\.[^.]+$/,'');
+    const detBpm=detectBpmFromBuffer(ab);
+    S.audBpm=detBpm;
+    if(saveToDb)audDbSave(songKey(targetSong),{buf:arrayBuf,name:fileName,bpm:detBpm});
+    S.audLoading=false;
+    render();
+    if(showBpmPrompt&&detBpm){
+      if(detBpm!==targetSong.bpm){
+        showToast(`Темп аудио: ~${detBpm} bpm`,'Применить',()=>{
+          targetSong.bpm=detBpm;
+          if(metro)metroOn();
+          save();render();
+        },8000);
+      }else{
+        showToast(`Темп аудио совпадает: ${detBpm} bpm`,null,null,2800);
+      }
+    }
+  }catch(err){
+    S.audLoading=false;render();
+    showToast('Не удалось декодировать аудиофайл',null,null,3500);
+  }
+}
+async function restoreSongAudio(targetSong){
+  if(S.ab&&S.asong===targetSong)return;
+  const rec=await audDbLoad(songKey(targetSong));
+  if(!rec||!rec.buf||song()!==targetSong)return;
+  await loadAudioBytes(targetSong,rec.buf,rec.name||'Аудио',false,false);
+}
+function fmtDur(sec){const s=Math.max(0,Math.floor(sec||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+function audSheet(){
+  if(!S.ab||song()!==S.asong){const f=$('#audfile');if(f)f.click();return}
+  const det=S.audBpm;
+  const bpmBlock=det
+    ?(det!==song().bpm
+      ?`<div class="h">Определённый темп аудио</div><div class="g"><button class="k sel" data-a="aud_apply_bpm">Установить ${det} bpm (сейчас ${song().bpm})</button></div>`
+      :`<div class="h">Определённый темп аудио: ${det} bpm (установлен)</div>`)
+    :'';
+  sheet(`<div class="h">Прикреплённое аудио</div>
+    <div style="font-size:18px;font-weight:700;margin-bottom:4px;word-break:break-word">${esc(S.audName||'Аудио')}</div>
+    <div style="font-size:13px;color:var(--mute);margin-bottom:8px">Длительность: ${fmtDur(S.ab.duration)}</div>
+    ${bpmBlock}
+    <div class="h">Файл</div>
+    <div class="g"><button class="k" data-a="aud_replace">Заменить аудио</button><button class="k dng" data-a="aud_remove">Удалить аудио</button></div>
+    <div class="g" style="margin-top:16px"><button class="k sel" data-a="close">Готово</button></div>`);
+}
 function tpTime(){return TP.playing?Math.min(S.ab.duration,S.ac.currentTime-TP.t0):TP.pos}
 function tpPlay(){if(TP.playing||!S.ab)return;const ac=S.ac;ac.resume();const s=ac.createBufferSource();s.buffer=S.ab;s.connect(ac.destination);s.start(0,TP.pos);TP.src=s;TP.t0=ac.currentTime-TP.pos;TP.playing=true;s.onended=()=>{if(TP.src===s&&TP.playing){TP.playing=false;TP.pos=0;updPl()}}}
 function tpPause(){if(!TP.playing)return;TP.pos=tpTime();TP.playing=false;try{TP.src.onended=null;TP.src.stop()}catch(e){}}
 function tpSeek(t){const was=TP.playing;tpPause();TP.pos=Math.max(0,Math.min(S.ab.duration-.05,t));if(was)tpPlay()}
 function updPl(){
   let p=document.getElementById('pl');const show=S.screen!=='home'&&S.ab&&song()===S.asong;
+  document.body.classList.toggle('has-pl',!!show);
   if(!show){if(p)p.style.display='none';tpPause();return}
   if(!p){p=document.createElement('div');p.id='pl';p.innerHTML='<button class="k sel" id="pp">▶</button><input type="range" id="ps" min="0" max="1000" value="0"><span id="pt">0:00</span><button class="k" id="px">✕</button>';document.body.appendChild(p);
-    $('#pp').onclick=()=>{if(TP.playing)tpPause();else{S.mode='play';wake(true);tpPlay()}render()};
+    $('#pp').onclick=()=>{if(TP.playing)tpPause();else{wake(true);tpPlay()}updPl()};
     $('#ps').oninput=e=>tpSeek(e.target.value/1000*S.ab.duration);
-    $('#px').onclick=()=>{tpPause();try{S.ac.close()}catch(x){}S.ab=null;S.asong=null;render()};
+    $('#px').onclick=()=>{const curS=song();clearAudioMem();if(curS)audDbDel(songKey(curS));render()};
     setInterval(tick,250)}
   p.style.display='flex';$('#pp').textContent=TP.playing?'❚❚':'▶';
 }
-function tick(){if(!S.ab||!document.getElementById('pl'))return;const t=tpTime();$('#ps').value=t/S.ab.duration*1000;$('#pt').textContent=Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
-  if(TP.playing&&song()===S.asong){const i=song().rows.findIndex(r=>r.rt&&t>=r.rt[0]&&t<r.rt[1]);if(i>=0&&i!==S.cur){S.cur=i;render()}}}
-function songText(s){return '# '+s.title+' | '+s.bpm+'\n'+s.rows.map((r,i)=>(labelsOf(s.rows)[i]||'-')+': '+r.c.join(' ')+(r.r>1?' x'+r.r:'')+(r.p?' п1':'')).join('\n')}
-function parseSongs(t){const out=[];let cur=null;
-  t.split(/\r?\n/).forEach(l=>{l=l.trim();if(!l)return;
-    if(l[0]==='#'){const m=l.slice(1).split('|');cur={title:m[0].trim()||'Без названия',bpm:Math.max(40,Math.min(240,parseInt(m[1])||120)),rows:[]};out.push(cur);return}
-    const m=/^(.+?):\s*(.+)$/.exec(l);if(!m)return;if(!cur){cur={title:'Импорт',bpm:120,rows:[]};out.push(cur)}
-    const row={t:m[1].trim()==='-'?'':m[1].trim(),c:[],r:1,p:0};m[2].split(/\s+/).forEach(k=>{let q;if(q=/^[xх×](\d+)$/i.exec(k))row.r=+q[1];else if(q=/^[пp](\d+)$/i.exec(k))row.p=+q[1];else row.c.push(k)});
-    if(row.c.length)cur.rows.push(row)});
-  return out.filter(s=>s.rows.length)}
-async function shareText(t){try{if(navigator.share){await navigator.share({text:t});return 'ok'}}catch(e){if(e&&e.name==='AbortError')return 'ok'}
-  try{await navigator.clipboard.writeText(t);return 'copy'}catch(e){}
-  const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok?'copy':'fail'}
-function impSheet(){sheet(`<div class="h">Вставьте текст песни из Telegram</div><textarea id="it" placeholder="# Название | 120&#10;Ин: Em C Em C x2"></textarea><div class="h" id="im"></div><div class="g"><button class="k sel" data-a="impgo">Добавить</button><button class="k" data-a="close">Отмена</button></div>`)}
+function tick(){if(!S.ab||!document.getElementById('pl'))return;const t=tpTime();$('#ps').value=t/S.ab.duration*1000;$('#pt').textContent=fmtDur(t)}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let nsParsed=null,ntaps=[];
 function parseTabText(raw){
@@ -762,12 +920,20 @@ function metroOff(){
 async function wake(on){try{if(on&&navigator.wakeLock){if(!wl)wl=await navigator.wakeLock.request('screen')}else if(wl){wl.release();wl=null}}catch(e){wl=null}}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&(mOpen||S.mode==='play')){wl=null;wake(true)}});
 let taps=[];
+$('#audfile').onchange=async e=>{
+  const file=e.target.files&&e.target.files[0];
+  if(!file)return;
+  close();
+  const target=song();
+  const abuf=await file.arrayBuffer();
+  await loadAudioBytes(target,abuf,file.name,true,true);
+};
 
 document.addEventListener('click',e=>{
   if(lp&&!(e.target.closest&&e.target.closest('#toast'))){lp=false;return}
   const el=e.target.closest('[data-a]');if(!el)return;
   const a=el.dataset.a,v=el.dataset.v,rowEl=el.closest('.row'),i=rowEl?+rowEl.dataset.i:null,rows=song().rows;
-  if(rowEl&&(a==='chord'||a==='row'||a==='tpick')&&S.mode==='play'){S.cur=i;vib(15);{const rt=rows[i].rt;if(S.ab&&rt&&song()===S.asong)tpSeek(rt[0])}render();return}
+  if(rowEl&&(a==='chord'||a==='row'||a==='tpick')&&S.mode==='play'){S.cur=i;vib(15);render();return}
   switch(a){
     case 'edittext':
       sheet(`<div class="h">Текст песни (названия секций пишите в скобках, например [К] или [П])</div><textarea id="txa" style="min-height:350px; font-family:monospace; white-space:pre">${esc(song().text||'')}</textarea><div class="g" style="margin-top:16px"><button class="k sel" data-a="savetext">Сохранить</button></div>`);
@@ -805,10 +971,11 @@ document.addEventListener('click',e=>{
     case 'gh_push':
       pushToGitHub();
       return;
-    case 'exp1':shareText(songText(song())).then(r=>pmsg(r==='copy'?'Скопировано. Вставьте в Telegram.':r==='ok'?'Готово.':'Не удалось скопировать.'));return;
-    case 'expall':shareText(S.lib.map(songText).join('\n\n')).then(r=>pmsg(r==='copy'?'Скопировано. Вставьте в Telegram.':r==='ok'?'Готово.':'Не удалось скопировать.'));return;
-    case 'imp':impSheet();return;
-    case 'impgo':{const L=parseSongs($('#it').value);if(!L.length){$('#im').textContent='Не нашёл песен в тексте.';return}L.forEach(s=>s.rows.forEach(r=>r.t=norm(r.t)));S.lib.push(...L);S.song=L[0];S.cur=0;close();break}
+    case 'audbtn':if(S.ab&&song()===S.asong)audSheet();else{const f=$('#audfile');if(f){f.value='';f.click()}}return;
+    case 'aud_replace':{const f=$('#audfile');if(f){f.value='';f.click()}}return;
+    case 'aud_apply_bpm':if(S.audBpm){song().bpm=S.audBpm;if(metro)metroOn();close();save();render()}return;
+    case 'aud_remove':{const curS=song();clearAudioMem();if(curS)audDbDel(songKey(curS));close();render()}return;
+    case 'toast_act':if(toastCb){const fn=toastCb;clearUndo();fn()}return;
     case 'chord':sel={i,j:+el.dataset.j};S.tab='chord';edSheet();return;
     case 'gtab':S.tab=v;edSheet();return;
     case 'gch':sel.j=+v;S.tab='chord';edSheet();return;
@@ -854,22 +1021,29 @@ document.addEventListener('click',e=>{
     case 'mode':S.mode=v;wake(v==='play');menuSheet();break;
     case 'home':mOpen=false;S.screen='home';metroOff();wake(false);close();window.scrollTo(0,0);render();return;
     case 'undo_del':if(undoD){const u=undoD;clearUndo();if(u.hadPh&&S.lib.length===1)S.lib.splice(0,1);S.lib.splice(Math.min(u.idx,S.lib.length),0,u.song);S.song=u.song;save();render()}return;
-    case 'opensong':clearUndo();S.song=S.lib[+v];S.screen='song';S.cur=0;metroOff();wake(S.mode==='play');window.scrollTo(0,0);break;
+    case 'opensong':clearUndo();S.song=S.lib[+v];S.screen='song';S.cur=0;metroOff();wake(S.mode==='play');window.scrollTo(0,0);restoreSongAudio(S.song);break;
     case 'newsong_sheet':newSongSheet();return;
     case 'nbp':nbpm=Math.max(40,Math.min(240,nbpm+ +v));{const e=$('#nbv');if(e)e.textContent=nbpm+' bpm'}return;
     case 'ntap':{const n=performance.now();ntaps=ntaps.filter(t=>n-t<2500);ntaps.push(n);if(ntaps.length>1){const d=(ntaps[ntaps.length-1]-ntaps[0])/(ntaps.length-1);nbpm=Math.round(Math.max(40,Math.min(240,60000/d)));const e=$('#nbv');if(e)e.textContent=nbpm+' bpm'}}return;
     case 'nspaste':(async()=>{const ta=$('#nsimp'),pv=$('#nsprev');try{if(!navigator.clipboard||!navigator.clipboard.readText)throw 0;const txt=await navigator.clipboard.readText();if(!txt){if(pv)pv.innerHTML='<div class="imp-stat warn">Буфер обмена пуст</div>';return}if(ta){ta.value=txt;updNewSongPrev()}}catch(e){if(pv)pv.innerHTML='<div class="imp-stat warn">Зажмите поле ниже пальцем → Вставить</div>'}})();return;
     case 'nsclear':{const ta=$('#nsimp');if(ta){ta.value='';updNewSongPrev()}}return;
     case 'createnewsong':createNewSong();return;
-    case 'pick':S.song=S.lib[+v];S.screen='song';S.cur=0;metroOff();menuSheet();break;
+    case 'pick':S.song=S.lib[+v];S.screen='song';S.cur=0;metroOff();restoreSongAudio(S.song);menuSheet();break;
     case 'newsong':{const n={title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]};S.lib.push(n);S.song=n;S.cur=0;metroOff();menuSheet();const t=$('#ti');t.focus();t.select();break}
     case 'delsong':if(!S.delAsk){S.delAsk=true;menuSheet();setTimeout(()=>{if(S.delAsk){S.delAsk=false;if($('#ti'))menuSheet()}},4000);return}
-      S.delAsk=false;{const k=S.lib.indexOf(song());S.lib.splice(k,1);if(!S.lib.length)S.lib.push({title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]});S.song=S.lib[Math.max(0,k-1)];S.cur=0;menuSheet()}break;
+      S.delAsk=false;{const k=S.lib.indexOf(song()),rem=song();if(S.asong===rem)clearAudioMem();audDbDel(songKey(rem));S.lib.splice(k,1);if(!S.lib.length)S.lib.push({title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]});S.song=S.lib[Math.max(0,k-1)];S.cur=0;restoreSongAudio(S.song);menuSheet()}break;
   }
   save();render();
 });
-let DP=null,lastTouch=0,undoT=null,undoD=null;
-function clearUndo(){if(undoT){clearTimeout(undoT);undoT=null}undoD=null;const t=document.getElementById('toast');if(t)t.remove()}
+let DP=null,lastTouch=0,undoT=null,undoD=null,toastCb=null;
+function clearUndo(){if(undoT){clearTimeout(undoT);undoT=null}undoD=null;toastCb=null;const t=document.getElementById('toast');if(t)t.remove()}
+function showToast(msg,btnLabel,cb,ms=5500){
+  clearUndo();toastCb=cb||null;
+  const t=document.createElement('div');t.id='toast';
+  t.innerHTML=`<span>${esc(msg)}</span>${btnLabel?`<button data-a="toast_act">${esc(btnLabel)}</button>`:''}`;
+  document.body.appendChild(t);
+  undoT=setTimeout(clearUndo,ms);
+}
 function showUndo(songObj,idx,hadPh){
   clearUndo();undoD={song:songObj,idx,hadPh};
   const t=document.createElement('div');t.id='toast';
@@ -909,6 +1083,7 @@ function dpEnd(){if(!DP)return;clearTimeout(DP.t);const d=DP;DP=null;if(!d.on)re
   if(d.isSong){
     if(d.over){
       const removed=S.lib.splice(d.i,1)[0];let hadPh=false;
+      if(S.asong===removed)clearAudioMem();
       if(!S.lib.length){S.lib.push({title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]});hadPh=true}
       if(S.song===removed)S.song=S.lib[Math.max(0,Math.min(d.i,S.lib.length-1))];
       vib([25,40,25]);showUndo(removed,d.i,hadPh);
