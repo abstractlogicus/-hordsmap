@@ -22,8 +22,9 @@ body.home .subbar{display:none!important}
 .tr-pill{padding:0 4px;gap:0}
 .tr-step{width:28px;height:32px;display:grid;place-items:center;font-size:16px;font-weight:500;color:#cfcfcf;border-radius:99px;transition:background .12s,color .12s}
 .tr-step:active{background:#262626;color:#fff}
+.tr-pill.on{border-color:#555;background:#161616}
 .tr-val{padding:0 4px;font-size:13px;color:var(--mute);min-width:32px;text-align:center;font-variant-numeric:tabular-nums}
-.tr-pill.on .tr-val{color:var(--acc);font-weight:700}
+.tr-pill.on .tr-val{color:#e6e6e6;font-weight:600}
 body.has-pl{padding-bottom:156px}
 body.has-pl #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 #list{font-size:clamp(17px,5.3vw,22px)}
@@ -34,7 +35,7 @@ body.has-pl #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 .row-del{position:absolute;right:0;top:50%;height:1.9em;min-width:38px;padding:0 .65em;border-radius:99px;border:1.5px solid #ff4d4d;background:rgba(42,16,16,.96);color:#ff6b6b;display:grid;place-items:center;opacity:0;pointer-events:none;transform:translate3d(100%,-50%,0) scale(.86);will-change:transform,opacity;transition:background .14s,border-color .14s,color .14s}
 .row-del svg{width:1.05em;height:1.05em;min-width:16px;min-height:16px}
 .row.sw-open .row-del{opacity:1;pointer-events:auto}
-.row.sw-arm .row-del,.row-del:active{background:#e02828;border-color:#ff5c5c;color:#fff}
+.row-del:active{background:#e02828;border-color:#ff5c5c;color:#fff}
 .play .row{opacity:.3}.play .row.cur{opacity:1}
 .row.cur{background:linear-gradient(90deg,#1b1b1b,transparent);border-radius:99px 0 0 99px;margin-left:-8px;padding-left:8px}
 .b{height:1.9em;min-width:1.9em;padding:0 .6em;border-radius:99px;display:grid;place-items:center;background:#555;white-space:nowrap}
@@ -1299,7 +1300,7 @@ render();
   };
   const closeOpen=(exceptRow=null)=>{
     if(openRow&&openRow!==exceptRow){
-      openRow.classList.remove('sw-open','sw-arm');
+      openRow.classList.remove('sw-open');
       setPos(openRow,0,true);
       openRow=null;
     }
@@ -1317,8 +1318,9 @@ render();
     }
     if(!row)return;
     const{delEl}=getParts(row);
-    const baseTx=row===openRow?-openW(delEl):0;
-    sw={row,sx:x,sy:y,baseTx,tx:baseTx,lock:null,armed:false};
+    const w=openW(delEl);
+    const baseTx=row===openRow?-w:0;
+    sw={row,sx:x,sy:y,baseTx,tx:baseTx,w,lock:null};
   };
   const onMove=(x,y,ev)=>{
     if(!sw)return;
@@ -1336,18 +1338,10 @@ render();
     }
     if(sw.lock==='h'){
       if(ev&&ev.cancelable)ev.preventDefault();
-      const rowW=sw.row.clientWidth||300;
-      const armLim=-Math.max(125,rowW*0.44);
       let nextTx=sw.baseTx+mx;
       if(nextTx>0)nextTx=0;
-      if(nextTx<armLim-36)nextTx=armLim-36+(nextTx-(armLim-36))*0.25;
+      if(nextTx<-sw.w)nextTx=-sw.w+(nextTx+sw.w)*0.22;
       sw.tx=nextTx;
-      const nowArm=nextTx<=armLim;
-      if(nowArm!==sw.armed){
-        sw.armed=nowArm;
-        sw.row.classList.toggle('sw-arm',nowArm);
-        if(nowArm)vib(15);
-      }
       setPos(sw.row,nextTx,false);
     }
   };
@@ -1357,18 +1351,8 @@ render();
     if(cur.lock!=='h')return;
     rowSwiped=true;
     setTimeout(()=>{rowSwiped=false},340);
-    const{row,tx,armed}=cur;
-    const{delEl}=getParts(row);
-    const w=openW(delEl);
-    row.classList.remove('sw-arm');
-    if(armed){
-      const idx=+row.dataset.i;
-      setPos(row,-(row.clientWidth||320),true);
-      openRow=null;
-      setTimeout(()=>deleteRowAt(idx),160);
-      return;
-    }
-    if(tx<=-Math.min(32,w*0.55)){
+    const{row,tx,w}=cur;
+    if(tx<=-Math.min(28,w*0.5)){
       closeOpen(row);
       row.classList.add('sw-open');
       openRow=row;
