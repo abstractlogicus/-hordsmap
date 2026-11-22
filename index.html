@@ -19,12 +19,22 @@ body.home .subbar{display:none!important}
 .aud-btn svg{width:14px;height:14px;flex:none;opacity:.85}
 .aud-btn .aud-lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:165px}
 .aud-btn .aud-tag{font-size:12px;color:var(--acc);font-weight:700;flex:none}
+.tr-pill{padding:0 4px;gap:0}
+.tr-step{width:28px;height:32px;display:grid;place-items:center;font-size:16px;font-weight:500;color:#cfcfcf;border-radius:99px;transition:background .12s,color .12s}
+.tr-step:active{background:#262626;color:#fff}
+.tr-val{padding:0 4px;font-size:13px;color:var(--mute);min-width:32px;text-align:center;font-variant-numeric:tabular-nums}
+.tr-pill.on .tr-val{color:var(--acc);font-weight:700}
 body.has-pl{padding-bottom:156px}
 body.has-pl #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 #list{font-size:clamp(17px,5.3vw,22px)}
-.row{display:flex;flex-wrap:nowrap;align-items:center;gap:.2em;min-height:2.2em;padding:.14em 0;font-weight:700;transition:opacity .15s}
-.row>*{flex:none}
-.wrap .row{flex-wrap:wrap}
+.row{position:relative;overflow:hidden;touch-action:pan-y;min-height:2.2em;padding:.14em 0;font-weight:700;transition:opacity .15s}
+.row-in{display:flex;flex-wrap:nowrap;align-items:center;gap:.2em;width:100%;min-width:0;will-change:transform}
+.row-in>*{flex:none}
+.wrap .row-in{flex-wrap:wrap}
+.row-del{position:absolute;right:0;top:50%;height:1.9em;min-width:38px;padding:0 .65em;border-radius:99px;border:1.5px solid #ff4d4d;background:rgba(42,16,16,.96);color:#ff6b6b;display:grid;place-items:center;opacity:0;pointer-events:none;transform:translate3d(100%,-50%,0) scale(.86);will-change:transform,opacity;transition:background .14s,border-color .14s,color .14s}
+.row-del svg{width:1.05em;height:1.05em;min-width:16px;min-height:16px}
+.row.sw-open .row-del{opacity:1;pointer-events:auto}
+.row.sw-arm .row-del,.row-del:active{background:#e02828;border-color:#ff5c5c;color:#fff}
 .play .row{opacity:.3}.play .row.cur{opacity:1}
 .row.cur{background:linear-gradient(90deg,#1b1b1b,transparent);border-radius:99px 0 0 99px;margin-left:-8px;padding-left:8px}
 .b{height:1.9em;min-width:1.9em;padding:0 .6em;border-radius:99px;display:grid;place-items:center;background:#555;white-space:nowrap}
@@ -183,7 +193,7 @@ body.home #bpm,body.home .adds{display:none!important}
 .imp-pills{display:flex;flex-wrap:wrap;gap:5px}
 .imp-pill{height:26px;min-width:26px;padding:0 9px;border-radius:99px;font-size:13px;font-weight:700;display:inline-grid;place-items:center}
 </style></head><body class="home"><div id="splash" aria-hidden="true"><div class="sp-lock"><svg class="sp-mark" viewBox="0 0 36.38 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33.7278 0C35.1913 2.98773e-07 36.3776 1.17403 36.3776 2.62227V33.3777C36.3776 34.826 35.1913 36 33.7278 36H2.64978C1.18635 36 0 34.826 0 33.3777V2.62227C3.78778e-07 1.17403 1.18635 0 2.64978 0H33.7278Z" fill="#fff"/><g transform="translate(18.21 18.04)"><g class="sp-spin"><path transform="translate(-18.21 -18.04)" d="M12.3293 2.77677C10.9344 2.33893 9.4449 3.10309 9.00247 4.48355L2.82275 23.7653C2.38032 25.1457 3.15249 26.6198 4.54744 27.0576L24.4283 33.2978C25.604 33.6668 26.8595 33.0227 27.2324 31.8592L33.538 12.1847C33.9804 10.8042 33.2083 9.33018 31.8133 8.89234L12.3293 2.77677Z" fill="#000"/></g></g></svg><div class="sp-word-clip"><svg class="sp-word" viewBox="53.8 0 217.2 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M61.5055 20.3116H64.6541C65.5312 20.3116 66.3713 19.9612 66.984 19.34L76.4484 9.74201C77.0148 9.11504 77.8877 8.7481 78.8126 8.74814L93.1951 8.74854C94.0881 8.74858 94.8692 9.2642 95.0978 10.0045L102.456 32.5847C102.562 32.9096 102.868 33.1299 103.213 33.1299H104.715C105.062 33.1299 105.369 32.9069 105.474 32.5792L112.645 10.0049C112.874 9.26441 113.655 8.74876 114.549 8.74893L137.902 8.75249C141.971 8.77474 146.316 9.76111 148.647 11.692C151.047 13.6099 152.246 16.1848 152.246 19.4168V34.6189C152.246 35.354 151.551 35.9498 150.694 35.9498H135.362C132.084 35.9498 128.126 36.1129 125.557 34.2139C123.612 32.6867 122.64 30.4291 122.64 27.943C122.64 21.9463 127.336 20.2373 133.281 20.2373L144.595 20.2373V19.166C144.595 14.413 143.165 11.2162 137.902 11.2162H121.258C120.696 11.2162 120.202 11.5388 120.054 12.0041L112.523 34.6533C112.284 35.4007 111.491 35.9188 110.588 35.9188H97.1555C96.2518 35.9188 95.4597 35.4007 95.2207 34.6533L87.6938 11.9519C87.5585 11.5289 87.1101 11.2356 86.5986 11.2356H85.1472C84.5205 11.2356 83.9285 11.4821 83.5409 11.9045L75.1852 20.5291C74.7573 20.9707 74.7342 21.6604 75.1316 22.1292L86.8911 36H77.6578L67.4611 24.5041C66.843 23.8073 65.9515 23.4078 65.0146 23.4078H61.5055V36H53.8295V0H61.5055V20.3116ZM136.944 22.7856C133.221 22.7856 131.242 24.963 131.242 27.943C131.242 30.8329 133.626 33.3885 136.445 33.3885H144.585V23.1857C144.591 23.0541 144.595 22.9208 144.595 22.7856H136.944Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M209.401 8.77759H221.315C225.384 8.79985 229.729 9.76112 232.06 11.692C234.459 13.6099 235.659 16.1849 235.659 19.4168V34.5925C235.659 35.3258 234.968 35.9209 234.112 35.9235L217.651 35.9665C214.495 35.9665 210.586 36.0822 208.099 34.2139C206.155 32.6867 205.183 30.4291 205.183 27.943C205.183 21.1258 210.407 19.6855 216.352 19.6855H228.008V19.166C228.008 14.2994 226.256 11.2649 221.315 11.2649H209.401V11.274H199.365C198.696 11.274 198.154 11.8107 198.154 12.4727V35.9188H190.502V10.9997C190.502 9.76269 191.671 8.75983 193.114 8.75982H209.401V8.77759ZM219.487 22.2013C215.763 22.2013 213.712 24.7683 213.712 27.5263C213.712 30.2843 215.525 33.3236 218.987 33.3236H227.998V22.6014C228.004 22.4699 228.008 22.3365 228.008 22.2013H219.487Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M185.504 8.73475H185.506V13.8517H185.504V30.8329H185.514V34.6189C185.514 35.3539 184.819 35.9498 183.962 35.9498H170.213C165.999 35.9285 162.476 34.632 159.645 32.0608C156.865 29.4634 155.465 26.4672 155.432 22.3548C155.465 18.2425 156.856 15.2212 159.636 12.6238C162.467 10.0526 165.99 8.75643 170.204 8.73511L177.852 8.73475V0.00585732H185.504V8.73475ZM172.961 11.2547C166.351 11.2547 163.774 16.4905 163.774 22.3548C163.774 28.6312 167.26 33.3 172.97 33.3H177.852V22.5845C177.852 22.3038 177.845 22.0293 177.829 21.7612V11.2549C176.587 11.2548 178.291 11.2547 172.961 11.2547Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M247.142 8.74864H257.789V11.5374H247.142V26.862C247.142 29.2379 248.212 33.2498 253.069 33.2498H258.924V35.9188H250.555C247.411 35.9188 243.835 35.1374 242.097 33.5747C240.36 32.0119 239.491 29.7744 239.491 26.862V0.00371841H247.142V8.74864Z" fill="white"/><path d="M267.319 2.14408C267.511 2.14411 267.695 2.18981 267.873 2.28116C268.055 2.36923 268.204 2.5014 268.32 2.67752C268.44 2.85024 268.5 3.06387 268.5 3.31784C268.5 3.57176 268.438 3.79172 268.315 3.97795C268.195 4.16083 268.041 4.30132 267.853 4.39954C267.85 4.40072 267.848 4.40133 267.846 4.4025L268.654 5.89339H267.915L267.205 4.54699H266.164V5.89339H265.501V2.14408H267.319ZM266.164 4.03382H267.103C267.278 4.03382 267.434 3.97318 267.571 3.85126C267.711 3.72598 267.781 3.54804 267.781 3.31784C267.781 3.08084 267.711 2.91126 267.571 2.80964C267.434 2.70803 267.283 2.65722 267.119 2.65722H266.164V4.03382Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M266.893 0C267.461 0 267.993 0.104688 268.49 0.314683C268.986 0.524666 269.422 0.816053 269.799 1.18858C270.175 1.56115 270.47 1.99341 270.682 2.48453C270.894 2.97559 271 3.50235 271 4.06452C271 4.62672 270.894 5.1534 270.682 5.64449C270.47 6.13556 270.175 6.56742 269.799 6.93997C269.422 7.31249 268.986 7.60384 268.49 7.81383C267.993 8.02383 267.461 8.12904 266.893 8.12904C266.324 8.12902 265.792 8.0238 265.296 7.81383C264.8 7.60384 264.363 7.31251 263.987 6.93997C263.61 6.56741 263.316 6.13558 263.104 5.64449C262.892 5.1534 262.786 4.62673 262.786 4.06452C262.786 3.50233 262.892 2.9756 263.104 2.48453C263.316 1.99341 263.61 1.56115 263.987 1.18858C264.363 0.816053 264.8 0.524661 265.296 0.314683C265.792 0.104718 266.324 2.70596e-05 266.893 0ZM266.893 0.757075C266.277 0.757111 265.715 0.905955 265.209 1.20391C264.706 1.50194 264.303 1.90168 264.002 2.40288C263.701 2.90078 263.55 3.45486 263.55 4.06452C263.55 4.67415 263.701 5.22984 264.002 5.73109C264.303 6.22889 264.706 6.62662 265.209 6.92464C265.715 7.22265 266.277 7.3719 266.893 7.37193C267.509 7.37193 268.069 7.2227 268.572 6.92464C269.078 6.62662 269.482 6.22886 269.783 5.73109C270.085 5.22984 270.235 4.67415 270.235 4.06452C270.235 3.45485 270.085 2.90078 269.783 2.40288C269.482 1.90167 269.078 1.50194 268.572 1.20391C268.069 0.905851 267.509 0.757075 266.893 0.757075Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/></svg></div></div></div><header><div class="brand home-only"><svg class="brand-svg" viewBox="0 0 271 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kvadrat"><path d="M33.7278 0C35.1913 2.98773e-07 36.3776 1.17403 36.3776 2.62227V33.3777C36.3776 34.826 35.1913 36 33.7278 36H2.64978C1.18635 36 0 34.826 0 33.3777V2.62227C3.78778e-07 1.17403 1.18635 0 2.64978 0H33.7278ZM12.3293 2.77677C10.9344 2.33893 9.4449 3.10309 9.00247 4.48355L2.82275 23.7653C2.38032 25.1457 3.15249 26.6198 4.54744 27.0576L24.4283 33.2978C25.604 33.6668 26.8595 33.0227 27.2324 31.8592L33.538 12.1847C33.9804 10.8042 33.2083 9.33018 31.8133 8.89234L12.3293 2.77677Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M61.5055 20.3116H64.6541C65.5312 20.3116 66.3713 19.9612 66.984 19.34L76.4484 9.74201C77.0148 9.11504 77.8877 8.7481 78.8126 8.74814L93.1951 8.74854C94.0881 8.74858 94.8692 9.2642 95.0978 10.0045L102.456 32.5847C102.562 32.9096 102.868 33.1299 103.213 33.1299H104.715C105.062 33.1299 105.369 32.9069 105.474 32.5792L112.645 10.0049C112.874 9.26441 113.655 8.74876 114.549 8.74893L137.902 8.75249C141.971 8.77474 146.316 9.76111 148.647 11.692C151.047 13.6099 152.246 16.1848 152.246 19.4168V34.6189C152.246 35.354 151.551 35.9498 150.694 35.9498H135.362C132.084 35.9498 128.126 36.1129 125.557 34.2139C123.612 32.6867 122.64 30.4291 122.64 27.943C122.64 21.9463 127.336 20.2373 133.281 20.2373L144.595 20.2373V19.166C144.595 14.413 143.165 11.2162 137.902 11.2162H121.258C120.696 11.2162 120.202 11.5388 120.054 12.0041L112.523 34.6533C112.284 35.4007 111.491 35.9188 110.588 35.9188H97.1555C96.2518 35.9188 95.4597 35.4007 95.2207 34.6533L87.6938 11.9519C87.5585 11.5289 87.1101 11.2356 86.5986 11.2356H85.1472C84.5205 11.2356 83.9285 11.4821 83.5409 11.9045L75.1852 20.5291C74.7573 20.9707 74.7342 21.6604 75.1316 22.1292L86.8911 36H77.6578L67.4611 24.5041C66.843 23.8073 65.9515 23.4078 65.0146 23.4078H61.5055V36H53.8295V0H61.5055V20.3116ZM136.944 22.7856C133.221 22.7856 131.242 24.963 131.242 27.943C131.242 30.8329 133.626 33.3885 136.445 33.3885H144.585V23.1857C144.591 23.0541 144.595 22.9208 144.595 22.7856H136.944Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M209.401 8.77759H221.315C225.384 8.79985 229.729 9.76112 232.06 11.692C234.459 13.6099 235.659 16.1849 235.659 19.4168V34.5925C235.659 35.3258 234.968 35.9209 234.112 35.9235L217.651 35.9665C214.495 35.9665 210.586 36.0822 208.099 34.2139C206.155 32.6867 205.183 30.4291 205.183 27.943C205.183 21.1258 210.407 19.6855 216.352 19.6855H228.008V19.166C228.008 14.2994 226.256 11.2649 221.315 11.2649H209.401V11.274H199.365C198.696 11.274 198.154 11.8107 198.154 12.4727V35.9188H190.502V10.9997C190.502 9.76269 191.671 8.75983 193.114 8.75982H209.401V8.77759ZM219.487 22.2013C215.763 22.2013 213.712 24.7683 213.712 27.5263C213.712 30.2843 215.525 33.3236 218.987 33.3236H227.998V22.6014C228.004 22.4699 228.008 22.3365 228.008 22.2013H219.487Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M185.504 8.73475H185.506V13.8517H185.504V30.8329H185.514V34.6189C185.514 35.3539 184.819 35.9498 183.962 35.9498H170.213C165.999 35.9285 162.476 34.632 159.645 32.0608C156.865 29.4634 155.465 26.4672 155.432 22.3548C155.465 18.2425 156.856 15.2212 159.636 12.6238C162.467 10.0526 165.99 8.75643 170.204 8.73511L177.852 8.73475V0.00585732H185.504V8.73475ZM172.961 11.2547C166.351 11.2547 163.774 16.4905 163.774 22.3548C163.774 28.6312 167.26 33.3 172.97 33.3H177.852V22.5845C177.852 22.3038 177.845 22.0293 177.829 21.7612V11.2549C176.587 11.2548 178.291 11.2547 172.961 11.2547Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M247.142 8.74864H257.789V11.5374H247.142V26.862C247.142 29.2379 248.212 33.2498 253.069 33.2498H258.924V35.9188H250.555C247.411 35.9188 243.835 35.1374 242.097 33.5747C240.36 32.0119 239.491 29.7744 239.491 26.862V0.00371841H247.142V8.74864Z" fill="white"/><path d="M267.319 2.14408C267.511 2.14411 267.695 2.18981 267.873 2.28116C268.055 2.36923 268.204 2.5014 268.32 2.67752C268.44 2.85024 268.5 3.06387 268.5 3.31784C268.5 3.57176 268.438 3.79172 268.315 3.97795C268.195 4.16083 268.041 4.30132 267.853 4.39954C267.85 4.40072 267.848 4.40133 267.846 4.4025L268.654 5.89339H267.915L267.205 4.54699H266.164V5.89339H265.501V2.14408H267.319ZM266.164 4.03382H267.103C267.278 4.03382 267.434 3.97318 267.571 3.85126C267.711 3.72598 267.781 3.54804 267.781 3.31784C267.781 3.08084 267.711 2.91126 267.571 2.80964C267.434 2.70803 267.283 2.65722 267.119 2.65722H266.164V4.03382Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M266.893 0C267.461 0 267.993 0.104688 268.49 0.314683C268.986 0.524666 269.422 0.816053 269.799 1.18858C270.175 1.56115 270.47 1.99341 270.682 2.48453C270.894 2.97559 271 3.50235 271 4.06452C271 4.62672 270.894 5.1534 270.682 5.64449C270.47 6.13556 270.175 6.56742 269.799 6.93997C269.422 7.31249 268.986 7.60384 268.49 7.81383C267.993 8.02383 267.461 8.12904 266.893 8.12904C266.324 8.12902 265.792 8.0238 265.296 7.81383C264.8 7.60384 264.363 7.31251 263.987 6.93997C263.61 6.56741 263.316 6.13558 263.104 5.64449C262.892 5.1534 262.786 4.62673 262.786 4.06452C262.786 3.50233 262.892 2.9756 263.104 2.48453C263.316 1.99341 263.61 1.56115 263.987 1.18858C264.363 0.816053 264.8 0.524661 265.296 0.314683C265.792 0.104718 266.324 2.70596e-05 266.893 0ZM266.893 0.757075C266.277 0.757111 265.715 0.905955 265.209 1.20391C264.706 1.50194 264.303 1.90168 264.002 2.40288C263.701 2.90078 263.55 3.45486 263.55 4.06452C263.55 4.67415 263.701 5.22984 264.002 5.73109C264.303 6.22889 264.706 6.62662 265.209 6.92464C265.715 7.22265 266.277 7.3719 266.893 7.37193C267.509 7.37193 268.069 7.2227 268.572 6.92464C269.078 6.62662 269.482 6.22886 269.783 5.73109C270.085 5.22984 270.235 4.67415 270.235 4.06452C270.235 3.45485 270.085 2.90078 269.783 2.40288C269.482 1.90167 269.078 1.50194 268.572 1.20391C268.069 0.905851 267.509 0.757075 266.893 0.757075Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/></svg></div><span class="hl song-only"><button class="back" data-a="home" aria-label="Список программы"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><h1 id="title" data-a="menu"></h1></span><span class="hb"><button class="plus-btn home-only" data-a="newsong_sheet" aria-label="Новая песня"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><button class="menu song-only" id="viewbtn" data-a="viewcycle" aria-label="Вид"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="3" y="4.5" width="4.5" height="3" rx="1.5" fill="#fff" stroke="none"/><line x1="10" y1="6" x2="21" y2="6"/><rect x="3" y="10.5" width="4.5" height="3" rx="1.5" fill="#fff" stroke="none"/><line x1="10" y1="12" x2="18.5" y2="12"/><rect x="3" y="16.5" width="4.5" height="3" rx="1.5" fill="#fff" stroke="none"/><line x1="10" y1="18" x2="21" y2="18"/></svg></button><button class="menu" data-a="menu" aria-label="Меню"><span><i></i><i></i></span></button></span></header>
-<div class="subbar"><button class="bpm" id="bpm" data-a="bpm"></button><button class="bpm aud-btn" id="audbtn" data-a="audbtn"></button></div><input type="file" id="audfile" accept="audio/*" hidden>
+<div class="subbar"><button class="bpm" id="bpm" data-a="bpm"></button><div class="bpm tr-pill" id="trpill"><button class="tr-step" data-a="transp" data-v="-1" aria-label="На полтона ниже">−</button><span class="tr-val" id="trval">Тон</span><button class="tr-step" data-a="transp" data-v="1" aria-label="На полтона выше">+</button></div><button class="bpm aud-btn" id="audbtn" data-a="audbtn"></button></div><input type="file" id="audfile" accept="audio/*" hidden>
 <main id="list"></main>
 <div class="adds"><button class="add" data-a="addrow">+ Секция</button><button class="add" data-a="addrow2">+ Строка без плашки</button></div>
 <div id="bd" data-a="close"></div>
@@ -234,6 +244,12 @@ function render(){
   }
   $('#title').textContent=song().title;
   const b=$('#bpm');b.textContent=(metro?'● ':'')+song().bpm+' bpm';b.classList.toggle('on',!!metro);
+  const trp=$('#trpill'),trv=$('#trval');
+  if(trp&&trv){
+    const tr=song()._tr||0;
+    trp.classList.toggle('on',tr!==0);
+    trv.textContent=tr===0?'Тон':(tr>0?'+'+tr:'−'+Math.abs(tr));
+  }
   const ab=$('#audbtn');
   if(ab){
     const hasA=S.ab&&song()===S.asong;
@@ -307,11 +323,12 @@ function render(){
   $('#list').innerHTML=song().rows.map((r,i)=>{
     const ti=tinfo(r.t),note=r.t==='♪';
     if(mp&&r.t==='')return '';
-    return `<div class="row${S.mode==='play'&&i===S.cur?' cur':''}${S.drag===i?' lift':''}" data-i="${i}">`+
+    return `<div class="row${S.mode==='play'&&i===S.cur?' cur':''}${S.drag===i?' lift':''}" data-i="${i}"><div class="row-in">`+
       `<button class="b${note?' note':''}${r.t===''?' nb':''}" data-a="tpick" style="background:${ti[1]};color:${ti[2]||'#fff'}">${note?'♪':lab[i]||'↳'}</button>`+
       (mp?'':r.c.map((c,j)=>`<button class="c" data-a="chord" data-j="${j}">${c}</button>`).join(''))+
       (r.r>1?`<button class="r" data-a="row">${r.r}x</button>`:'')+
-      (r.p?`<button class="p" data-a="row">${pauseSvg}</button>`:'')+`</div>`}).join('');
+      (r.p?`<button class="p" data-a="row">${pauseSvg}</button>`:'')+
+      `</div><button class="row-del" data-a="delrow" aria-label="Удалить строку">${trashSvg}</button></div>`}).join('');
 }
 function sheet(h){$('#sh').innerHTML=h;$('#sh').classList.add('on');$('#bd').classList.add('on')}
 function close(){$('#sh').classList.remove('on');$('#bd').classList.remove('on');sel=null;S.ghOpen=false}
@@ -340,8 +357,7 @@ function edSheet(){
   else if(tab==='type')body=`<div class="g">${typeBtns('typeset',r.t)}</div>`;
   else body=`<div class="h">Повтор</div><div class="st"><button class="k" data-a="rep" data-v="-1">−</button><b>${r.r>1?r.r+'x':'нет'}</b><button class="k" data-a="rep" data-v="1">+</button>${r.r>1?'<button class="k dng" data-a="rep" data-v="-99">Убрать</button>':''}</div>
     <div class="h">Пауза после строки</div><div class="g">${r.p?'<button class="k dng" data-a="pau" data-v="-99">Убрать паузу</button>':'<button class="k" data-a="pau" data-v="1">+ Добавить паузу</button>'}</div>
-    <div class="h">Порядок</div><div class="g"><button class="k" data-a="up">↑ Выше</button><button class="k" data-a="down">↓ Ниже</button><button class="k" data-a="rowbelow">+ Строка ниже</button></div>
-    <div class="g" style="margin-top:14px"><button class="k dng" data-a="delr">Удалить строку</button></div>`;
+    <div class="h">Порядок</div><div class="g"><button class="k" data-a="up">↑ Выше</button><button class="k" data-a="down">↓ Ниже</button><button class="k" data-a="rowbelow">+ Строка ниже</button></div>`;
   sheet(prevRow()+`<div class="sw" style="margin-bottom:4px">${[['chord','Аккорд'],['type','Секция'],['row','Строка']].map(t=>`<button data-a="gtab" data-v="${t[0]}" class="${t[0]===tab?'sel':''}">${t[1]}</button>`).join('')}</div>`+body+`<div class="g" style="margin-top:16px"><button class="k sel" data-a="close">Готово</button></div>`);
   const sh=$('#sh');if(sh)sh.scrollTop=sc;
   if(tab==='chord'){const ci=$('#ci');if(ci)ci.oninput=()=>{const v=ci.value.trim();if(v){setChord(v);save();render();const e=document.querySelector('.pv .cs');if(e)e.textContent=v}}}
@@ -965,9 +981,10 @@ $('#audfile').onchange=async e=>{
   await loadAudioBytes(target,abuf,file.name,true,true);
 };
 
-let hdrSwiped=false;
+let hdrSwiped=false,rowSwiped=false;
 document.addEventListener('click',e=>{
   if(hdrSwiped){hdrSwiped=false;return}
+  if(rowSwiped){rowSwiped=false;return}
   if(lp&&!(e.target.closest&&e.target.closest('#toast'))){lp=false;return}
   const el=e.target.closest('[data-a]');if(!el)return;
   const a=el.dataset.a,v=el.dataset.v,rowEl=el.closest('.row'),i=rowEl?+rowEl.dataset.i:null,rows=song().rows;
@@ -1052,11 +1069,12 @@ document.addEventListener('click',e=>{
     case 'up':if(sel.i>0){[rows[sel.i-1],rows[sel.i]]=[rows[sel.i],rows[sel.i-1]];sel.i--}rowSheet();break;
     case 'down':if(sel.i<rows.length-1){[rows[sel.i+1],rows[sel.i]]=[rows[sel.i],rows[sel.i+1]];sel.i++}rowSheet();break;
     case 'dup':rows.splice(sel.i+1,0,JSON.parse(JSON.stringify(rows[sel.i])));sel.i++;edSheet();break;
-    case 'delr':rows.splice(sel.i,1);close();break;
+    case 'delrow':if(i!==null&&rows[i]){deleteRowAt(i)}return;
+    case 'undo_row':if(undoR){const u=undoR;clearUndo();if(u.song===song()){song().rows.splice(Math.min(u.idx,song().rows.length),0,u.row);save();render()}}return;
     case 'bp':song().bpm=Math.max(40,Math.min(240,song().bpm+ +v));updMvis();break;
     case 'metro':metro?metroOff():metroOn();break;
     case 'tap':{const n=performance.now();taps=taps.filter(t=>n-t<2500);taps.push(n);if(taps.length>1){const d=(taps[taps.length-1]-taps[0])/(taps.length-1);song().bpm=Math.round(Math.max(40,Math.min(240,60000/d)));if(metro)metroOn();else updMvis()}else updMvis();break}
-    case 'transp':transposeSong(song(),+v);save();render();menuSheet();return;
+    case 'transp':transposeSong(song(),+v);save();render();if($('#sh').classList.contains('on'))menuSheet();return;
     case 'transp_reset':if(song()._tr){transposeSong(song(),-song()._tr);song()._tr=0;save();render();menuSheet()}return;
     case 'mode':S.mode=v;wake(v==='play');menuSheet();break;
     case 'home':mOpen=false;S.screen='home';metroOff();wake(false);close();window.scrollTo(0,0);render();return;
@@ -1075,8 +1093,24 @@ document.addEventListener('click',e=>{
   }
   save();render();
 });
-let DP=null,lastTouch=0,undoT=null,undoD=null,toastCb=null;
-function clearUndo(){if(undoT){clearTimeout(undoT);undoT=null}undoD=null;toastCb=null;const t=document.getElementById('toast');if(t)t.remove()}
+let DP=null,lastTouch=0,undoT=null,undoD=null,undoR=null,toastCb=null;
+function clearUndo(){if(undoT){clearTimeout(undoT);undoT=null}undoD=null;undoR=null;toastCb=null;const t=document.getElementById('toast');if(t)t.remove()}
+function showRowUndo(rowObj,idx,targetSong){
+  clearUndo();undoR={row:rowObj,idx,song:targetSong};
+  const t=document.createElement('div');t.id='toast';
+  t.innerHTML=`<span>Строка удалена</span><button data-a="undo_row">Отменить</button>`;
+  document.body.appendChild(t);
+  undoT=setTimeout(clearUndo,4500);
+}
+function deleteRowAt(idx){
+  const rows=song().rows;
+  if(!rows||idx<0||idx>=rows.length)return;
+  const removed=rows.splice(idx,1)[0];
+  if(S.cur>=rows.length)S.cur=Math.max(0,rows.length-1);
+  vib(22);
+  save();render();
+  showRowUndo(removed,idx,song());
+}
 function showToast(msg,btnLabel,cb,ms=5500){
   clearUndo();toastCb=cb||null;
   const t=document.createElement('div');t.id='toast';
@@ -1098,7 +1132,7 @@ function dpStart(e,x,y){if(S.mode==='play'||DP||!e.target.closest)return;if(e.ta
   const row=e.target.closest('.row');if(!row||row.classList.contains('ghost'))return;DP={isSong:false,i:+row.dataset.i,el:row,x,y,cx:x,cy:y,on:false,t:setTimeout(dpBegin,380)}}
 function dpBegin(){if(!DP)return;clearUndo();const el=DP.el,q=el.getBoundingClientRect(),l=$('#list');
   DP.on=true;lp=true;vib(40);DP.dx=DP.x-q.left;DP.dy=DP.y-q.top;
-  const g=el.cloneNode(true);g.className=(DP.isSong?'prow':'row')+' ghost';g.style.cssText='position:fixed;left:'+q.left+'px;top:'+q.top+'px;width:'+q.width+'px;font-size:'+getComputedStyle(l).fontSize+';margin:0;pointer-events:none';document.body.appendChild(g);DP.g=g;
+  const g=el.cloneNode(true);const gd=g.querySelector('.row-del');if(gd)gd.remove();g.className=(DP.isSong?'prow':'row')+' ghost';g.style.cssText='position:fixed;left:'+q.left+'px;top:'+q.top+'px;width:'+q.width+'px;font-size:'+getComputedStyle(l).fontSize+';margin:0;pointer-events:none';document.body.appendChild(g);DP.g=g;
   el.classList.add('ph');const ins=document.createElement('div');ins.id='ins';document.body.appendChild(ins);DP.ins=ins;
   let z=document.getElementById('dz');if(!z){z=document.createElement('div');z.id='dz';document.body.appendChild(z)}
   if(DP.isSong){DP.top=false;z.className='del';z.innerHTML=trashSvg+'<span>Удалить песню</span>'}
@@ -1150,7 +1184,7 @@ function fit(){
   if(v==='text') return; // для текста адаптив не нужен
   
   const wfit=(start,min)=>{l.classList.remove('wrap');let fs=start;l.style.fontSize=fs+'px';
-    const over=()=>Math.max(0,...[...l.querySelectorAll('.row')].map(r=>r.scrollWidth-r.clientWidth));
+    const over=()=>Math.max(0,...[...l.querySelectorAll('.row')].map(r=>{const c=r.querySelector('.row-in')||r;return c.scrollWidth-r.clientWidth}));
     for(let k=0;k<10;k++){const o=over();if(o<=0||fs<=min)break;const w=l.children[0]?l.children[0].clientWidth:l.clientWidth;fs=Math.max(min,fs*w/(w+o)-.2);l.style.fontSize=fs+'px'}return fs};
   const hfit=(fs,min)=>{const p=document.getElementById('pl'),top=l.getBoundingClientRect().top+scrollY,avail=innerHeight-top-24-(p&&p.style.display!=='none'?64:0);
     for(let k=0;k<8;k++){if(l.scrollHeight<=avail||fs<=min)break;fs=Math.max(min,fs*avail/l.scrollHeight*.97);l.style.fontSize=fs+'px'}return fs};
@@ -1245,6 +1279,113 @@ render();
   hl.addEventListener('mousedown',e=>{if(Date.now()-lastTouch<800||e.button)return;onStart(e.clientX,e.clientY,e.target)});
   window.addEventListener('mousemove',e=>{if(active)onMove(e.clientX,e.clientY,e)});
   window.addEventListener('mouseup',()=>{if(active)onEnd()});
+})();
+(function(){
+  let openRow=null,sw=null;
+  const getParts=row=>row?{inEl:row.querySelector('.row-in'),delEl:row.querySelector('.row-del')}:{inEl:null,delEl:null};
+  const openW=delEl=>((delEl&&delEl.offsetWidth)||44)+8;
+  const setPos=(row,tx,anim)=>{
+    const{inEl,delEl}=getParts(row);
+    if(!inEl||!delEl)return;
+    const w=openW(delEl);
+    const p=Math.min(1,Math.max(0,-tx/w));
+    const btnX=Math.max(0,w+tx);
+    const sc=0.86+0.14*p;
+    inEl.style.transition=anim?'transform .22s cubic-bezier(.22,1,.36,1)':'none';
+    delEl.style.transition=anim?'transform .22s cubic-bezier(.22,1,.36,1),opacity .18s ease-out,background .14s,border-color .14s,color .14s':'background .14s,border-color .14s,color .14s';
+    inEl.style.transform=`translate3d(${tx}px,0,0)`;
+    delEl.style.transform=`translate3d(${btnX}px,-50%,0) scale(${sc})`;
+    delEl.style.opacity=String(Math.min(1,p*1.25));
+  };
+  const closeOpen=(exceptRow=null)=>{
+    if(openRow&&openRow!==exceptRow){
+      openRow.classList.remove('sw-open','sw-arm');
+      setPos(openRow,0,true);
+      openRow=null;
+    }
+  };
+  const onStart=(x,y,target)=>{
+    if(S.screen==='home'||S.mode==='play'||S.view==='text')return;
+    if(target.closest('#sh')||target.closest('#toast'))return;
+    if(target.closest('.row-del'))return;
+    const row=target.closest('.row');
+    if(openRow&&row!==openRow){
+      closeOpen();
+      rowSwiped=true;
+      setTimeout(()=>{rowSwiped=false},320);
+      return;
+    }
+    if(!row)return;
+    const{delEl}=getParts(row);
+    const baseTx=row===openRow?-openW(delEl):0;
+    sw={row,sx:x,sy:y,baseTx,tx:baseTx,lock:null,armed:false};
+  };
+  const onMove=(x,y,ev)=>{
+    if(!sw)return;
+    if(DP&&DP.on){sw=null;return}
+    const mx=x-sw.sx,my=y-sw.sy;
+    if(!sw.lock&&(Math.abs(mx)>7||Math.abs(my)>7)){
+      if(Math.abs(mx)>Math.abs(my)*1.15){
+        sw.lock='h';
+        if(DP){clearTimeout(DP.t);DP=null}
+      }else{
+        sw.lock='v';
+        sw=null;
+        return;
+      }
+    }
+    if(sw.lock==='h'){
+      if(ev&&ev.cancelable)ev.preventDefault();
+      const rowW=sw.row.clientWidth||300;
+      const armLim=-Math.max(125,rowW*0.44);
+      let nextTx=sw.baseTx+mx;
+      if(nextTx>0)nextTx=0;
+      if(nextTx<armLim-36)nextTx=armLim-36+(nextTx-(armLim-36))*0.25;
+      sw.tx=nextTx;
+      const nowArm=nextTx<=armLim;
+      if(nowArm!==sw.armed){
+        sw.armed=nowArm;
+        sw.row.classList.toggle('sw-arm',nowArm);
+        if(nowArm)vib(15);
+      }
+      setPos(sw.row,nextTx,false);
+    }
+  };
+  const onEnd=()=>{
+    if(!sw)return;
+    const cur=sw;sw=null;
+    if(cur.lock!=='h')return;
+    rowSwiped=true;
+    setTimeout(()=>{rowSwiped=false},340);
+    const{row,tx,armed}=cur;
+    const{delEl}=getParts(row);
+    const w=openW(delEl);
+    row.classList.remove('sw-arm');
+    if(armed){
+      const idx=+row.dataset.i;
+      setPos(row,-(row.clientWidth||320),true);
+      openRow=null;
+      setTimeout(()=>deleteRowAt(idx),160);
+      return;
+    }
+    if(tx<=-Math.min(32,w*0.55)){
+      closeOpen(row);
+      row.classList.add('sw-open');
+      openRow=row;
+      setPos(row,-w,true);
+    }else{
+      row.classList.remove('sw-open');
+      if(openRow===row)openRow=null;
+      setPos(row,0,true);
+    }
+  };
+  document.addEventListener('touchstart',e=>{if(e.touches.length===1)onStart(e.touches[0].clientX,e.touches[0].clientY,e.target)},{passive:true});
+  document.addEventListener('touchmove',e=>{if(sw)onMove(e.touches[0].clientX,e.touches[0].clientY,e)},{passive:false});
+  document.addEventListener('touchend',onEnd);
+  document.addEventListener('touchcancel',onEnd);
+  document.addEventListener('mousedown',e=>{if(Date.now()-lastTouch<800||e.button)return;onStart(e.clientX,e.clientY,e.target)});
+  window.addEventListener('mousemove',e=>{if(sw)onMove(e.clientX,e.clientY,e)});
+  window.addEventListener('mouseup',()=>{if(sw)onEnd()});
 })();
 (function(){const sp=$('#splash');if(!sp)return;const red=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!red&&S.screen==='home')document.body.classList.add('revealing');let done=false;const hide=()=>{if(done)return;done=true;document.documentElement.classList.remove('splashing');if(document.body.classList.contains('revealing')){requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('shown')))}sp.classList.add('out');setTimeout(()=>{sp.remove();document.body.classList.remove('revealing','shown')},460)};sp.addEventListener('click',hide);sp.addEventListener('touchstart',hide,{passive:true});setTimeout(hide,red?350:1140);})();
 </script></body></html>
