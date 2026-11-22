@@ -166,13 +166,20 @@ body.home #bpm,body.home .adds{display:none!important}
 .mv-row .k{flex:1;min-width:0;padding:0 10px;font-size:16px}
 .mv-row .k.snd-on{background:#262626;border:1.5px solid #fff;color:#fff}
 .mv-row .k.acc-on{border:1.5px solid #ffdd1a;color:#ffdd1a}
+
+.imp-stat{font-size:13px;color:#8a8a8a;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.imp-stat.warn{color:#ffdd1a}
+.imp-stat.ok{color:#4cd97b}
+.imp-clr{font-size:13px;color:#8a8a8a;text-decoration:underline}
+.imp-pills{display:flex;flex-wrap:wrap;gap:5px}
+.imp-pill{height:26px;min-width:26px;padding:0 9px;border-radius:99px;font-size:13px;font-weight:700;display:inline-grid;place-items:center}
 </style></head><body class="home"><div id="splash" aria-hidden="true"><div class="sp-lock"><svg class="sp-mark" viewBox="0 0 36.38 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M33.7278 0C35.1913 2.98773e-07 36.3776 1.17403 36.3776 2.62227V33.3777C36.3776 34.826 35.1913 36 33.7278 36H2.64978C1.18635 36 0 34.826 0 33.3777V2.62227C3.78778e-07 1.17403 1.18635 0 2.64978 0H33.7278Z" fill="#fff"/><g transform="translate(18.21 18.04)"><g class="sp-spin"><path transform="translate(-18.21 -18.04)" d="M12.3293 2.77677C10.9344 2.33893 9.4449 3.10309 9.00247 4.48355L2.82275 23.7653C2.38032 25.1457 3.15249 26.6198 4.54744 27.0576L24.4283 33.2978C25.604 33.6668 26.8595 33.0227 27.2324 31.8592L33.538 12.1847C33.9804 10.8042 33.2083 9.33018 31.8133 8.89234L12.3293 2.77677Z" fill="#000"/></g></g></svg><div class="sp-word-clip"><svg class="sp-word" viewBox="53.8 0 217.2 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M61.5055 20.3116H64.6541C65.5312 20.3116 66.3713 19.9612 66.984 19.34L76.4484 9.74201C77.0148 9.11504 77.8877 8.7481 78.8126 8.74814L93.1951 8.74854C94.0881 8.74858 94.8692 9.2642 95.0978 10.0045L102.456 32.5847C102.562 32.9096 102.868 33.1299 103.213 33.1299H104.715C105.062 33.1299 105.369 32.9069 105.474 32.5792L112.645 10.0049C112.874 9.26441 113.655 8.74876 114.549 8.74893L137.902 8.75249C141.971 8.77474 146.316 9.76111 148.647 11.692C151.047 13.6099 152.246 16.1848 152.246 19.4168V34.6189C152.246 35.354 151.551 35.9498 150.694 35.9498H135.362C132.084 35.9498 128.126 36.1129 125.557 34.2139C123.612 32.6867 122.64 30.4291 122.64 27.943C122.64 21.9463 127.336 20.2373 133.281 20.2373L144.595 20.2373V19.166C144.595 14.413 143.165 11.2162 137.902 11.2162H121.258C120.696 11.2162 120.202 11.5388 120.054 12.0041L112.523 34.6533C112.284 35.4007 111.491 35.9188 110.588 35.9188H97.1555C96.2518 35.9188 95.4597 35.4007 95.2207 34.6533L87.6938 11.9519C87.5585 11.5289 87.1101 11.2356 86.5986 11.2356H85.1472C84.5205 11.2356 83.9285 11.4821 83.5409 11.9045L75.1852 20.5291C74.7573 20.9707 74.7342 21.6604 75.1316 22.1292L86.8911 36H77.6578L67.4611 24.5041C66.843 23.8073 65.9515 23.4078 65.0146 23.4078H61.5055V36H53.8295V0H61.5055V20.3116ZM136.944 22.7856C133.221 22.7856 131.242 24.963 131.242 27.943C131.242 30.8329 133.626 33.3885 136.445 33.3885H144.585V23.1857C144.591 23.0541 144.595 22.9208 144.595 22.7856H136.944Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M209.401 8.77759H221.315C225.384 8.79985 229.729 9.76112 232.06 11.692C234.459 13.6099 235.659 16.1849 235.659 19.4168V34.5925C235.659 35.3258 234.968 35.9209 234.112 35.9235L217.651 35.9665C214.495 35.9665 210.586 36.0822 208.099 34.2139C206.155 32.6867 205.183 30.4291 205.183 27.943C205.183 21.1258 210.407 19.6855 216.352 19.6855H228.008V19.166C228.008 14.2994 226.256 11.2649 221.315 11.2649H209.401V11.274H199.365C198.696 11.274 198.154 11.8107 198.154 12.4727V35.9188H190.502V10.9997C190.502 9.76269 191.671 8.75983 193.114 8.75982H209.401V8.77759ZM219.487 22.2013C215.763 22.2013 213.712 24.7683 213.712 27.5263C213.712 30.2843 215.525 33.3236 218.987 33.3236H227.998V22.6014C228.004 22.4699 228.008 22.3365 228.008 22.2013H219.487Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M185.504 8.73475H185.506V13.8517H185.504V30.8329H185.514V34.6189C185.514 35.3539 184.819 35.9498 183.962 35.9498H170.213C165.999 35.9285 162.476 34.632 159.645 32.0608C156.865 29.4634 155.465 26.4672 155.432 22.3548C155.465 18.2425 156.856 15.2212 159.636 12.6238C162.467 10.0526 165.99 8.75643 170.204 8.73511L177.852 8.73475V0.00585732H185.504V8.73475ZM172.961 11.2547C166.351 11.2547 163.774 16.4905 163.774 22.3548C163.774 28.6312 167.26 33.3 172.97 33.3H177.852V22.5845C177.852 22.3038 177.845 22.0293 177.829 21.7612V11.2549C176.587 11.2548 178.291 11.2547 172.961 11.2547Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M247.142 8.74864H257.789V11.5374H247.142V26.862C247.142 29.2379 248.212 33.2498 253.069 33.2498H258.924V35.9188H250.555C247.411 35.9188 243.835 35.1374 242.097 33.5747C240.36 32.0119 239.491 29.7744 239.491 26.862V0.00371841H247.142V8.74864Z" fill="white"/><path d="M267.319 2.14408C267.511 2.14411 267.695 2.18981 267.873 2.28116C268.055 2.36923 268.204 2.5014 268.32 2.67752C268.44 2.85024 268.5 3.06387 268.5 3.31784C268.5 3.57176 268.438 3.79172 268.315 3.97795C268.195 4.16083 268.041 4.30132 267.853 4.39954C267.85 4.40072 267.848 4.40133 267.846 4.4025L268.654 5.89339H267.915L267.205 4.54699H266.164V5.89339H265.501V2.14408H267.319ZM266.164 4.03382H267.103C267.278 4.03382 267.434 3.97318 267.571 3.85126C267.711 3.72598 267.781 3.54804 267.781 3.31784C267.781 3.08084 267.711 2.91126 267.571 2.80964C267.434 2.70803 267.283 2.65722 267.119 2.65722H266.164V4.03382Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M266.893 0C267.461 0 267.993 0.104688 268.49 0.314683C268.986 0.524666 269.422 0.816053 269.799 1.18858C270.175 1.56115 270.47 1.99341 270.682 2.48453C270.894 2.97559 271 3.50235 271 4.06452C271 4.62672 270.894 5.1534 270.682 5.64449C270.47 6.13556 270.175 6.56742 269.799 6.93997C269.422 7.31249 268.986 7.60384 268.49 7.81383C267.993 8.02383 267.461 8.12904 266.893 8.12904C266.324 8.12902 265.792 8.0238 265.296 7.81383C264.8 7.60384 264.363 7.31251 263.987 6.93997C263.61 6.56741 263.316 6.13558 263.104 5.64449C262.892 5.1534 262.786 4.62673 262.786 4.06452C262.786 3.50233 262.892 2.9756 263.104 2.48453C263.316 1.99341 263.61 1.56115 263.987 1.18858C264.363 0.816053 264.8 0.524661 265.296 0.314683C265.792 0.104718 266.324 2.70596e-05 266.893 0ZM266.893 0.757075C266.277 0.757111 265.715 0.905955 265.209 1.20391C264.706 1.50194 264.303 1.90168 264.002 2.40288C263.701 2.90078 263.55 3.45486 263.55 4.06452C263.55 4.67415 263.701 5.22984 264.002 5.73109C264.303 6.22889 264.706 6.62662 265.209 6.92464C265.715 7.22265 266.277 7.3719 266.893 7.37193C267.509 7.37193 268.069 7.2227 268.572 6.92464C269.078 6.62662 269.482 6.22886 269.783 5.73109C270.085 5.22984 270.235 4.67415 270.235 4.06452C270.235 3.45485 270.085 2.90078 269.783 2.40288C269.482 1.90167 269.078 1.50194 268.572 1.20391C268.069 0.905851 267.509 0.757075 266.893 0.757075Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/></svg></div></div></div><header><div class="brand home-only"><svg class="brand-svg" viewBox="0 0 271 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kvadrat"><path d="M33.7278 0C35.1913 2.98773e-07 36.3776 1.17403 36.3776 2.62227V33.3777C36.3776 34.826 35.1913 36 33.7278 36H2.64978C1.18635 36 0 34.826 0 33.3777V2.62227C3.78778e-07 1.17403 1.18635 0 2.64978 0H33.7278ZM12.3293 2.77677C10.9344 2.33893 9.4449 3.10309 9.00247 4.48355L2.82275 23.7653C2.38032 25.1457 3.15249 26.6198 4.54744 27.0576L24.4283 33.2978C25.604 33.6668 26.8595 33.0227 27.2324 31.8592L33.538 12.1847C33.9804 10.8042 33.2083 9.33018 31.8133 8.89234L12.3293 2.77677Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M61.5055 20.3116H64.6541C65.5312 20.3116 66.3713 19.9612 66.984 19.34L76.4484 9.74201C77.0148 9.11504 77.8877 8.7481 78.8126 8.74814L93.1951 8.74854C94.0881 8.74858 94.8692 9.2642 95.0978 10.0045L102.456 32.5847C102.562 32.9096 102.868 33.1299 103.213 33.1299H104.715C105.062 33.1299 105.369 32.9069 105.474 32.5792L112.645 10.0049C112.874 9.26441 113.655 8.74876 114.549 8.74893L137.902 8.75249C141.971 8.77474 146.316 9.76111 148.647 11.692C151.047 13.6099 152.246 16.1848 152.246 19.4168V34.6189C152.246 35.354 151.551 35.9498 150.694 35.9498H135.362C132.084 35.9498 128.126 36.1129 125.557 34.2139C123.612 32.6867 122.64 30.4291 122.64 27.943C122.64 21.9463 127.336 20.2373 133.281 20.2373L144.595 20.2373V19.166C144.595 14.413 143.165 11.2162 137.902 11.2162H121.258C120.696 11.2162 120.202 11.5388 120.054 12.0041L112.523 34.6533C112.284 35.4007 111.491 35.9188 110.588 35.9188H97.1555C96.2518 35.9188 95.4597 35.4007 95.2207 34.6533L87.6938 11.9519C87.5585 11.5289 87.1101 11.2356 86.5986 11.2356H85.1472C84.5205 11.2356 83.9285 11.4821 83.5409 11.9045L75.1852 20.5291C74.7573 20.9707 74.7342 21.6604 75.1316 22.1292L86.8911 36H77.6578L67.4611 24.5041C66.843 23.8073 65.9515 23.4078 65.0146 23.4078H61.5055V36H53.8295V0H61.5055V20.3116ZM136.944 22.7856C133.221 22.7856 131.242 24.963 131.242 27.943C131.242 30.8329 133.626 33.3885 136.445 33.3885H144.585V23.1857C144.591 23.0541 144.595 22.9208 144.595 22.7856H136.944Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M209.401 8.77759H221.315C225.384 8.79985 229.729 9.76112 232.06 11.692C234.459 13.6099 235.659 16.1849 235.659 19.4168V34.5925C235.659 35.3258 234.968 35.9209 234.112 35.9235L217.651 35.9665C214.495 35.9665 210.586 36.0822 208.099 34.2139C206.155 32.6867 205.183 30.4291 205.183 27.943C205.183 21.1258 210.407 19.6855 216.352 19.6855H228.008V19.166C228.008 14.2994 226.256 11.2649 221.315 11.2649H209.401V11.274H199.365C198.696 11.274 198.154 11.8107 198.154 12.4727V35.9188H190.502V10.9997C190.502 9.76269 191.671 8.75983 193.114 8.75982H209.401V8.77759ZM219.487 22.2013C215.763 22.2013 213.712 24.7683 213.712 27.5263C213.712 30.2843 215.525 33.3236 218.987 33.3236H227.998V22.6014C228.004 22.4699 228.008 22.3365 228.008 22.2013H219.487Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M185.504 8.73475H185.506V13.8517H185.504V30.8329H185.514V34.6189C185.514 35.3539 184.819 35.9498 183.962 35.9498H170.213C165.999 35.9285 162.476 34.632 159.645 32.0608C156.865 29.4634 155.465 26.4672 155.432 22.3548C155.465 18.2425 156.856 15.2212 159.636 12.6238C162.467 10.0526 165.99 8.75643 170.204 8.73511L177.852 8.73475V0.00585732H185.504V8.73475ZM172.961 11.2547C166.351 11.2547 163.774 16.4905 163.774 22.3548C163.774 28.6312 167.26 33.3 172.97 33.3H177.852V22.5845C177.852 22.3038 177.845 22.0293 177.829 21.7612V11.2549C176.587 11.2548 178.291 11.2547 172.961 11.2547Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M247.142 8.74864H257.789V11.5374H247.142V26.862C247.142 29.2379 248.212 33.2498 253.069 33.2498H258.924V35.9188H250.555C247.411 35.9188 243.835 35.1374 242.097 33.5747C240.36 32.0119 239.491 29.7744 239.491 26.862V0.00371841H247.142V8.74864Z" fill="white"/><path d="M267.319 2.14408C267.511 2.14411 267.695 2.18981 267.873 2.28116C268.055 2.36923 268.204 2.5014 268.32 2.67752C268.44 2.85024 268.5 3.06387 268.5 3.31784C268.5 3.57176 268.438 3.79172 268.315 3.97795C268.195 4.16083 268.041 4.30132 267.853 4.39954C267.85 4.40072 267.848 4.40133 267.846 4.4025L268.654 5.89339H267.915L267.205 4.54699H266.164V5.89339H265.501V2.14408H267.319ZM266.164 4.03382H267.103C267.278 4.03382 267.434 3.97318 267.571 3.85126C267.711 3.72598 267.781 3.54804 267.781 3.31784C267.781 3.08084 267.711 2.91126 267.571 2.80964C267.434 2.70803 267.283 2.65722 267.119 2.65722H266.164V4.03382Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/><path d="M266.893 0C267.461 0 267.993 0.104688 268.49 0.314683C268.986 0.524666 269.422 0.816053 269.799 1.18858C270.175 1.56115 270.47 1.99341 270.682 2.48453C270.894 2.97559 271 3.50235 271 4.06452C271 4.62672 270.894 5.1534 270.682 5.64449C270.47 6.13556 270.175 6.56742 269.799 6.93997C269.422 7.31249 268.986 7.60384 268.49 7.81383C267.993 8.02383 267.461 8.12904 266.893 8.12904C266.324 8.12902 265.792 8.0238 265.296 7.81383C264.8 7.60384 264.363 7.31251 263.987 6.93997C263.61 6.56741 263.316 6.13558 263.104 5.64449C262.892 5.1534 262.786 4.62673 262.786 4.06452C262.786 3.50233 262.892 2.9756 263.104 2.48453C263.316 1.99341 263.61 1.56115 263.987 1.18858C264.363 0.816053 264.8 0.524661 265.296 0.314683C265.792 0.104718 266.324 2.70596e-05 266.893 0ZM266.893 0.757075C266.277 0.757111 265.715 0.905955 265.209 1.20391C264.706 1.50194 264.303 1.90168 264.002 2.40288C263.701 2.90078 263.55 3.45486 263.55 4.06452C263.55 4.67415 263.701 5.22984 264.002 5.73109C264.303 6.22889 264.706 6.62662 265.209 6.92464C265.715 7.22265 266.277 7.3719 266.893 7.37193C267.509 7.37193 268.069 7.2227 268.572 6.92464C269.078 6.62662 269.482 6.22886 269.783 5.73109C270.085 5.22984 270.235 4.67415 270.235 4.06452C270.235 3.45485 270.085 2.90078 269.783 2.40288C269.482 1.90167 269.078 1.50194 268.572 1.20391C268.069 0.905851 267.509 0.757075 266.893 0.757075Z" fill-rule="evenodd" clip-rule="evenodd" fill="white"/></svg></div><span class="hl song-only"><button class="back" data-a="home" aria-label="Список программы"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><h1 id="title" data-a="menu"></h1></span><span class="hb"><button class="plus-btn home-only" data-a="newsong_sheet" aria-label="Новая песня"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><button class="menu song-only" data-a="viewcycle" aria-label="Вид"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button><button class="menu" data-a="menu" aria-label="Меню"><span><i></i><i></i></span></button></span></header>
 <button class="bpm" id="bpm" data-a="bpm"></button>
 <main id="list"></main>
 <div class="adds"><button class="add" data-a="addrow">+ Секция</button><button class="add" data-a="addrow2">+ Строка без плашки</button></div>
 <div id="bd" data-a="close"></div>
 <div id="sh"></div><div id="mv-edge"></div><div id="mvis" aria-hidden="true"><div class="mv-top"><div class="mv-song" id="mv-title"></div><button class="mv-x" data-a="mclose" aria-label="Закрыть">✕</button></div><div class="mv-mid"><div class="mv-stage" data-a="metro"><div class="mv-halo" id="mv-halo"></div><div class="mv-wave" id="mv-wave"></div><div class="mv-orb" id="mv-orb"><div class="mv-num" id="mv-num">120</div><div class="mv-sub" id="mv-sub">BPM</div></div></div><div class="mv-dots" id="mv-dots" data-a="mmeter"></div></div><div class="mv-bot"><div class="mv-row"><button class="k" data-a="bp" data-v="-5">−5</button><button class="k" data-a="bp" data-v="-1">−1</button><button class="k" data-a="bp" data-v="1">+1</button><button class="k" data-a="bp" data-v="5">+5</button></div><div class="mv-row"><button class="k" data-a="tap">Tap</button><button class="k" data-a="mmeter" id="mv-meter">4/4</button><button class="k" data-a="msound" id="mv-sound">Звук: Выкл</button></div><div class="mv-row"><button class="k" data-a="metro" id="mv-toggle">Пауза</button><button class="k sel" data-a="mclose">Готово</button></div></div></div>
-<script type="application/json" id="seed">{"v":1795158861676,"songs":[{"title":"Матрос (Дети Picasso)","bpm":126,"rows":[{"t":"Ин","c":["Em","G","Em"],"r":8,"p":0},{"t":"К","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"П","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"♪","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"К","c":["Em","C","Gm","C"],"r":2,"p":0},{"t":"♪","c":["Em","C","Em","C"],"r":1,"p":0},{"t":"П","c":["Em","D","C#m","C"],"r":2,"p":0},{"t":"Соло","c":["Em","D","C#m","C"],"r":4,"p":0},{"t":"П","c":["Em","D","C#m","C"],"r":4,"p":0},{"t":"♪","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"Ин","c":["Em","C","Em","C"],"r":2,"p":0},{"t":"К","c":["Em","C","Em","C"],"r":1,"p":0},{"t":"К","c":["Hm","C","Em","C"],"r":1,"p":0}]},{"title":"Блюз о крыльях, ногах и хвостах","bpm":101,"text":"[Ин x8]\n\n[К]\nПустыня. Солнце жжёт, как в аду на сковородке.\nЖажда. Сухая кожа. Зуд и вечно пустошь в глОтке.\nСижу на жёстком камне. Я уродец. Обветшалый блюз\nПою про край наш жалкий, бедный, захудалый.\n---\nВон щуплый страус с хитрым грифом заболтались\nИ оба в миг прям как-то слишком уж разволновались.\nА мне до них нет дела. Я сам по себе бывалый блюз\nПою про край наш жаркий, знойный, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[К]\nТем, кому летать не суждено, прокачивали ноги,\nБежали по горячему песку — на пятках мозоли и ожоги,\nНо от себя не убежать — подохнешь лишь усталым.\nЯ блюз пою про край наш жаркий, знойный, захудалый\n---\nКто не умел летать — пусть учится, а то заставят силой.\nУчись всегда, чтоб образованным прилечь потом в могилу,\nА кто невежда и лентяй — тот дуба даст отсталым.\nЯ блюз пою про край наш истощённый, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Бридж]\nЕсть крылья у одних и ноги у других,\nНо нету смысла о них мусолить тех и тех и этих\nСкоро кондратий пустит на погост.\nВедь главное не крылья и не ноги, а только хвост.\n\n[Соло x2]\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Конец]","rows":[{"t":"Ин","c":["Em","G","Em","G"],"r":8,"p":0},{"t":"К","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"П","c":["Em","G","Em","G","Em","G"],"r":1,"p":0},{"t":"","c":["D","B","Am","B","Em"],"r":1,"p":1},{"t":"♪","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":1,"p":0},{"t":"К","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C","Em"],"r":1,"p":1},{"t":"П","c":["Em","G","Em","G","Em","G"],"r":1,"p":0},{"t":"","c":["D","B","Am","B","Em"],"r":1,"p":1},{"t":"♪","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":1,"p":0},{"t":"Бридж","c":["C","Am","Em","G"],"r":1,"p":0},{"t":"","c":["C","Am","Em"],"r":1,"p":1},{"t":"Соло","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":1,"p":0},{"t":"П","c":["Em","G","Em","G","Em","G"],"r":1,"p":0},{"t":"","c":["D","B","Am","B","Em"],"r":1,"p":1},{"t":"♪","c":["Em","G","Em","G"],"r":2,"p":0},{"t":"","c":["Am","C","Am","C"],"r":1,"p":0},{"t":"","c":["Em","G","Em","G"],"r":3,"p":0}]},{"title":"Старый панк","bpm":120,"rows":[{"t":"К","c":["Csus4","C","C","C"],"r":1,"p":0}]},{"title":"Арарат","bpm":115,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Летели облака","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Журавли","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Коты","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Новогодняя","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Ласточка","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]},{"title":"Knocking","bpm":120,"rows":[{"t":"К","c":["C","C","C","C"],"r":1,"p":0}]}],"cur":1}</script><script>
+<script type="application/json" id="seed">{"v": 1794959664151, "songs": [{"title": "Матрос (Дети Picasso)", "bpm": 126, "rows": [{"t": "Ин", "c": ["Em", "G", "Em"], "r": 8, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "П", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "К", "c": ["Em", "C", "Gm", "C"], "r": 2, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 1, "p": 0}, {"t": "П", "c": ["Em", "D", "C#m", "C"], "r": 2, "p": 0}, {"t": "Соло", "c": ["Em", "D", "C#m", "C"], "r": 4, "p": 0}, {"t": "П", "c": ["Em", "D", "C#m", "C"], "r": 4, "p": 0}, {"t": "♪", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "Ин", "c": ["Em", "C", "Em", "C"], "r": 2, "p": 0}, {"t": "К", "c": ["Em", "C", "Em", "C"], "r": 1, "p": 0}, {"t": "К", "c": ["Hm", "C", "Em", "C"], "r": 1, "p": 0}]}, {"title": "Панк морей", "bpm": 120, "rows": [{"t": "К", "c": ["Csus4", "C", "C", "C"], "r": 1, "p": 0}]}, {"title": "1. Люболь", "bpm": 144, "rows": []}, {"title": "Блюз о крыльях, ногах и хвостах", "bpm": 101, "text": "[Ин x8]\n\n[К]\nПустыня. Солнце жжёт, как в аду на сковородке.\nЖажда. Сухая кожа. Зуд и вечно пустошь в глОтке.\nСижу на жёстком камне. Я уродец. Обветшалый блюз\nПою про край наш жалкий, бедный, захудалый.\n---\nВон щуплый страус с хитрым грифом заболтались\nИ оба в миг прям как-то слишком уж разволновались.\nА мне до них нет дела. Я сам по себе бывалый блюз\nПою про край наш жаркий, знойный, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[К]\nТем, кому летать не суждено, прокачивали ноги,\nБежали по горячему песку — на пятках мозоли и ожоги,\nНо от себя не убежать — подохнешь лишь усталым.\nЯ блюз пою про край наш жаркий, знойный, захудалый\n---\nКто не умел летать — пусть учится, а то заставят силой.\nУчись всегда, чтоб образованным прилечь потом в могилу,\nА кто невежда и лентяй — тот дуба даст отсталым.\nЯ блюз пою про край наш истощённый, захудалый.\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Бридж]\nЕсть крылья у одних и ноги у других,\nНо нету смысла о них мусолить тех и тех и этих\nСкоро кондратий пустит на погост.\nВедь главное не крылья и не ноги, а только хвост.\n\n[Соло x2]\n\n[П]\nМне дела нет до страусов и грифов.\nМне дела нет до позитивов, негативов.\nМне наплевать на Кантовский императив\nИ мне наплевать на рекламные призывы.\nДо лампочки мне солнца зной\nПока мой хвост со мной\nПока мой длинный хвост со мной. Со мной.\n\n[♪ x2]\n\n[Конец]", "rows": [{"t": "Ин", "c": ["Em", "G", "Em", "G"], "r": 8, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "К", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C", "Em"], "r": 1, "p": 1}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "Бридж", "c": ["C", "Am", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["C", "Am", "Em"], "r": 1, "p": 1}, {"t": "Соло", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "П", "c": ["Em", "G", "Em", "G", "Em", "G"], "r": 1, "p": 0}, {"t": "", "c": ["D", "B", "Am", "B", "Em"], "r": 1, "p": 1}, {"t": "♪", "c": ["Em", "G", "Em", "G"], "r": 2, "p": 0}, {"t": "", "c": ["Am", "C", "Am", "C"], "r": 1, "p": 0}, {"t": "", "c": ["Em", "G", "Em", "G"], "r": 3, "p": 0}]}], "cur": 3}</script><script>
 const SRC_JS=document.currentScript.textContent,SRC_CSS=document.getElementById('appcss').textContent;
 const TYPES=[['Ин','#c4237a'],['К','#1a3cff'],['П','#ff2020'],['Соло','#ffdd1a','#000'],['Бридж','#8a2be2'],['Конец','#ff7a00'],['♪','#0a9a3a'],['','#2a2a2a']];
 const ROOTS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B','H'];
@@ -374,17 +381,193 @@ async function shareText(t){try{if(navigator.share){await navigator.share({text:
   const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok?'copy':'fail'}
 function impSheet(){sheet(`<div class="h">Вставьте текст песни из Telegram</div><textarea id="it" placeholder="# Название | 120&#10;Ин: Em C Em C x2"></textarea><div class="h" id="im"></div><div class="g"><button class="k sel" data-a="impgo">Добавить</button><button class="k" data-a="close">Отмена</button></div>`)}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let nsParsed=null,ntaps=[];
+function parseTabText(raw){
+  const text=String(raw||'').replace(/\r\n/g,'\n').replace(/\r/g,'\n').replace(/\u00a0/g,' ').trim();
+  if(!text)return null;
+  if(/^https?:\/\/\S+$/i.test(text))return{isUrl:true};
+  let lines=text.split('\n');
+  let detectedTitle='',titleLineIdx=-1;
+  for(let k=0;k<Math.min(8,lines.length);k++){
+    const t=lines[k].trim();
+    if(!t)continue;
+    let m=/^(.+?)\s+chords\s+by\s+(.+?)(?:\s+@\s+ultimate-guitar.*)?$/i.exec(t);
+    if(m){
+      let sn=m[1].trim(),ar=m[2].trim();
+      if(sn===sn.toUpperCase()||sn===sn.toLowerCase())sn=sn.charAt(0).toUpperCase()+sn.slice(1).toLowerCase();
+      detectedTitle=ar?`${sn} (${ar})`:sn;
+      titleLineIdx=k;
+      break;
+    }
+    m=/^(.+?)\s+[—–-]\s+(.+?)(?:,\s*аккорды.*|\s+\(?аккорды.*)?$/i.exec(t);
+    if(m&&/аккорды|табы|текст песни/i.test(t)){
+      detectedTitle=`${m[2].trim()} (${m[1].trim()})`;
+      titleLineIdx=k;
+      break;
+    }
+  }
+  if(titleLineIdx>=0)lines.splice(titleLineIdx,1);
+  const ugMark=/^(Difficulty:|Tuning:|Capo:|Author:|Last edit:|Add to favorites|View in App|Transpose|Listen|PDF|Strumming|Guitar|Ukulele|Piano)$/i;
+  if(lines.slice(0,35).some(l=>ugMark.test(l.trim()))){
+    let lastC=-1;
+    lines.slice(0,40).forEach((l,idx)=>{
+      const s=l.trim();
+      if(ugMark.test(s)||/chords\s+by\s+/i.test(s)||/^[\d,]+\s+views/i.test(s))lastC=idx;
+    });
+    if(lastC>=0)lines=lines.slice(lastC+1);
+  }
+  const footRe=/^(Report bad tab|Please rate this tab|Related tabs|Похожие песни|Похожие подборы|Комментарии|Рейтинг:|Аппликатуры аккордов)/i;
+  const cutIdx=lines.findIndex(l=>footRe.test(l.trim()));
+  if(cutIdx>=0)lines=lines.slice(0,cutIdx);
+  while(lines.length&&/^(X|Print|Печать|В избранное)$/i.test(lines[lines.length-1].trim()))lines.pop();
+
+  const cyrMap={'А':'A','В':'B','С':'C','Е':'E','Н':'H','а':'a','с':'c','е':'e'};
+  const toLat=s=>s.replace(/[АВСЕНace]/g,ch=>cyrMap[ch]||ch).replace(/♯/g,'#').replace(/♭/g,'b');
+  const chordRe=/^\(?([A-H][#b]?(?:maj|min|m|M|dim|aug|sus|add|alt)?(?:2|4|5|6|7|9|11|13)?(?:(?:sus|add|maj|min|dim|aug|#|\+|b|-)[0-9]{1,2})*(?:\/[A-H][#b]?)?)\)?$/;
+  const noiseTok=/^([|/\\\-–—*~•.]+|[xх×]\d+|\d+[xх×]|\(?[xх×]?\d+[xх×]?\)?|раза?|раз)$/i;
+  const normTok=tok=>{
+    const t=tok.replace(/^[,;]+|[,;]+$/g,'');
+    if(!t||noiseTok.test(t))return null;
+    const m=chordRe.exec(toLat(t));
+    if(m){const c=m[1];return c[0].toUpperCase()+c.slice(1)}
+    return false;
+  };
+  const tabRe=/^[eBGDAEН]?\s*\|[-0-9hHpPsS/\\~xX|() ]+$/;
+  const parseChordLine=line=>{
+    const tr=line.trim();
+    if(!tr||tabRe.test(tr))return null;
+    const toks=tr.split(/[\s|]+/).filter(Boolean);
+    if(!toks.length)return null;
+    const chords=[];let rep=1,bad=0;
+    for(const tok of toks){
+      const rm=/^\(?[xх×](\d+)\)?$|^\(?(\d+)[xх×]\)?$/i.exec(tok);
+      if(rm){rep=Math.max(1,Math.min(16,+(rm[1]||rm[2])));continue}
+      const res=normTok(tok);
+      if(res===null)continue;
+      if(res===false)bad++;else chords.push(res);
+    }
+    if(!chords.length)return null;
+    if(bad===0)return{chords,rep};
+    if(chords.length>=2&&bad/(chords.length+bad)<=0.25&&!toks.some(x=>/[а-яёА-ЯЁ]{2,}/.test(x)))return{chords,rep};
+    return null;
+  };
+  const mapSec=label=>{
+    let s=label.trim().replace(/:+$/,'').trim(),rep=1;
+    const rm=/^(.*?)\s*(?:[xх×](\d+)|(\d+)[xх×])$/i.exec(s);
+    if(rm){s=rm[1].trim();rep=Math.max(1,Math.min(16,+(rm[2]||rm[3])))}
+    const low=s.toLowerCase();
+    if(/^(ин|интро|вступ|вступление|intro|введение)\b/.test(low))return['Ин',rep];
+    if(/^(к\d*|куплет|verse|запев|строфа)\b/.test(low))return['К',rep];
+    if(/^(п\d*|припев|chorus|refrain)\b/.test(low))return['П',rep];
+    if(/^(соло|solo)\b/.test(low))return['Соло',rep];
+    if(/^(бридж|bridge|переход|пре-?припев|pre-?chorus)\b/.test(low))return['Бридж',rep];
+    if(/^(конец|концовка|кода|аутро|outro|ending|coda|финал)\b/.test(low))return['Конец',rep];
+    if(/^(♪|проигрыш|инструментал|interlude|instrumental|riff|рифф)\b/.test(low))return['♪',rep];
+    return[null,rep];
+  };
+  const parseSecHdr=line=>{
+    const t=line.trim();
+    if(!t)return null;
+    const m=/^\[([^\]]+)\]$/.exec(t);
+    if(m){
+      const[sec,rep]=mapSec(m[1]);
+      if(sec)return[sec,rep];
+      if(!parseChordLine(m[1])&&m[1].length<=24)return['К',rep];
+    }
+    if(t.length<=30&&!parseChordLine(t)){
+      if(/^(вступление|интро|intro|куплет(?:\s*\d+)?|verse(?:\s*\d+)?|припев(?:\s*\d+)?|chorus(?:\s*\d+)?|проигрыш|interlude|instrumental|соло|solo|бридж|bridge|пре-?припев|pre-?chorus|кода|концовка|конец|outro|ending)(?:\s*(?:[xх×]\d+|\d+[xх×]))?\s*:?$/i.test(t)){
+        return mapSec(t);
+      }
+    }
+    return null;
+  };
+  const metaRe=/^(тональность|бой|перебор|каподастр|capo|tuning|tempo|темп)\s*:/i;
+  const sections=[];let cur=null;
+  const ensureSec=(t='К')=>{if(!cur){cur={t,items:[],lyrics:[],hdrRep:1};sections.push(cur)}return cur};
+
+  for(const rawL of lines){
+    const trim=rawL.trim();
+    if(!trim){if(cur&&cur.lyrics.length&&cur.lyrics[cur.lyrics.length-1]!=='')cur.lyrics.push('');continue}
+    if(metaRe.test(trim)||tabRe.test(trim))continue;
+    const hdr=parseSecHdr(trim);
+    if(hdr){cur={t:hdr[0],items:[],lyrics:[],hdrRep:hdr[1]};sections.push(cur);continue}
+    const inl=[...trim.matchAll(/\[([^\]]+)\]/g)];
+    if(inl.length){
+      const ic=[];let ok=true;
+      for(const im of inl){const r=normTok(im[1]);if(r&&r!==false)ic.push(r);else{ok=false;break}}
+      if(ok&&ic.length){
+        const sec=ensureSec('К');
+        sec.items.push({c:ic,r:1});
+        const cl=trim.replace(/\[[^\]]+\]/g,'').trim();
+        if(cl)sec.lyrics.push(cl);
+        continue;
+      }
+    }
+    const ch=parseChordLine(trim);
+    if(ch){ensureSec('К').items.push({c:ch.chords,r:ch.rep});continue}
+    ensureSec('К').lyrics.push(trim);
+  }
+
+  const rows=[],textBlocks=[];
+  for(const sec of sections){
+    const merged=[];
+    for(const it of sec.items){
+      if(merged.length&&merged[merged.length-1].c.join(' ')===it.c.join(' ')){
+        merged[merged.length-1].r=Math.min(16,merged[merged.length-1].r+it.r);
+      }else merged.push({c:[...it.c],r:it.r});
+    }
+    if(merged.length===1&&sec.hdrRep>1&&merged[0].r===1)merged[0].r=sec.hdrRep;
+    merged.forEach((it,idx)=>rows.push({t:idx===0?sec.t:'',c:it.c,r:it.r,p:0}));
+    const lyr=[...sec.lyrics];
+    while(lyr.length&&lyr[lyr.length-1]==='')lyr.pop();
+    if(lyr.length)textBlocks.push(`[${sec.t}]\n`+lyr.join('\n'));
+    else if(merged.length){
+      const tr=merged.length===1?merged[0].r:sec.hdrRep;
+      textBlocks.push(`[${sec.t}${tr>1?' x'+tr:''}]`);
+    }else textBlocks.push(`[${sec.t}]`);
+  }
+  return{title:detectedTitle,rows,text:textBlocks.join('\n\n'),secCount:sections.length};
+}
+function updNewSongPrev(){
+  const ta=$('#nsimp'),pv=$('#nsprev'),ti=$('#nst');
+  if(!ta||!pv)return;
+  nsParsed=parseTabText(ta.value);
+  if(!nsParsed){pv.innerHTML='';return}
+  if(nsParsed.isUrl){
+    pv.innerHTML='<div class="imp-stat warn"><span>Это ссылка — откройте страницу, скопируйте текст с аккордами и вставьте сюда</span><button class="imp-clr" data-a="nsclear">Очистить</button></div>';
+    return;
+  }
+  if(nsParsed.title&&ti&&!ti.dataset.manual)ti.value=nsParsed.title;
+  if(!nsParsed.rows.length){
+    pv.innerHTML=`<div class="imp-stat warn"><span>Аккорды не найдены — сохранится только текст</span><button class="imp-clr" data-a="nsclear">Очистить</button></div>`;
+    return;
+  }
+  const labs=labelsOf(nsParsed.rows);
+  const badges=nsParsed.rows.map((r,idx)=>r.t?`<span class="imp-pill" style="background:${tinfo(r.t)[1]};color:${tinfo(r.t)[2]||'#fff'}">${r.t==='♪'?'♪':esc(labs[idx])}</span>`:'').join('');
+  pv.innerHTML=`<div class="imp-stat ok"><span>Секций: ${nsParsed.secCount} · Строк: ${nsParsed.rows.length}${nsParsed.text?' + текст':''}</span><button class="imp-clr" data-a="nsclear">Очистить</button></div><div class="imp-pills">${badges}</div>`;
+}
 function newSongSheet(){
-  nbpm=120;
+  nbpm=120;nsParsed=null;ntaps=[];
   sheet(`<div class="h">Новая песня</div><input id="nst" placeholder="Название песни" autocomplete="off">
-  <div class="h">Темп: <b id="nbv" style="color:#fff">120 bpm</b></div><div class="g"><button class="k" data-a="nbp" data-v="-5">−5</button><button class="k" data-a="nbp" data-v="-1">−1</button><button class="k" data-a="nbp" data-v="1">+1</button><button class="k" data-a="nbp" data-v="5">+5</button></div>
-  <div class="g" style="margin-top:18px"><button class="k sel" data-a="createnewsong">Создать</button><button class="k" data-a="close">Отмена</button></div>`);
-  const inp=$('#nst');
-  if(inp){inp.focus();inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();createNewSong()}}}
+  <div class="h">Темп: <b id="nbv" style="color:#fff">120 bpm</b></div><div class="g"><button class="k" data-a="nbp" data-v="-5">−5</button><button class="k" data-a="nbp" data-v="-1">−1</button><button class="k" data-a="nbp" data-v="1">+1</button><button class="k" data-a="nbp" data-v="5">+5</button><button class="k" data-a="ntap">Tap</button></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px"><div class="h" style="margin:0">Импорт аккордов и текста</div><button class="k" data-a="nspaste" style="min-height:34px;padding:0 12px;font-size:13px">Вставить</button></div>
+  <textarea id="nsimp" placeholder="Скопируйте песню с аккордами с любого сайта (Ultimate Guitar, AmDm, MyChords…) и вставьте сюда" style="min-height:104px;font-size:14px;line-height:1.4"></textarea>
+  <div id="nsprev" style="margin-top:8px"></div>
+  <div class="g" style="margin-top:16px"><button class="k sel" data-a="createnewsong">Создать</button><button class="k" data-a="close">Отмена</button></div>`);
+  const inp=$('#nst'),ta=$('#nsimp');
+  if(inp){
+    inp.oninput=()=>{inp.dataset.manual=inp.value.trim()?'1':''};
+    inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();createNewSong()}};
+  }
+  if(ta)ta.oninput=updNewSongPrev;
 }
 function createNewSong(){clearUndo();
-  const inp=$('#nst'),title=(inp?inp.value:'').trim()||'Новая песня';
-  const n={title,bpm:nbpm,rows:[R('К',['C','C','C','C'])]};
+  const inp=$('#nst');
+  const title=(inp?inp.value:'').trim()||(nsParsed&&nsParsed.title)||'Новая песня';
+  const hasRows=nsParsed&&!nsParsed.isUrl&&nsParsed.rows&&nsParsed.rows.length;
+  const hasText=nsParsed&&!nsParsed.isUrl&&nsParsed.text;
+  const n={title,bpm:nbpm,rows:hasRows?nsParsed.rows:[R('К',['C','C','C','C'])]};
+  if(hasText)n.text=nsParsed.text;
   S.lib.push(n);S.song=n;S.screen='song';S.mode='edit';S.cur=0;metroOff();close();save();render();
 }
 function menuSheet(){
@@ -673,6 +856,9 @@ document.addEventListener('click',e=>{
     case 'opensong':clearUndo();S.song=S.lib[+v];S.screen='song';S.cur=0;metroOff();wake(S.mode==='play');window.scrollTo(0,0);break;
     case 'newsong_sheet':newSongSheet();return;
     case 'nbp':nbpm=Math.max(40,Math.min(240,nbpm+ +v));{const e=$('#nbv');if(e)e.textContent=nbpm+' bpm'}return;
+    case 'ntap':{const n=performance.now();ntaps=ntaps.filter(t=>n-t<2500);ntaps.push(n);if(ntaps.length>1){const d=(ntaps[ntaps.length-1]-ntaps[0])/(ntaps.length-1);nbpm=Math.round(Math.max(40,Math.min(240,60000/d)));const e=$('#nbv');if(e)e.textContent=nbpm+' bpm'}}return;
+    case 'nspaste':(async()=>{const ta=$('#nsimp'),pv=$('#nsprev');try{if(!navigator.clipboard||!navigator.clipboard.readText)throw 0;const txt=await navigator.clipboard.readText();if(!txt){if(pv)pv.innerHTML='<div class="imp-stat warn">Буфер обмена пуст</div>';return}if(ta){ta.value=txt;updNewSongPrev()}}catch(e){if(pv)pv.innerHTML='<div class="imp-stat warn">Зажмите поле ниже пальцем → Вставить</div>'}})();return;
+    case 'nsclear':{const ta=$('#nsimp');if(ta){ta.value='';updNewSongPrev()}}return;
     case 'createnewsong':createNewSong();return;
     case 'pick':S.song=S.lib[+v];S.screen='song';S.cur=0;metroOff();menuSheet();break;
     case 'newsong':{const n={title:'Новая песня',bpm:120,rows:[R('К',['C','C','C','C'])]};S.lib.push(n);S.song=n;S.cur=0;metroOff();menuSheet();const t=$('#ti');t.focus();t.select();break}
