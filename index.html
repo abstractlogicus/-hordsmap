@@ -456,13 +456,14 @@ function parseTabText(raw){
     const rm=/^(.*?)\s*(?:[xх×](\d+)|(\d+)[xх×])$/i.exec(s);
     if(rm){s=rm[1].trim();rep=Math.max(1,Math.min(16,+(rm[2]||rm[3])))}
     const low=s.toLowerCase();
-    if(/^(ин|интро|вступ|вступление|intro|введение)\b/.test(low))return['Ин',rep];
-    if(/^(к\d*|куплет|verse|запев|строфа)\b/.test(low))return['К',rep];
-    if(/^(п\d*|припев|chorus|refrain)\b/.test(low))return['П',rep];
-    if(/^(соло|solo)\b/.test(low))return['Соло',rep];
-    if(/^(бридж|bridge|переход|пре-?припев|pre-?chorus)\b/.test(low))return['Бридж',rep];
-    if(/^(конец|концовка|кода|аутро|outro|ending|coda|финал)\b/.test(low))return['Конец',rep];
-    if(/^(♪|проигрыш|инструментал|interlude|instrumental|riff|рифф)\b/.test(low))return['♪',rep];
+    const end='(?=$|[^а-яёa-z])';
+    if(new RegExp('^(ин|интро|вступ|вступление|intro|введение)'+end).test(low))return['Ин',rep];
+    if(new RegExp('^(к\\d*|куплет|verse|запев|строфа)'+end).test(low))return['К',rep];
+    if(new RegExp('^(п\\d*|припев|chorus|refrain)'+end).test(low))return['П',rep];
+    if(new RegExp('^(соло|solo)'+end).test(low))return['Соло',rep];
+    if(new RegExp('^(бридж|bridge|переход|пре-?припев|pre-?chorus)'+end).test(low))return['Бридж',rep];
+    if(new RegExp('^(конец|концовка|кода|аутро|outro|ending|coda|финал)'+end).test(low))return['Конец',rep];
+    if(new RegExp('^(♪|проигрыш|инструментал|interlude|instrumental|riff|рифф)'+end).test(low))return['♪',rep];
     return[null,rep];
   };
   const parseSecHdr=line=>{
