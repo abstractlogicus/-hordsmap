@@ -60,16 +60,19 @@ body.has-pl #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
 .b{height:1.9em;min-width:1.9em;padding:0 .62em;border-radius:999px;display:grid;place-items:center;background:#444;white-space:nowrap}
 .b.note{font-size:1.5em;height:1.267em;width:1.933em;padding:0;border-radius:0;clip-path:polygon(22% 0,78% 0,100% 50%,78% 100%,22% 100%,0 50%);background:#0a9a3a;line-height:1}
 
-/* Fused horizontal chord strip for fast eye scan */
-.c-strip{display:inline-flex;align-items:stretch;height:1.9em;border-radius:999px;background:var(--pill);overflow:hidden}
-.c{height:100%;min-width:1.85em;padding:0 .62em;border-radius:0;background:transparent;color:var(--fg);display:grid;place-items:center;position:relative;transition:background .1s ease,color .1s ease}
-.c+.c::before{content:'';position:absolute;left:0;top:24%;bottom:24%;width:1px;background:rgba(255,255,255,.11)}
-.c:active{background:#3c3c3c}
-.play .c-strip{background:#2d2d2d}
-.wrap .c-strip{height:auto;flex-wrap:wrap;border-radius:1.1em;padding:.08em}
-.wrap .c{height:1.75em;border-radius:999px}
-.wrap .c+.c::before{display:none}
-
+/* Concave-necked chord strip inspired by reference pill cluster */
+.c-strip{position:relative;isolation:isolate;display:inline-flex;align-items:center;height:1.9em;background:transparent;padding:0}
+.c{height:1.9em;min-width:1.9em;padding:0 .62em;border-radius:999px;background:var(--pill);color:var(--fg);display:grid;place-items:center;position:relative;z-index:2;transition:background .12s ease,color .12s ease,transform .1s ease}
+.c+.c{margin-left:.34em}
+.c+.c::before{content:'';position:absolute;left:-.44em;right:calc(100% - .12em);top:50%;height:.82em;transform:translateY(-50%);background:var(--pill);z-index:1;pointer-events:none}
+.c+.c::after{content:'';position:absolute;left:-.42em;top:50%;width:.48em;height:1.5em;transform:translateY(-50%);background:radial-gradient(circle at 0 0,transparent 70%,var(--pill) 71%) top left/50% 50% no-repeat,radial-gradient(circle at 0 100%,transparent 70%,var(--pill) 71%) bottom left/50% 50% no-repeat,radial-gradient(circle at 100% 0,transparent 70%,var(--pill) 71%) top right/50% 50% no-repeat,radial-gradient(circle at 100% 100%,transparent 70%,var(--pill) 71%) bottom right/50% 50% no-repeat;z-index:2;pointer-events:none}
+.c:active{background:#3a3a3a}
+.play .c{background:#2c2c2c}
+.play .c+.c::before{background:#2c2c2c}
+.play .c+.c::after{background:radial-gradient(circle at 0 0,transparent 70%,#2c2c2c 71%) top left/50% 50% no-repeat,radial-gradient(circle at 0 100%,transparent 70%,#2c2c2c 71%) bottom left/50% 50% no-repeat,radial-gradient(circle at 100% 0,transparent 70%,#2c2c2c 71%) top right/50% 50% no-repeat,radial-gradient(circle at 100% 100%,transparent 70%,#2c2c2c 71%) bottom right/50% 50% no-repeat}
+.wrap .c-strip{height:auto;flex-wrap:wrap;gap:.24em}
+.wrap .c{height:1.85em;margin-left:0!important}
+.wrap .c+.c::before,.wrap .c+.c::after{display:none}
 .r{height:1.9em;padding:0 .48em;border:1.5px solid var(--line);border-radius:8px;display:grid;place-items:center;margin-left:.1em;min-width:2em;color:#dcdcdc;font-size:.86em}
 .p{display:inline-flex;align-items:center;gap:.2em;margin-left:.25em;font-size:1em;color:#dcdcdc}
 .p svg{width:1.5em;height:1.5em}
@@ -100,9 +103,11 @@ body.v-c,body.v-m{padding-bottom:20px}body.v-c .adds,body.v-m .adds{display:none
 
 /* Preview bar inside edit sheet: fused chords + add + modifiers */
 .pv{font-size:18px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-weight:700;margin-bottom:14px}
-.pv .c-strip{height:1.9em;background:var(--pill-2)}
-.pv .c.cs{background:#fff;color:#000;border-radius:999px}
-.pv .c.cs::before,.pv .c.cs+.c::before{display:none}
+.pv .c-strip{height:1.9em;background:transparent;padding:0}
+.pv .c-strip .c{background:var(--pill-2)}
+.pv .c-strip .c+.c::before{background:var(--pill-2)}
+.pv .c-strip .c+.c::after{background:radial-gradient(circle at 0 0,transparent 70%,var(--pill-2) 71%) top left/50% 50% no-repeat,radial-gradient(circle at 0 100%,transparent 70%,var(--pill-2) 71%) bottom left/50% 50% no-repeat,radial-gradient(circle at 100% 0,transparent 70%,var(--pill-2) 71%) top right/50% 50% no-repeat,radial-gradient(circle at 100% 100%,transparent 70%,var(--pill-2) 71%) bottom right/50% 50% no-repeat}
+.pv .c.cs{background:#fff;color:#000;border-radius:999px;z-index:3}
 .pv .gh{font-size:14px;display:grid}
 .gh{height:1.9em;min-width:1.9em;padding:0 .5em;border:1.5px dashed #383838;color:#7a7a7a;border-radius:999px;display:grid;place-items:center;font-size:.8em;font-weight:700}
 .gh.gx{border-radius:8px}
